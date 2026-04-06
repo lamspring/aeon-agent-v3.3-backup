@@ -1,0 +1,15 @@
+[Unit]
+Description=Xiaxia Life Rhythm Guard - System-Level Rule Enforcer
+After=network.target xiaxia-boot-check.service
+Wants=xiaxia-boot-check.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/.openclaw/workspace/agent/system
+ExecStart=/usr/bin/python3 life_rhythm_guard.py
+StandardOutput=append:/var/log/xiaxia-rhythm-guard.log
+StandardError=append:/var/log/xiaxia-rhythm-guard.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,24 @@
+# Aeon Agent v3.3 Python依赖
+# 安装命令: pip install -r requirements.txt
+
+# 数据验证和配置
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# HTTP请求
+requests>=2.31.0
+
+# 数据库 (通常Python内置sqlite3足够，如需特定版本可取消注释)
+# sqlite3  # Python标准库
+
+# 可选: 如果需要Web界面
+# flask>=2.0.0
+# fastapi>=0.100.0
+# uvicorn>=0.20.0
+
+# 可选: 异步支持
+# aiohttp>=3.8.0
+# asyncio  # Python标准库
+
+# 可选: 日志增强
+# structlog>=23.0.0

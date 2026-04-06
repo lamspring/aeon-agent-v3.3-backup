@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Boot Notification
+After=openclaw-gateway.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/.openclaw/workspace/tools/boot_check.sh
+
+[Install]
+WantedBy=multi-user.target

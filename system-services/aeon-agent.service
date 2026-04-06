@@ -1,0 +1,37 @@
+[Unit]
+Description=Aeon Agent v3.1 - AI Operating System with Goal & Attention
+Documentation=https://github.com/openclaw/aeon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/.openclaw/workspace/agent
+Environment=PYTHONPATH=/root/.openclaw/workspace/agent
+Environment=AEON_HOME=/root/.openclaw/workspace/agent
+Environment=AEON_LOG_LEVEL=INFO
+Environment=AEON_VERSION=3.1
+
+# 启动命令 - v3.1 (systemd推荐模式: foreground, 永不退出)
+ExecStart=/usr/bin/python3 /root/.openclaw/workspace/agent/launcher.py
+
+# 重启策略
+Restart=always
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=10
+
+# 优雅关闭超时
+TimeoutStopSec=30
+KillMode=process
+KillSignal=SIGTERM
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=aeon-agent
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=Xiaxia Health Check - Health Monitor
+After=network.target agent.service
+Wants=agent.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/.openclaw/workspace/agent/system
+ExecStart=/usr/bin/python3 health_check.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/xiaxia-health.log
+StandardError=append:/var/log/xiaxia-health.log
+
+[Install]
+WantedBy=multi-user.target

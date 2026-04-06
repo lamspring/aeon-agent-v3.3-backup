@@ -1,0 +1,21 @@
+[Unit]
+Description=Xiaxia Consciousness Heartbeat
+After=network.target
+Wants=network.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/.openclaw/workspace
+Environment=PYTHONPATH=/root/.openclaw/workspace/evolution/consciousness
+Environment=XIAXIA_HOME=/root/.openclaw/workspace
+ExecStart=/usr/bin/python3 /root/.openclaw/workspace/evolution/consciousness/wake_handler.py
+StandardOutput=append:/var/log/xiaxia-heartbeat.log
+StandardError=append:/var/log/xiaxia-heartbeat.log
+
+# 不再使用 always 重启，由定时器控制触发
+# Restart=always
+# RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
