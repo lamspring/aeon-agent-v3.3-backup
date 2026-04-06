@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "high_risk_actions": [
+    "exec",
+    "write",
+    "edit",
+    "delete",
+    "sessions_spawn",
+    "message_send"
+  ],
+  "medium_risk_actions": [
+    "web_search",
+    "kimi_search",
+    "browser_open"
+  ],
+  "approval_modes": {
+    "high_risk": "required",
+    "medium_risk": "log_only",
+    "low_risk": "auto"
+  },
+  "escalation": {
+    "after_violations": 3,
+    "action": "gate_close"
+  }
+}

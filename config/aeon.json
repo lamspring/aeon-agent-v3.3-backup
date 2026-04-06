@@ -1,0 +1,33 @@
+{
+  "health_server": {
+    "enabled": true,
+    "host": "0.0.0.0",
+    "port": 9090
+  },
+  "cognition": {
+    "tick_interval": 30,
+    "idle_timeout": 300,
+    "enable_llm": true,
+    "llm_threshold": 5,
+    "max_events_per_tick": 5
+  },
+  "attention": {
+    "max_events_per_tick": 5,
+    "decay_factor": 0.95,
+    "min_score_threshold": 0.1,
+    "top_k_base": 3,
+    "top_k_max": 10
+  },
+  "event_bus": {
+    "enable_persistence": true,
+    "max_retry": 3,
+    "retry_delay": 60,
+    "default_ttl": 300
+  },
+  "alert": {
+    "enabled": true,
+    "webhook_url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=aa988b51-fb13-4b21-bee2-da30d16c92b1",
+    "throttle_minutes": 5,
+    "min_level": "info"
+  }
+}

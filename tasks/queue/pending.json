@@ -1,0 +1,19 @@
+[
+  {
+    "task_id": "reflection_20260405_201515",
+    "type": "reflection",
+    "goal": "\u590d\u76d8\u4eca\u5929\u7684\u5de5\u4f5c\u548c\u5b66\u4e60",
+    "steps": [
+      "review_completed_tasks",
+      "check_diary",
+      "summarize_lessons",
+      "plan_tomorrow"
+    ],
+    "current_step": 2,
+    "total_steps": 4,
+    "progress": 0.5,
+    "started_at": "2026-04-05T20:15:15.485149",
+    "status": "interrupted",
+    "interrupted_at": "2026-04-05T21:59:12.277539"
+  }
+]

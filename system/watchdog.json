@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "timeout_minutes": 90,
+  "max_retries": 3,
+  "check_interval": "every_heartbeat",
+  "actions": {
+    "on_timeout": "kill_and_retry",
+    "on_max_retries": "move_to_error"
+  }
+}

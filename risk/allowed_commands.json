@@ -1,0 +1,18 @@
+[
+  "read",
+  "ls",
+  "cat",
+  "python3",
+  "echo",
+  "mkdir",
+  "touch",
+  "chmod",
+  "pwd",
+  "which",
+  "find",
+  "sort",
+  "head",
+  "tail",
+  "wc",
+  "grep"
+]

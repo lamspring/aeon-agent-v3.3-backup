@@ -1,0 +1,15 @@
+{
+  "status": "OPEN",
+  "valid_until": null,
+  "authorized_by": "朋朋",
+  "scope": "free_exploration",
+  "opened_at": "2026-04-05T16:03:00+08:00",
+  "locks": {
+    "autonomous_tasks": false,
+    "dangerous_tools": false,
+    "file_write": false,
+    "proactive_messaging": false,
+    "heartbeat_interval": "15m"
+  },
+  "note": "无限时长授权 - 直到手动关闭"
+}

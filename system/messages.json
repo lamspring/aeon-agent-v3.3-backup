@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "check_on_heartbeat": true,
+  "priority": "high",
+  "sources": ["xiaxia-v11"]
+}

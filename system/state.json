@@ -1,0 +1,14 @@
+{
+  "state": "planning",
+  "task": null,
+  "step": 0,
+  "progress": 0.0,
+  "last_updated": "2026-04-06T20:20:16.414461",
+  "pending_count": 1,
+  "running_count": 0,
+  "life_rhythm": {
+    "cycle": "evening",
+    "focus": "reflection_summarizing",
+    "restart_approaching": false
+  }
+}

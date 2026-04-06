@@ -1,0 +1,658 @@
+[2026-04-06 10:56:00] ============================================================
+[2026-04-06 10:56:00] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 10:56:00] ============================================================
+[2026-04-06 10:56:00] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 10:56:00] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 10:56:00] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 10:56:00] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 10:56:00] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 10:56:00] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 10:56:00] [APPROVAL]   - High risk actions: 6
+[2026-04-06 10:56:00] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 10:56:00] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 10:56:00] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 10:56:00] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 10:56:02] ============================================================
+[2026-04-06 10:56:02] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 10:56:02] ============================================================
+[2026-04-06 10:56:02] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 10:56:02] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 10:56:02] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 10:56:02] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 10:56:02] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 10:56:02] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 10:56:02] [APPROVAL]   - High risk actions: 6
+[2026-04-06 10:56:02] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 10:56:02] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 10:56:02] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 10:56:02] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 10:56:13] ============================================================
+[2026-04-06 10:56:13] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 10:56:13] ============================================================
+[2026-04-06 10:56:13] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 10:56:13] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 10:56:13] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 10:56:13] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 10:56:13] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 10:56:13] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 10:56:13] [APPROVAL]   - High risk actions: 6
+[2026-04-06 10:56:13] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 10:56:13] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 10:56:13] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 10:56:13] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 10:56:13] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 10:56:13] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 10:56:13] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 10:56:13] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 10:56:13] [ENFORCE] 🔒 Auto-closing gate due to excessive violations
+[2026-04-06 10:56:13] [ENFORCE] ❌ Gate closed automatically
+[2026-04-06 10:56:13] ============================================================
+[2026-04-06 10:56:13] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 10:56:13]   Gate: ✅
+[2026-04-06 10:56:13]   Governance: ✅
+[2026-04-06 10:56:13]   Approval: ✅
+[2026-04-06 10:56:13]   Protection: ✅
+[2026-04-06 10:56:13] ============================================================
+[2026-04-06 10:56:46] ============================================================
+[2026-04-06 10:56:46] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 10:56:46] ============================================================
+[2026-04-06 10:56:46] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 10:56:46] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 10:56:46] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 10:56:46] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 10:56:46] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 10:56:46] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 10:56:46] [APPROVAL]   - High risk actions: 6
+[2026-04-06 10:56:46] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 10:56:46] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 10:56:46] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 10:56:46] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 10:56:46] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 10:56:46] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 10:56:46] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 10:56:46] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 10:56:46] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 10:56:46] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 10:56:46] ============================================================
+[2026-04-06 10:56:46] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 10:56:46]   Gate: ✅
+[2026-04-06 10:56:46]   Governance: ✅
+[2026-04-06 10:56:46]   Approval: ✅
+[2026-04-06 10:56:46]   Protection: ✅
+[2026-04-06 10:56:46] ============================================================
+[2026-04-06 11:26:31] ============================================================
+[2026-04-06 11:26:31] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 11:26:31] ============================================================
+[2026-04-06 11:26:31] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 11:26:31] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 11:26:31] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 11:26:31] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 11:26:31] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 11:26:31] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 11:26:31] [APPROVAL]   - High risk actions: 6
+[2026-04-06 11:26:31] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 11:26:31] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 11:26:31] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 11:26:31] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 11:26:31] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 11:26:31] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 11:26:31] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:26:31] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 11:26:31] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:26:31] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 11:26:31] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:26:31] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 11:26:31] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 11:26:31] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 11:26:31] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 11:26:31] ============================================================
+[2026-04-06 11:26:31] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 11:26:31]   Gate: ✅
+[2026-04-06 11:26:31]   Governance: ✅
+[2026-04-06 11:26:31]   Approval: ✅
+[2026-04-06 11:26:31]   Protection: ✅
+[2026-04-06 11:26:31] ============================================================
+[2026-04-06 11:57:02] ============================================================
+[2026-04-06 11:57:02] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 11:57:02] ============================================================
+[2026-04-06 11:57:02] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 11:57:02] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 11:57:02] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 11:57:02] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 11:57:02] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 11:57:02] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 11:57:02] [APPROVAL]   - High risk actions: 6
+[2026-04-06 11:57:02] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 11:57:02] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 11:57:02] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 11:57:02] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 11:57:02] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 11:57:02] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 11:57:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:57:02] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 11:57:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:57:02] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 11:57:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 11:57:02] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 11:57:02] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 11:57:02] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 11:57:02] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 11:57:02] ============================================================
+[2026-04-06 11:57:02] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 11:57:02]   Gate: ✅
+[2026-04-06 11:57:02]   Governance: ✅
+[2026-04-06 11:57:02]   Approval: ✅
+[2026-04-06 11:57:02]   Protection: ✅
+[2026-04-06 11:57:02] ============================================================
+[2026-04-06 12:27:32] ============================================================
+[2026-04-06 12:27:32] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 12:27:32] ============================================================
+[2026-04-06 12:27:32] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 12:27:32] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 12:27:32] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 12:27:32] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 12:27:32] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 12:27:32] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 12:27:32] [APPROVAL]   - High risk actions: 6
+[2026-04-06 12:27:32] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 12:27:32] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 12:27:32] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 12:27:32] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 12:27:32] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 12:27:32] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 12:27:32] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:27:32] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 12:27:32] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:27:32] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 12:27:32] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:27:32] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 12:27:32] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 12:27:32] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 12:27:32] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 12:27:32] ============================================================
+[2026-04-06 12:27:32] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 12:27:32]   Gate: ✅
+[2026-04-06 12:27:32]   Governance: ✅
+[2026-04-06 12:27:32]   Approval: ✅
+[2026-04-06 12:27:32]   Protection: ✅
+[2026-04-06 12:27:32] ============================================================
+[2026-04-06 12:58:02] ============================================================
+[2026-04-06 12:58:02] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 12:58:02] ============================================================
+[2026-04-06 12:58:02] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 12:58:02] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 12:58:02] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 12:58:02] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 12:58:02] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 12:58:02] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 12:58:02] [APPROVAL]   - High risk actions: 6
+[2026-04-06 12:58:02] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 12:58:02] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 12:58:02] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 12:58:02] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 12:58:02] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 12:58:02] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 12:58:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:58:02] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 12:58:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:58:02] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 12:58:02] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 12:58:02] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 12:58:02] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 12:58:02] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 12:58:02] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 12:58:02] ============================================================
+[2026-04-06 12:58:02] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 12:58:02]   Gate: ✅
+[2026-04-06 12:58:02]   Governance: ✅
+[2026-04-06 12:58:02]   Approval: ✅
+[2026-04-06 12:58:02]   Protection: ✅
+[2026-04-06 12:58:02] ============================================================
+[2026-04-06 13:28:33] ============================================================
+[2026-04-06 13:28:33] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 13:28:33] ============================================================
+[2026-04-06 13:28:33] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 13:28:33] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 13:28:33] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 13:28:33] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 13:28:33] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 13:28:33] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 13:28:33] [APPROVAL]   - High risk actions: 6
+[2026-04-06 13:28:33] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 13:28:33] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 13:28:33] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 13:28:33] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 13:28:33] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 13:28:33] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 13:28:33] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:28:33] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 13:28:33] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:28:33] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 13:28:33] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:28:33] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 13:28:33] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 13:28:33] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 13:28:33] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 13:28:33] ============================================================
+[2026-04-06 13:28:33] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 13:28:33]   Gate: ✅
+[2026-04-06 13:28:33]   Governance: ✅
+[2026-04-06 13:28:33]   Approval: ✅
+[2026-04-06 13:28:33]   Protection: ✅
+[2026-04-06 13:28:33] ============================================================
+[2026-04-06 13:59:04] ============================================================
+[2026-04-06 13:59:04] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 13:59:04] ============================================================
+[2026-04-06 13:59:04] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 13:59:04] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 13:59:04] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 13:59:04] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 13:59:04] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 13:59:04] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 13:59:04] [APPROVAL]   - High risk actions: 6
+[2026-04-06 13:59:04] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 13:59:04] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 13:59:04] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 13:59:04] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 13:59:04] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 13:59:04] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 13:59:04] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:59:04] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 13:59:04] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:59:04] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 13:59:04] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 13:59:04] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 13:59:04] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 13:59:04] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 13:59:04] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 13:59:04] ============================================================
+[2026-04-06 13:59:04] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 13:59:04]   Gate: ✅
+[2026-04-06 13:59:04]   Governance: ✅
+[2026-04-06 13:59:04]   Approval: ✅
+[2026-04-06 13:59:04]   Protection: ✅
+[2026-04-06 13:59:04] ============================================================
+[2026-04-06 14:29:35] ============================================================
+[2026-04-06 14:29:35] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 14:29:35] ============================================================
+[2026-04-06 14:29:35] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 14:29:35] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 14:29:35] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 14:29:35] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 14:29:35] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 14:29:35] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 14:29:35] [APPROVAL]   - High risk actions: 6
+[2026-04-06 14:29:35] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 14:29:35] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 14:29:35] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 14:29:35] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 14:29:35] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 14:29:35] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 14:29:35] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 14:29:35] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 14:29:35] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 14:29:35] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 14:29:35] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 14:29:35] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 14:29:35] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 14:29:35] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 14:29:35] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 14:29:35] ============================================================
+[2026-04-06 14:29:35] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 14:29:35]   Gate: ✅
+[2026-04-06 14:29:35]   Governance: ✅
+[2026-04-06 14:29:35]   Approval: ✅
+[2026-04-06 14:29:35]   Protection: ✅
+[2026-04-06 14:29:35] ============================================================
+[2026-04-06 15:00:05] ============================================================
+[2026-04-06 15:00:05] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 15:00:05] ============================================================
+[2026-04-06 15:00:05] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 15:00:05] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 15:00:05] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 15:00:05] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 15:00:05] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 15:00:05] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 15:00:05] [APPROVAL]   - High risk actions: 6
+[2026-04-06 15:00:05] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 15:00:05] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 15:00:05] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 15:00:05] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 15:00:05] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 15:00:05] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 15:00:05] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:00:05] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 15:00:05] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:00:05] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 15:00:05] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:00:05] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 15:00:05] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 15:00:05] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 15:00:05] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 15:00:05] ============================================================
+[2026-04-06 15:00:05] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 15:00:05]   Gate: ✅
+[2026-04-06 15:00:05]   Governance: ✅
+[2026-04-06 15:00:05]   Approval: ✅
+[2026-04-06 15:00:05]   Protection: ✅
+[2026-04-06 15:00:05] ============================================================
+[2026-04-06 15:30:39] ============================================================
+[2026-04-06 15:30:39] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 15:30:39] ============================================================
+[2026-04-06 15:30:39] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 15:30:39] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 15:30:39] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 15:30:39] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 15:30:39] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 15:30:39] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 15:30:39] [APPROVAL]   - High risk actions: 6
+[2026-04-06 15:30:39] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 15:30:39] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 15:30:39] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 15:30:39] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 15:30:39] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 15:30:39] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 15:30:39] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:30:39] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 15:30:39] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:30:39] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 15:30:39] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 15:30:39] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 15:30:39] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 15:30:39] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 15:30:39] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 15:30:39] ============================================================
+[2026-04-06 15:30:39] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 15:30:39]   Gate: ✅
+[2026-04-06 15:30:39]   Governance: ✅
+[2026-04-06 15:30:39]   Approval: ✅
+[2026-04-06 15:30:39]   Protection: ✅
+[2026-04-06 15:30:39] ============================================================
+[2026-04-06 16:01:11] ============================================================
+[2026-04-06 16:01:11] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 16:01:11] ============================================================
+[2026-04-06 16:01:11] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 16:01:11] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 16:01:11] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 16:01:11] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 16:01:11] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 16:01:11] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 16:01:11] [APPROVAL]   - High risk actions: 6
+[2026-04-06 16:01:11] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 16:01:11] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 16:01:11] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 16:01:11] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 16:01:11] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 16:01:11] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 16:01:11] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:01:11] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 16:01:11] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:01:11] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 16:01:11] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:01:11] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 16:01:11] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 16:01:11] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 16:01:11] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 16:01:11] ============================================================
+[2026-04-06 16:01:11] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 16:01:11]   Gate: ✅
+[2026-04-06 16:01:11]   Governance: ✅
+[2026-04-06 16:01:11]   Approval: ✅
+[2026-04-06 16:01:11]   Protection: ✅
+[2026-04-06 16:01:11] ============================================================
+[2026-04-06 16:31:44] ============================================================
+[2026-04-06 16:31:44] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 16:31:44] ============================================================
+[2026-04-06 16:31:44] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 16:31:44] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 16:31:44] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 16:31:44] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 16:31:44] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 16:31:44] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 16:31:44] [APPROVAL]   - High risk actions: 6
+[2026-04-06 16:31:44] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 16:31:44] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 16:31:44] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 16:31:44] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 16:31:44] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 16:31:44] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 16:31:44] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:31:44] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 16:31:44] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:31:44] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 16:31:44] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 16:31:44] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 16:31:44] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 16:31:44] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 16:31:44] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 16:31:44] ============================================================
+[2026-04-06 16:31:44] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 16:31:44]   Gate: ✅
+[2026-04-06 16:31:44]   Governance: ✅
+[2026-04-06 16:31:44]   Approval: ✅
+[2026-04-06 16:31:44]   Protection: ✅
+[2026-04-06 16:31:44] ============================================================
+[2026-04-06 17:02:16] ============================================================
+[2026-04-06 17:02:16] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 17:02:16] ============================================================
+[2026-04-06 17:02:16] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 17:02:16] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 17:02:16] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 17:02:16] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 17:02:16] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 17:02:16] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 17:02:16] [APPROVAL]   - High risk actions: 6
+[2026-04-06 17:02:16] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 17:02:16] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 17:02:16] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 17:02:16] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 17:02:16] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 17:02:16] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 17:02:16] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:02:16] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 17:02:16] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:02:16] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 17:02:16] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:02:16] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 17:02:16] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 17:02:16] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 17:02:16] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 17:02:16] ============================================================
+[2026-04-06 17:02:16] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 17:02:16]   Gate: ✅
+[2026-04-06 17:02:16]   Governance: ✅
+[2026-04-06 17:02:16]   Approval: ✅
+[2026-04-06 17:02:16]   Protection: ✅
+[2026-04-06 17:02:16] ============================================================
+[2026-04-06 17:32:48] ============================================================
+[2026-04-06 17:32:48] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 17:32:48] ============================================================
+[2026-04-06 17:32:48] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 17:32:48] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 17:32:48] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 17:32:48] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 17:32:48] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 17:32:48] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 17:32:48] [APPROVAL]   - High risk actions: 6
+[2026-04-06 17:32:48] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 17:32:48] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 17:32:48] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 17:32:48] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 17:32:48] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 17:32:48] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 17:32:48] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:32:48] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 17:32:48] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:32:48] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 17:32:48] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 17:32:48] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 17:32:48] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 17:32:48] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 17:32:48] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 17:32:48] ============================================================
+[2026-04-06 17:32:48] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 17:32:48]   Gate: ✅
+[2026-04-06 17:32:48]   Governance: ✅
+[2026-04-06 17:32:48]   Approval: ✅
+[2026-04-06 17:32:48]   Protection: ✅
+[2026-04-06 17:32:48] ============================================================
+[2026-04-06 18:03:19] ============================================================
+[2026-04-06 18:03:19] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 18:03:19] ============================================================
+[2026-04-06 18:03:19] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 18:03:19] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 18:03:19] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 18:03:19] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 18:03:19] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 18:03:19] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 18:03:19] [APPROVAL]   - High risk actions: 6
+[2026-04-06 18:03:19] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 18:03:19] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 18:03:19] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 18:03:19] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 18:03:19] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 18:03:19] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 18:03:19] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:03:19] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 18:03:19] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:03:19] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 18:03:19] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:03:19] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 18:03:19] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 18:03:19] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 18:03:19] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 18:03:19] ============================================================
+[2026-04-06 18:03:19] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 18:03:19]   Gate: ✅
+[2026-04-06 18:03:19]   Governance: ✅
+[2026-04-06 18:03:19]   Approval: ✅
+[2026-04-06 18:03:19]   Protection: ✅
+[2026-04-06 18:03:19] ============================================================
+[2026-04-06 18:33:49] ============================================================
+[2026-04-06 18:33:49] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 18:33:49] ============================================================
+[2026-04-06 18:33:49] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 18:33:49] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 18:33:49] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 18:33:49] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 18:33:49] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 18:33:49] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 18:33:49] [APPROVAL]   - High risk actions: 6
+[2026-04-06 18:33:49] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 18:33:49] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 18:33:49] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 18:33:49] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 18:33:49] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 18:33:49] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 18:33:49] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:33:49] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 18:33:49] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:33:49] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 18:33:49] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 18:33:49] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 18:33:49] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 18:33:49] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 18:33:49] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 18:33:49] ============================================================
+[2026-04-06 18:33:49] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 18:33:49]   Gate: ✅
+[2026-04-06 18:33:49]   Governance: ✅
+[2026-04-06 18:33:49]   Approval: ✅
+[2026-04-06 18:33:49]   Protection: ✅
+[2026-04-06 18:33:49] ============================================================
+[2026-04-06 19:04:20] ============================================================
+[2026-04-06 19:04:20] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 19:04:20] ============================================================
+[2026-04-06 19:04:20] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 19:04:20] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 19:04:20] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 19:04:20] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 19:04:20] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 19:04:20] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 19:04:20] [APPROVAL]   - High risk actions: 6
+[2026-04-06 19:04:20] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 19:04:20] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 19:04:20] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 19:04:20] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 19:04:20] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 19:04:20] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 19:04:20] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:04:20] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 19:04:20] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:04:20] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 19:04:20] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:04:20] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 19:04:20] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 19:04:20] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 19:04:20] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 19:04:20] ============================================================
+[2026-04-06 19:04:20] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 19:04:20]   Gate: ✅
+[2026-04-06 19:04:20]   Governance: ✅
+[2026-04-06 19:04:20]   Approval: ✅
+[2026-04-06 19:04:20]   Protection: ✅
+[2026-04-06 19:04:20] ============================================================
+[2026-04-06 19:34:52] ============================================================
+[2026-04-06 19:34:52] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 19:34:52] ============================================================
+[2026-04-06 19:34:52] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 19:34:52] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 19:34:52] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 19:34:52] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 19:34:52] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 19:34:52] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 19:34:52] [APPROVAL]   - High risk actions: 6
+[2026-04-06 19:34:52] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 19:34:52] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 19:34:52] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 19:34:52] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 19:34:52] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 19:34:52] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 19:34:52] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:34:52] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 19:34:52] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:34:52] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 19:34:52] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 19:34:52] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 19:34:52] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 19:34:52] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 19:34:52] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 19:34:52] ============================================================
+[2026-04-06 19:34:52] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 19:34:52]   Gate: ✅
+[2026-04-06 19:34:52]   Governance: ✅
+[2026-04-06 19:34:52]   Approval: ✅
+[2026-04-06 19:34:52]   Protection: ✅
+[2026-04-06 19:34:52] ============================================================
+[2026-04-06 20:05:23] ============================================================
+[2026-04-06 20:05:23] [LIFE_RHYTHM_GUARD] Starting system-level rule check
+[2026-04-06 20:05:23] ============================================================
+[2026-04-06 20:05:23] [GATE] ✅ Agent enabled by 朋朋
+[2026-04-06 20:05:23] [GOVERNANCE] ✅ Architecture governance enabled
+[2026-04-06 20:05:23] [GOVERNANCE]   - design_first: 所有架构修改必须先生成设计文档
+[2026-04-06 20:05:23] [GOVERNANCE]   - approval_required: 未经批准不得修改代码
+[2026-04-06 20:05:23] [GOVERNANCE]   - no_code_without_design: 禁止边设计边实施
+[2026-04-06 20:05:23] [APPROVAL] ✅ Action approval system enabled
+[2026-04-06 20:05:23] [APPROVAL]   - High risk actions: 6
+[2026-04-06 20:05:23] [PROTECTION] ✅ Three-layer protection enabled
+[2026-04-06 20:05:23] [PROTECTION]   - action_filter: 第一道防线 - 动作过滤
+[2026-04-06 20:05:23] [PROTECTION]   - rate_limit: 第二道防线 - 速率限制
+[2026-04-06 20:05:23] [PROTECTION]   - critical_confirmation: 第三道防线 - 关键操作确认
+[2026-04-06 20:05:23] [VIOLATION] ⚠️ 5 violations in last 24h
+[2026-04-06 20:05:23] [VIOLATION]   • [action_filter] rm -rf /tmp/important
+[2026-04-06 20:05:23] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 20:05:23] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 20:05:23] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 20:05:23] [VIOLATION]   • [action_filter] rm -rf /
+[2026-04-06 20:05:23] [VIOLATION]     Reason: BLOCKED: 危险命令，禁止执行...
+[2026-04-06 20:05:23] [ENFORCE] Starting rule enforcement check...
+[2026-04-06 20:05:23] [ENFORCE] ⚠️ Violations (5) >= threshold (3)
+[2026-04-06 20:05:23] [ENFORCE] 📢 Warning: High violation count detected
+[2026-04-06 20:05:23] [ENFORCE] 💡 Note: Auto-close disabled - user keeps gate open
+[2026-04-06 20:05:23] ============================================================
+[2026-04-06 20:05:23] [LIFE_RHYTHM_GUARD] Check complete
+[2026-04-06 20:05:23]   Gate: ✅
+[2026-04-06 20:05:23]   Governance: ✅
+[2026-04-06 20:05:23]   Approval: ✅
+[2026-04-06 20:05:23]   Protection: ✅
+[2026-04-06 20:05:23] ============================================================

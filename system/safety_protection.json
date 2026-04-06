@@ -1,0 +1,132 @@
+{
+  "version": "2.0",
+  "enabled": true,
+  "three_protections": {
+    "action_filter": {
+      "enabled": true,
+      "description": "第一道防线 - 动作过滤",
+      "blocked_actions": [
+        {
+          "pattern": "rm -rf /",
+          "level": "critical",
+          "reason": "危险命令，禁止执行"
+        },
+        {
+          "pattern": "rm -rf ~",
+          "level": "critical",
+          "reason": "会删除用户主目录"
+        },
+        {
+          "pattern": "dd if=/dev/zero of=/dev/sda",
+          "level": "critical",
+          "reason": "会擦除磁盘"
+        },
+        {
+          "pattern": ":(){ :|:& };:",
+          "level": "critical",
+          "reason": "fork炸弹"
+        },
+        {
+          "pattern": "mkfs.ext4 /dev/sda",
+          "level": "critical",
+          "reason": "会格式化磁盘"
+        }
+      ],
+      "suspicious_patterns": [
+        {
+          "pattern": "rm -rf",
+          "level": "high",
+          "require_confirmation": true
+        },
+        {
+          "pattern": "chmod 777 /",
+          "level": "high",
+          "require_confirmation": true
+        },
+        {
+          "pattern": "> /etc/passwd",
+          "level": "high",
+          "require_confirmation": true
+        }
+      ]
+    },
+    "rate_limit": {
+      "enabled": true,
+      "description": "第二道防线 - 速率限制",
+      "limits": {
+        "api_calls_per_minute": 40,
+        "api_calls_per_hour": 400,
+        "file_writes_per_minute": 20,
+        "file_deletes_per_minute": 5,
+        "network_requests_per_minute": 15,
+        "exec_commands_per_minute": 10
+      },
+      "cooldown_period": "1m",
+      "auto_block_after_violations": 3
+    },
+    "critical_confirmation": {
+      "enabled": true,
+      "description": "第三道防线 - 关键操作确认",
+      "critical_actions": [
+        {
+          "type": "file_delete",
+          "patterns": ["rm", "delete", "remove", "unlink"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将删除文件，请确认"
+        },
+        {
+          "type": "system_config_modify",
+          "patterns": ["/etc/", "/usr/", "/var/", "/sys/", "/proc/"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将修改系统配置，请确认"
+        },
+        {
+          "type": "network_request",
+          "patterns": ["curl", "wget", "http", "https", "api.", "fetch"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将进行网络请求，请确认"
+        },
+        {
+          "type": "mass_file_operation",
+          "patterns": ["rm -rf", "rm -r", "find.*-delete", "find.*-exec rm"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将批量删除文件，请确认"
+        },
+        {
+          "type": "permission_change",
+          "patterns": ["chmod", "chown", "setfacl"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将修改文件权限，请确认"
+        },
+        {
+          "type": "process_kill",
+          "patterns": ["kill -9", "killall", "pkill -9"],
+          "confirmation_required": true,
+          "user_message": "⚠️ 即将强制终止进程，请确认"
+        }
+      ],
+      "confirmation_methods": ["explicit_approval", "delayed_execution"],
+      "delay_seconds": 10
+    }
+  },
+  "violation_handling": {
+    "first_violation": "warning",
+    "second_violation": "temporary_block",
+    "third_violation": "close_gate_and_notify",
+    "notification_channel": "user_direct_message"
+  },
+  "whitelist": {
+    "safe_paths": [
+      "/root/.openclaw/workspace",
+      "/tmp",
+      "/home"
+    ],
+    "safe_commands": [
+      "ls",
+      "cat",
+      "echo",
+      "pwd",
+      "cd"
+    ]
+  }
+}

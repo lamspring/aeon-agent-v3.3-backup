@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "can_spawn_subtasks": true,
+  "max_depth": 3,
+  "spawn_triggers": {
+    "on_decision_adjust": true,
+    "on_complex_task": true,
+    "on_new_discovery": true
+  }
+}

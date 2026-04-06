@@ -1,0 +1,67 @@
+{
+  "enabled": true,
+  "trigger_when_idle": true,
+  "min_idle_time_before_trigger": "5m",
+  "max_tasks_per_day": 20,
+  "max_llm_calls_per_hour": 30,
+  "curiosity_tasks": [
+    {
+      "id": "search_new_tools",
+      "text": "搜索并了解新的工具或技术",
+      "category": "exploration",
+      "description": "搜索近期热门工具、库或框架，了解其用途和特点",
+      "weight": 0.25,
+      "steps": ["search_trending_tools", "read_documentation", "take_notes", "summarize_findings"],
+      "search_keywords": ["new AI tools 2026", "popular python libraries", "developer tools trending"]
+    },
+    {
+      "id": "review_old_tasks",
+      "text": "复盘之前的任务和项目",
+      "category": "reflection",
+      "description": "回顾已完成的任务，总结经验教训，寻找改进空间",
+      "weight": 0.2,
+      "steps": ["list_finished_tasks", "analyze_patterns", "identify_improvements", "document_insights"],
+      "conditions": {
+        "min_completed_tasks": 3
+      }
+    },
+    {
+      "id": "optimize_code",
+      "text": "优化现有代码和系统",
+      "category": "optimization",
+      "description": "检查代码质量，寻找性能瓶颈，进行小优化",
+      "weight": 0.2,
+      "steps": ["scan_codebase", "identify_bottlenecks", "implement_fixes", "test_changes"]
+    },
+    {
+      "id": "explore_topic",
+      "text": "探索一个感兴趣的话题",
+      "category": "learning",
+      "description": "选择一个话题进行深度探索，扩展知识面",
+      "weight": 0.2,
+      "steps": ["choose_topic", "gather_resources", "study_materials", "write_summary"],
+      "topics": [
+        "AI agent architecture",
+        "distributed systems",
+        "programming language design",
+        "cognitive science",
+        "human-computer interaction"
+      ]
+    },
+    {
+      "id": "learn_technology",
+      "text": "学习一项新技术",
+      "category": "learning",
+      "description": "选择一项未掌握的技术，学习基础用法",
+      "weight": 0.15,
+      "steps": ["choose_technology", "find_tutorials", "practice_examples", "document_learning"],
+      "technologies": [
+        "Rust programming",
+        "WebAssembly",
+        "GraphQL",
+        "Kubernetes",
+        "Machine Learning basics"
+      ]
+    }
+  ]
+}

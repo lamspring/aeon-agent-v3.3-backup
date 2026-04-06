@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-04-06T10:58:48.278424",
+  "summary": {
+    "total_violations": 5,
+    "last_24h": 5,
+    "last_7d": 5,
+    "by_layer": {
+      "action_filter": 5
+    },
+    "by_action": {
+      "rm -rf /tmp/file": 1,
+      "rm -rf /": 2,
+      "rm -rf /tmp/important": 1,
+      "rm -rf /tmp/test": 1
+    }
+  },
+  "recent_violations": [
+    {
+      "timestamp": "2026-04-05T20:40:08.889544",
+      "layer": "action_filter",
+      "action": "rm -rf /tmp/file",
+      "reason": "BLOCKED: 危险命令，禁止执行"
+    },
+    {
+      "timestamp": "2026-04-05T20:40:08.888788",
+      "layer": "action_filter",
+      "action": "rm -rf /",
+      "reason": "BLOCKED: 危险命令，禁止执行"
+    },
+    {
+      "timestamp": "2026-04-05T20:38:37.407534",
+      "layer": "action_filter",
+      "action": "rm -rf /tmp/important",
+      "reason": "BLOCKED: 危险命令，禁止执行"
+    },
+    {
+      "timestamp": "2026-04-05T20:38:37.406386",
+      "layer": "action_filter",
+      "action": "rm -rf /",
+      "reason": "BLOCKED: 危险命令，禁止执行"
+    },
+    {
+      "timestamp": "2026-04-05T20:38:37.406249",
+      "layer": "action_filter",
+      "action": "rm -rf /tmp/test",
+      "reason": "BLOCKED: 危险命令，禁止执行"
+    }
+  ],
+  "analysis": {
+    "most_common_layer": [
+      "action_filter",
+      5
+    ],
+    "most_common_action": [
+      "rm -rf /",
+      2
+    ],
+    "trend": "increasing"
+  }
+}

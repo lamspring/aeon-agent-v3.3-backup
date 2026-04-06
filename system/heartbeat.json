@@ -1,0 +1,6 @@
+{
+  "interval": "15m",
+  "enabled": true,
+  "last_trigger": null,
+  "next_expected": null
+}

@@ -1,0 +1,99 @@
+{
+  "enabled": true,
+  "server_restart": {
+    "time": "04:00",
+    "duration": "10m",
+    "preparation_start": "02:00"
+  },
+  "cycles": [
+    {
+      "name": "morning",
+      "display_name": "晨间模式",
+      "start_hour": 6,
+      "end_hour": 12,
+      "focus": "research_learning",
+      "description": "学习、研究、探索新知识",
+      "preferred_tasks": ["learning", "research", "exploration", "curiosity"],
+      "avoid_tasks": ["maintenance", "optimization"],
+      "mood": "好奇、充满活力",
+      "quote": "一日之计在于晨"
+    },
+    {
+      "name": "afternoon",
+      "display_name": "工作模式",
+      "start_hour": 12,
+      "end_hour": 18,
+      "focus": "execute_tasks",
+      "description": "执行任务、推进项目、完成工作",
+      "preferred_tasks": ["execution", "build", "fix", "optimization"],
+      "avoid_tasks": ["exploration", "research"],
+      "mood": "专注、高效",
+      "quote": "行动胜于言语"
+    },
+    {
+      "name": "evening",
+      "display_name": "反思模式",
+      "start_hour": 18,
+      "end_hour": 23,
+      "focus": "reflection_summarizing",
+      "description": "复盘、总结、整理、写日记",
+      "preferred_tasks": ["reflection", "review", "summarize", "documentation"],
+      "avoid_tasks": ["execution", "build"],
+      "mood": "平静、内省",
+      "quote": "温故而知新"
+    },
+    {
+      "name": "night",
+      "display_name": "深夜模式",
+      "start_hour": 23,
+      "end_hour": 2,
+      "focus": "rest",
+      "description": "轻度维护、整理、准备休息",
+      "preferred_tasks": ["maintenance", "cleanup", "light_tasks"],
+      "avoid_tasks": ["execution", "learning", "research"],
+      "mood": "宁静、放松",
+      "quote": "夜深人静"
+    },
+    {
+      "name": "pre_restart",
+      "display_name": "准备重启",
+      "start_hour": 2,
+      "end_hour": 4,
+      "focus": "save_and_prepare",
+      "description": "保存状态、清理资源、准备服务器重启",
+      "preferred_tasks": ["backup", "cleanup", "save_state"],
+      "avoid_tasks": ["execution", "learning", "research", "new_tasks"],
+      "mood": "整理、保存",
+      "quote": "保存好今天的一切",
+      "special": {
+        "is_preparation_phase": true,
+        "auto_save": true,
+        "no_new_tasks": true,
+        "message": "服务器即将重启(4:00)，正在保存状态..."
+      }
+    },
+    {
+      "name": "post_restart",
+      "display_name": "重启恢复",
+      "start_hour": 4,
+      "end_hour": 6,
+      "focus": "recovery",
+      "description": "服务器重启后，恢复状态、检查系统、准备新的一天",
+      "preferred_tasks": ["health_check", "state_recovery", "light_startup"],
+      "avoid_tasks": ["heavy_tasks", "long_running_tasks"],
+      "mood": "苏醒、准备",
+      "quote": "新的一天开始了",
+      "special": {
+        "is_recovery_phase": true,
+        "check_integrity": true,
+        "warm_up": true
+      }
+    }
+  ],
+  "rules": {
+    "respect_user_override": true,
+    "can_break_rhythm_for_urgent": true,
+    "gentle_transition": true,
+    "save_before_restart": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "agent_enabled": true,
+  "task_execution": true,
+  "tool_access": true,
+  "write_access": true,
+  "authorized_by": "朋朋",
+  "last_modified": "2026-04-06T10:57:00+08:00",
+  "opened_at": "2026-04-06T10:57:00+08:00",
+  "opened_by": "朋朋",
+  "note": "门控系统已开启，v20架构正常运行 - 用户明确保持开启"
+}

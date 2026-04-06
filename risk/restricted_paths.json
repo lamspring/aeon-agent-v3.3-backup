@@ -1,0 +1,9 @@
+[
+  "/etc/",
+  "/usr/bin/sudo",
+  "/bin/su",
+  "/root/.ssh/",
+  "/var/log/",
+  "/proc/",
+  "/sys/"
+]

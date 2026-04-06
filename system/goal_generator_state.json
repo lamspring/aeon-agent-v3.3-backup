@@ -1,0 +1,14 @@
+{
+  "today_goals": [
+    {
+      "id": "learn_new",
+      "text": "learn something new",
+      "date": "2026-04-05",
+      "time": "2026-04-05T19:46:48.411762",
+      "task_id": "pending"
+    }
+  ],
+  "last_goal_time": "2026-04-05T19:46:48.411764",
+  "goal_history": [],
+  "daily_stats": {}
+}

@@ -1,0 +1,36 @@
+{
+  "video_master": {
+    "name": "视频解析大师",
+    "category": "video_processing",
+    "description": "完整的视频内容解析能力：下载视频 → 提取语音 → 转文字 → 做总结。\n\n适用平台：抖音、快手等短视频平台（使用 Playwright 渲染方案）。\n\n完整流程：\n1. 【扒视频】用 Playwright 渲染页面，提取 video 元素 src\n2. 【去水印】将 /playwm/ 替换为 /play/ 获取无水印视频\n3. 【下载】用 requests 下载视频流到本地\n4. 【转语音】用 ffmpeg + Whisper 提取音频并转文字\n5. 【做总结】阅读转录文本，提炼主题、关键对话、核心信息\n\n技术要点：\n- 需要系统 Chrome 和 ffmpeg\n- 使用 tiny 模型速度快，pro 模型准确度高\n- 语音识别对普通话效果好，方言/口音会有误差\n\n输出格式：\n- 视频文件: /tmp/video.mp4\n- 语音转录: /tmp/video.txt\n- 内容总结: AI分析后的主题摘要",
+    "code_snippet": "#!/usr/bin/env python3\n# 视频解析大师 - 完整流程\n\nimport os\n\ndef parse_video(url, platform=\"douyin\"):\n    \"\"\"解析视频完整流程\"\"\"\n    \n    # Step 1: 下载视频\n    from playwright.sync_api import sync_playwright\n    import requests\n    \n    print(\"🎬 正在解析视频...\")\n    with sync_playwright() as p:\n        browser = p.chromium.launch(\n            executable_path='/usr/bin/google-chrome',\n            headless=True,\n            args=['--no-sandbox']\n        )\n        page = browser.new_page()\n        page.goto(url, wait_until='networkidle', timeout=30000)\n        page.wait_for_timeout(3000)\n        \n        video = page.query_selector('video')\n        src = video.get_attribute('src')\n        video_url = f'https://www.douyin.com{src}'.replace('/playwm/', '/play/')\n        browser.close()\n        \n        # 下载\n        response = requests.get(video_url, headers={'Referer': url})\n        video_path = '/tmp/video.mp4'\n        with open(video_path, 'wb') as f:\n            f.write(response.content)\n        print(f\"✅ 视频下载完成: {video_path}\")\n    \n    # Step 2: 语音转文字\n    import whisper\n    print(\"🎙️ 正在转录语音...\")\n    model = whisper.load_model(\"tiny\")\n    result = model.transcribe(video_path, language=\"Chinese\")\n    \n    text_path = '/tmp/video.txt'\n    with open(text_path, 'w', encoding='utf-8') as f:\n        f.write(result[\"text\"])\n    print(f\"✅ 转录完成: {text_path}\")\n    \n    # Step 3: 返回结果\n    return {\n        \"video_path\": video_path,\n        \"text\": result[\"text\"],\n        \"text_path\": text_path\n    }\n\n# 使用示例\nresult = parse_video(\"https://v.douyin.com/xxxxx/\")\nprint(\"\n📝 视频内容:\")\nprint(result[\"text\"][:500])\n",
+    "dependencies": [
+      "playwright",
+      "requests",
+      "openai-whisper",
+      "ffmpeg",
+      "google-chrome"
+    ],
+    "tags": [
+      "视频解析",
+      "抖音",
+      "语音转文字",
+      "爬虫",
+      "playwright",
+      "whisper"
+    ],
+    "source": "2026-04-01 朋朋亲授：视频解析大师完整流程",
+    "created_at": "2026-04-01T22:15:35.980332",
+    "updated_at": "2026-04-01T22:15:35.980348",
+    "usage_count": 0,
+    "id": "video_master"
+  },
+  "system_health": {
+    "name": "system_health",
+    "description": "系统健康监控：检查随动心跳、日记状态、技能库、身份文件等核心组件的运行状态",
+    "script": "/root/.openclaw/workspace/tools/system_health.py",
+    "type": "monitoring",
+    "added_at": "2026-04-04T15:13:01.940095",
+    "status": "active"
+  }
+}

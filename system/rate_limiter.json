@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "limits": {
+    "api_calls_per_minute": 10,
+    "api_calls_per_hour": 100,
+    "tasks_created_per_heartbeat": 3,
+    "subtasks_per_task": 5,
+    "max_pending_tasks": 20,
+    "max_tree_depth": 3
+  },
+  "actions": {
+    "on_limit_exceeded": "reject",
+    "log_violations": true
+  }
+}

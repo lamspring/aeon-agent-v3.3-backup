@@ -1,0 +1,97 @@
+{
+  "governance_enabled": true,
+  "version": "1.0",
+  "effective_date": "2026-04-05",
+  "rules": {
+    "design_first": {
+      "description": "所有架构修改必须先生成设计文档",
+      "required": true,
+      "violation_level": "critical"
+    },
+    "approval_required": {
+      "description": "未经批准不得修改代码",
+      "required": true,
+      "violation_level": "critical"
+    },
+    "no_code_without_design": {
+      "description": "禁止边设计边实施",
+      "required": true,
+      "violation_level": "critical"
+    }
+  },
+  "workflow": {
+    "states": [
+      "PENDING",
+      "APPROVED",
+      "REJECTED",
+      "IMPLEMENTING",
+      "VERIFYING",
+      "COMPLETED",
+      "ROLLED_BACK"
+    ],
+    "allowed_transitions": {
+      "PENDING": [
+        "APPROVED",
+        "REJECTED"
+      ],
+      "APPROVED": [
+        "IMPLEMENTING"
+      ],
+      "IMPLEMENTING": [
+        "VERIFYING"
+      ],
+      "VERIFYING": [
+        "COMPLETED",
+        "ROLLED_BACK"
+      ],
+      "REJECTED": [
+        "PENDING"
+      ],
+      "ROLLED_BACK": [
+        "PENDING"
+      ]
+    }
+  },
+  "exceptions": [
+    "bug_fix",
+    "documentation_update",
+    "configuration_change",
+    "log_improvement"
+  ],
+  "enforcement": {
+    "first_violation": "warning",
+    "second_violation": "suspend_architecture_changes",
+    "third_violation": "close_gate_and_stop_autonomous_tasks"
+  },
+  "design_template": "designs/TEMPLATE.md",
+  "design_directory": "designs",
+  "current_designs": [
+    {
+      "id": "DESIGN_20260405_001",
+      "title": "添加天气感知模块",
+      "status": "APPROVED",
+      "created_at": "2026-04-05T21:27:21.137892",
+      "updated_at": "2026-04-05T21:27:31.429559",
+      "comments": [
+        {
+          "timestamp": "2026-04-05T21:27:31.429576",
+          "comment": "Approved by 朋朋"
+        }
+      ]
+    },
+    {
+      "id": "DESIGN_20260405_002",
+      "title": "云端Agent优化：防阻塞、限内存、自监控、可重启",
+      "status": "COMPLETED",
+      "created_at": "2026-04-05T21:36:51.045040",
+      "updated_at": "2026-04-05T21:48:47.865485",
+      "comments": [
+        {
+          "timestamp": "2026-04-05T21:48:47.865501",
+          "comment": "Approved by 朋朋"
+        }
+      ],
+      "completed_at": "2026-04-05T21:55:00"
+    }
+  ]
+}

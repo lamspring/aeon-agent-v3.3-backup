@@ -1,0 +1,8 @@
+{
+  "status": "IDLE",
+  "last_updated": "2026-04-05T15:11:00+08:00",
+  "current_task": null,
+  "task_started_at": null,
+  "heartbeat_queue": [],
+  "note": "Pretext避障效果有bug，已暂停，待下次修复"
+}

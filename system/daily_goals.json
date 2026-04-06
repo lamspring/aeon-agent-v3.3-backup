@@ -1,0 +1,57 @@
+{
+  "enabled": true,
+  "goal_selection": "weighted_random",
+  "max_goals_per_day": 3,
+  "goals": [
+    {
+      "id": "learn_new",
+      "text": "learn something new",
+      "category": "learning",
+      "priority": 5,
+      "weight": 0.3,
+      "conditions": {
+        "min_idle_time": "1h",
+        "max_per_day": 1
+      }
+    },
+    {
+      "id": "improve_stability",
+      "text": "improve system stability",
+      "category": "maintenance",
+      "priority": 4,
+      "weight": 0.25,
+      "conditions": {
+        "when": "after_error"
+      }
+    },
+    {
+      "id": "review_work",
+      "text": "review previous work",
+      "category": "reflection",
+      "priority": 3,
+      "weight": 0.2,
+      "conditions": {
+        "min_completed_tasks": 3
+      }
+    },
+    {
+      "id": "explore_tools",
+      "text": "explore new tools or skills",
+      "category": "exploration",
+      "priority": 3,
+      "weight": 0.15
+    },
+    {
+      "id": "optimize_performance",
+      "text": "optimize performance and efficiency",
+      "category": "optimization",
+      "priority": 2,
+      "weight": 0.1
+    }
+  ],
+  "generation_rules": {
+    "no_goal_if_running": true,
+    "no_goal_if_pending": true,
+    "min_interval_between_goals": "30m"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "today_count": 1,
+  "last_trigger": "2026-04-05T20:07:42.261839",
+  "history": [
+    {
+      "timestamp": "2026-04-05T20:07:42.261832",
+      "task_id": "curiosity_20260405_200742",
+      "goal": "\u5b66\u4e60\u4e00\u9879\u65b0\u6280\u672f: WebAssembly"
+    }
+  ]
+}

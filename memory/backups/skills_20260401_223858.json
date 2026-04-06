@@ -1,0 +1,74 @@
+{
+  "video_master": {
+    "name": "视频解析大师",
+    "category": "video_processing",
+    "description": "完整的视频内容解析能力：下载视频 → 提取语音 → 转文字 → 做总结。\n\n适用平台：抖音、快手等短视频平台（使用 Playwright 渲染方案）。\n\n完整流程：\n1. 【扒视频】用 Playwright 渲染页面，提取 video 元素 src\n2. 【去水印】将 /playwm/ 替换为 /play/ 获取无水印视频\n3. 【下载】用 requests 下载视频流到本地\n4. 【转语音】用 ffmpeg + Whisper 提取音频并转文字\n5. 【做总结】阅读转录文本，提炼主题、关键对话、核心信息\n\n技术要点：\n- 需要系统 Chrome 和 ffmpeg\n- 使用 tiny 模型速度快，pro 模型准确度高\n- 语音识别对普通话效果好，方言/口音会有误差\n\n输出格式：\n- 视频文件: /tmp/video.mp4\n- 语音转录: /tmp/video.txt\n- 内容总结: AI分析后的主题摘要",
+    "code_snippet": "#!/usr/bin/env python3\n# 视频解析大师 - 完整流程\n\nimport os\n\ndef parse_video(url, platform=\"douyin\"):\n    \"\"\"解析视频完整流程\"\"\"\n    \n    # Step 1: 下载视频\n    from playwright.sync_api import sync_playwright\n    import requests\n    \n    print(\"🎬 正在解析视频...\")\n    with sync_playwright() as p:\n        browser = p.chromium.launch(\n            executable_path='/usr/bin/google-chrome',\n            headless=True,\n            args=['--no-sandbox']\n        )\n        page = browser.new_page()\n        page.goto(url, wait_until='networkidle', timeout=30000)\n        page.wait_for_timeout(3000)\n        \n        video = page.query_selector('video')\n        src = video.get_attribute('src')\n        video_url = f'https://www.douyin.com{src}'.replace('/playwm/', '/play/')\n        browser.close()\n        \n        # 下载\n        response = requests.get(video_url, headers={'Referer': url})\n        video_path = '/tmp/video.mp4'\n        with open(video_path, 'wb') as f:\n            f.write(response.content)\n        print(f\"✅ 视频下载完成: {video_path}\")\n    \n    # Step 2: 语音转文字\n    import whisper\n    print(\"🎙️ 正在转录语音...\")\n    model = whisper.load_model(\"tiny\")\n    result = model.transcribe(video_path, language=\"Chinese\")\n    \n    text_path = '/tmp/video.txt'\n    with open(text_path, 'w', encoding='utf-8') as f:\n        f.write(result[\"text\"])\n    print(f\"✅ 转录完成: {text_path}\")\n    \n    # Step 3: 返回结果\n    return {\n        \"video_path\": video_path,\n        \"text\": result[\"text\"],\n        \"text_path\": text_path\n    }\n\n# 使用示例\nresult = parse_video(\"https://v.douyin.com/xxxxx/\")\nprint(\"\n📝 视频内容:\")\nprint(result[\"text\"][:500])\n",
+    "dependencies": [
+      "playwright",
+      "requests",
+      "openai-whisper",
+      "ffmpeg",
+      "google-chrome"
+    ],
+    "tags": [
+      "视频解析",
+      "抖音",
+      "语音转文字",
+      "爬虫",
+      "playwright",
+      "whisper"
+    ],
+    "source": "2026-04-01 朋朋亲授：视频解析大师完整流程",
+    "created_at": "2026-04-01T22:15:35.980332",
+    "updated_at": "2026-04-01T22:15:35.980348",
+    "usage_count": 0,
+    "id": "video_master"
+  },
+  "meta_cognition_ai侦探_-_自我反思引擎": {
+    "name": "AI侦探 - 自我反思引擎",
+    "category": "meta_cognition",
+    "description": "遇到搞不定的难题时，先停下来分析刚才哪步错了，再重新规划路线。\n\n核心能力:\n1. 【根因分析】识别错误类型（依赖缺失/权限问题/网络阻塞/方法失效）\n2. 【认知偏差检查】检测执着偏差、确认偏差等思维陷阱\n3. 【新行动计划】根据错误类型生成针对性的解决步骤\n\n使用场景:\n- 代码报错反复出现\n- 同一问题尝试3次以上无果\n- 用户反馈不对/错了\n- 自己感觉不对劲\n\n输出:\n- 问题分类与深层原因\n- 认知偏差警告（如有）\n- 4步新行动计划\n\n调用方式:\n    from ai_detective import reflect_on_failure\n    reflect_on_failure(\n        task=\"想做什么\",\n        error=exception,\n        context={\"file\": \"xxx.py\"},\n        attempted=[\"试过的方法1\", \"试过的方法2\"]\n    )\n",
+    "code_snippet": "\nfrom ai_detective import reflect_on_failure, get_detective\n\n# 使用示例\ntry:\n    # 你的代码\n    risky_operation()\nexcept Exception as e:\n    # 遇到错误，启动AI侦探\n    reflection = reflect_on_failure(\n        task=\"尝试执行风险操作\",\n        error=e,\n        context={\"file\": \"main.py\", \"line\": 42},\n        attempted=[\"直接执行\", \"加try-catch\"]\n    )\n    # 按新计划执行\n    for step in reflection[\"new_plan\"]:\n        print(step)\n",
+    "dependencies": [
+      "json",
+      "pathlib",
+      "datetime",
+      "traceback"
+    ],
+    "tags": [
+      "元认知",
+      "自我反思",
+      "错误分析",
+      "AI侦探",
+      "调试"
+    ],
+    "source": "2026-04-01 朋朋亲授：用脑子而不是瞎试",
+    "created_at": "2026-04-01T22:24:54.415024",
+    "updated_at": "2026-04-01T22:24:54.415039",
+    "usage_count": 0
+  },
+  "meta_cognition_agent0-vl_大脑升级包": {
+    "name": "Agent0-VL 大脑升级包",
+    "category": "meta_cognition",
+    "description": "基于 arXiv:2511.19900 的自我反思与进化架构。\n\n核心思想:\n不要只靠自己想，要用工具验证。\n\nAgent0-VL 双角色架构:\n1. Solver (执行者): 负责实际任务执行\n2. Verifier (验证者): 用工具验证结果，生成结构化反馈\n\nVerifier 输出格式:\n- score [-1, 1]: 事实正确性评分\n- confidence [0, 1]: 自信度估计\n- critique: 自然语言反思，指出问题\n- tool_checks: 工具验证结果\n\n自信门控修复 (Confidence-Gated Repair):\n- 自信度 < 70% → 触发自我修复\n- 生成4步修复计划\n- 修复后重新验证\n\n关键洞察:\n- 纯文本反思容易幻觉（想错但以为对）\n- 工具增强验证提供事实依据\n- 迭代进化: 越反思越准确\n\n论文结果:\n- 7B模型提升12.5%\n- 3次迭代持续改进\n- 可作为Process Reward Model帮其他模型提升7.3%\n",
+    "code_snippet": "\nfrom ai_detective_v2 import AgentZeroReflection\n\n# 初始化\ndetective = AgentZeroReflection()\n\n# 定义你的任务\ndef my_task():\n    # 执行某些操作\n    return result\n\n# Agent0-VL 循环: 执行 → 验证 → 修复\nresult = detective.solve_and_verify(\n    task=\"描述任务\",\n    solver_func=my_task,\n    tools_available=[\"验证工具1\", \"验证工具2\"],\n    context={\"关键信息\": \"xxx\"}\n)\n\n# 结果包含:\n# - success: 是否成功\n# - verification: 验证详情 (score, confidence, critique)\n# - needs_repair: 是否需要修复\n# - repair_plan: 修复计划 (如需要)\n",
+    "dependencies": [
+      "json",
+      "pathlib",
+      "datetime"
+    ],
+    "tags": [
+      "Agent0-VL",
+      "自我反思",
+      "双角色架构",
+      "工具增强",
+      "大脑升级",
+      "元认知"
+    ],
+    "source": "2026-04-01 朋朋指令: 学习 arXiv:2511.19900 论文",
+    "created_at": "2026-04-01T22:33:33.038368",
+    "updated_at": "2026-04-01T22:33:33.038384",
+    "usage_count": 0
+  }
+}

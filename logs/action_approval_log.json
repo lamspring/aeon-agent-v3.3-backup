@@ -1,0 +1,18 @@
+[
+  {
+    "timestamp": "2026-04-05T19:29:34.629537",
+    "action_type": "HIGH_RISK",
+    "tool": "exec",
+    "params": "{'command': 'ls'}",
+    "decision": "BLOCKED_PENDING",
+    "reason": "Requires manual approval"
+  },
+  {
+    "timestamp": "2026-04-05T19:29:34.629767",
+    "action_type": "HIGH_RISK",
+    "tool": "write",
+    "params": "{'content': 'test'}",
+    "decision": "BLOCKED_PENDING",
+    "reason": "Requires manual approval"
+  }
+]

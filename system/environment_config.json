@@ -1,0 +1,44 @@
+{
+  "enabled": true,
+  "sensors": {
+    "system_resources": {
+      "enabled": true,
+      "interval": "5m",
+      "metrics": ["cpu_percent", "memory_percent", "disk_usage", "load_average"]
+    },
+    "network": {
+      "enabled": true,
+      "check_connectivity": true,
+      "check_latency": true
+    },
+    "filesystem": {
+      "enabled": true,
+      "watch_paths": [
+        "/root/.openclaw/workspace/agent/logs",
+        "/root/.openclaw/workspace/agent/memory"
+      ],
+      "check_disk_space": true
+    },
+    "time_context": {
+      "enabled": true,
+      "track": ["hour", "day_of_week", "is_weekend", "is_working_hours"]
+    },
+    "workspace_state": {
+      "enabled": true,
+      "track_git_status": true,
+      "count_files": true,
+      "check_recent_changes": true
+    }
+  },
+  "alerts": {
+    "high_cpu_threshold": 80,
+    "high_memory_threshold": 85,
+    "low_disk_threshold": 10,
+    "max_load_average": 4.0
+  },
+  "logging": {
+    "log_to_file": true,
+    "log_file": "logs/environment.log",
+    "significant_changes_only": true
+  }
+}

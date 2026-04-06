@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-06T20:21:20.553133",
+  "time": {
+    "hour": 20,
+    "minute": 21,
+    "day_of_week": 0,
+    "day_name": "周一",
+    "date": "2026-04-06",
+    "is_weekend": false,
+    "is_working_hours": false,
+    "is_early_morning": false,
+    "special_day": "Monday Planning Day"
+  },
+  "system": {
+    "cpu_percent": 0.0,
+    "memory_percent": 31.8,
+    "disk_percent": 60.1,
+    "load_average": [
+      0.06,
+      0.06,
+      0.07
+    ],
+    "status": "healthy"
+  },
+  "network": {
+    "is_connected": false,
+    "timestamp": "2026-04-06T20:21:23.057486"
+  },
+  "user_activity": {
+    "last_interaction": "2026-04-06 20:21:22",
+    "interaction_count_today": 127930,
+    "current_project": null,
+    "recent_topics": [],
+    "mood_hint": "unknown"
+  },
+  "internet_updates": {
+    "last_check": null,
+    "news": [],
+    "github_trending": [],
+    "ai_papers": [],
+    "enabled": false
+  },
+  "world_events": [],
+  "alerts": [
+    "❌ 网络连接中断"
+  ]
+}

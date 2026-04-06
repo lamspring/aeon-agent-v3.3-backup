@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "trigger_on": {
+    "task_complete": true,
+    "task_stuck": true,
+    "every_n_heartbeats": 4
+  },
+  "decisions": ["continue", "adjust", "stop"],
+  "questions": [
+    "progress quality",
+    "strategy effectiveness", 
+    "whether to continue or adjust"
+  ]
+}

@@ -1,0 +1,229 @@
+Agent:
+  Daemon:
+    Enable: true
+    Remote:
+      Endpoint: open.volcengineapi.com
+      HeartbeatPeriodInSeconds: 300
+    Worker:
+      CPUShares: 20 # compared to default share 1024
+      CPUQuota: 20000 # of default period 100000
+      MemoryLimitInMb: 300
+      RestartCoolDownInSeconds: 0
+  EnableReporter:
+    Stdout: false
+    Influxdb: false
+    InfluxdbTob: true
+    Prometheus: false
+    Metrics: false
+    Kafka: false
+    TLS: false
+
+  EnableAggregator:
+    PassThrough: false
+    P99: false
+
+  UnregisterManager:
+    Metric: false
+    SysMetric: false
+    SysKernelMetric: false
+    EBPF: true
+    Logs: true
+    GpuMetric: false
+    FirmwareConfigMetric: false
+    HwNpuMetric: false
+    GaudiMetric: false
+    BDAAMetric: false
+
+  UnregisterCollector:
+    Hostinfo: true
+    # metric manager from here
+    AgentInfo: false
+    CPU: false
+    Disk: false
+    Mem: false
+    Net: false
+    NetProto: false
+    NetConnectionStat: false
+    ProcessStat: false
+    SysLoad: false
+    ReservedFault: false
+    GpuBurnInfo: true
+    # metric manager end here
+    GPU: false
+    Rdma: false
+    SysDisk: false
+    SysMem: false
+    SysMountPointInfo: false
+    SysAoc: false
+    SysGpu: false
+    SysNic: false
+    SysNicPort: false
+    KernelEvent: false
+    Mellanox: false
+    IB: false
+    HwNpu: false
+    GaudiHPU: false
+    HccnPing: true
+    Hccn: false
+    BDAA: false
+
+  ManagerIntervals:
+    Metric: 60
+    SysMetric: 1800
+    SysKernelMetric: 60
+    EBPF: 30
+    Logs: 60
+    GpuMetric: 60
+    FirmwareConfigMetric: 3600
+    HwNpuMetric: 60
+    GaudiMetric: 60
+    BDAAMetric: 60
+
+  Kafka:
+    enabled: false
+    topic: cloud-monitor-agent
+    cluster: 10.249.60.14:9192,10.249.60.57:9192,10.249.62.25:9192
+    ack: 1
+    version: ""
+    enableSasl: false
+    sasl:
+      userName: monitor_agent
+      passwd: IaaS2022
+      mechanism: SCRAM-SHA-256
+
+  Prometheus:
+    ## Address to listen
+    listen: ":9091"
+
+    ## Use HTTP Basic Authentication.
+    username: ""
+    password: ""
+
+    ## Path to publish the metrics on.
+    path: "/metrics"
+    string_as_label: false
+
+    ## Send string metrics as Prometheus labels.
+    ## Unless set to false all string metrics will be sent as labels.
+    # string_as_label: false
+
+    ## Prometheus push config
+    pushAddr: ""
+    pushJobName: ""
+    pushUsername: ""
+    pushPassword: ""
+
+
+
+  BakeTime: 60  # Main Agent BakeTime, for in case of agent goroutine panic， suggest to be lager than each above intervals
+
+MISC:
+  MetricsPrefix: "web.iaas.compute"
+  DevMetricsPrefix: "test.web.iaas.compute"
+
+  ProcessCollector:
+    TopN: 5
+    ProcWhiteList: "" #examples: "systemd,cloud-monitor-agent"
+
+  Influxdb:
+    Url: "http://localhost:8086"
+    Database: "iaas_metrics"
+
+#######################################
+## eBPF Network Tracer Configuration ##
+#######################################
+
+eBPF:
+  ## @param network_tracer - custom object - optional
+  ## network monitoring
+  #
+  network_tracer:
+
+    ## @param tcp_connection - custom object - optional
+    ## tcp connection monitoring
+    #
+    tcp_connection:
+
+      ## @param enabled - boolean - optional - default: true
+      ## Set to true to collect tcp connection stats
+      #
+      enabled: true
+
+      ## @param whitelist - custom object - optional
+      ## process whitelist
+      #
+      whitelist:
+
+        ## @param enabled - boolean - optional - default: true
+        ## Set to true to collect metrics only generate by specific pid
+        #
+        enabled: false
+
+        ## @param pid - integer - optional - default: 0
+        ## Set to pid that want to collect
+        #
+        pid: 0
+
+      ## @param conn_stats_enabled - boolean - optional - default: true
+      ## Set to true to collect tcp connection traffic metrics: tx/rx bytes, tx/rx packets
+      #
+      conn_stats_enabled: true
+
+      ## @param tcp_stats_enabled - boolean - optional - default: true
+      ## Set to true to collect tcp connection retransmits/RTT/RTT Variance
+      #
+      tcp_stats_enabled: true
+
+      ## @param tcp_flow_stats_enabled - boolean - optional - default: false
+      ## Set to true to collect tcp flow metrics like: connect times/accept times/connect timeouts/accept timeouts
+      #
+      tcp_flow_stats_enabled: false
+
+      ## @param tcp_window_stats_enabled - boolean - optional - default: false
+      ## Set to true to collect tcp congestion(sender)/received window stats
+      #
+      tcp_window_stats_enabled: false
+
+    ## @param udp_connection - custom object - optional
+    ## udp connection monitoring
+    #
+    udp_connection:
+      ## @param enabled - boolean - optional - default: false
+      ## Set to true to collect udp connection stats like: tx/rx bytes, tx/rx packets
+      #
+      enabled: false
+
+  ## @param syscall_tracer - custom object - optional
+  ## syscall monitoring
+  #
+  syscall_tracer:
+
+    ## @param enabled - boolean - optional -default: false
+    ## Set to true to enable syscall latency/count monitoring (recommended for troubleshooting only)
+    #
+    enabled: false
+
+#######################################
+## HuaWei Fault Event Tracer Configuration for Data AML Robust ##
+#######################################
+
+HWLog:
+  ## @param enabled - boolean - optional -default: false
+  ## Set to true to enable output hua wei npu fault event and
+  ## current error code of each npu
+  #
+  enabled: false
+  path: ""
+
+  eventFilter:
+    enabled: true
+    allow: []
+    prohibit: []
+
+#######################################
+## Binding core to control memory usage ##
+#######################################
+
+BindingCore:
+  enabled: false
+  bindingCoreList: []

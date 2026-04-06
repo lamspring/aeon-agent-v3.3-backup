@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "schedule": {
+    "day_of_week": 0,
+    "hour": 20,
+    "minute": 0,
+    "timezone": "Asia/Shanghai"
+  },
+  "reflection_prompt": "请基于以下信息，生成一份周报反思：\n\n1. 本周完成的任务\n2. 本周学到的知识/技能\n3. 遇到的问题和挑战\n4. 下周的目标和计划\n\n请用简洁的中文总结，格式：\n\n## 本周做了什么\n- ...\n\n## 学到了什么\n- ...\n\n## 下周目标\n- ...\n",
+  "sources": [
+    "logs/execution_log.txt",
+    "tasks/queue/finished.json",
+    "memory/diary.md",
+    "memory/long_term.md"
+  ],
+  "output": {
+    "file": "memory/weekly_reflections.md",
+    "max_entries": 52
+  },
+  "model": "kimi-k2p5",
+  "thinking": "high"
+}

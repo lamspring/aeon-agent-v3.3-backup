@@ -1,0 +1,15 @@
+{
+  "task_id": "task_004",
+  "type": "explore",
+  "goal": "explore multi-agent patterns",
+  "priority": 4,
+  "steps": [
+    "survey existing frameworks",
+    "identify key patterns",
+    "analyze pros and cons",
+    "document findings"
+  ],
+  "created": "2026-04-05T18:20:00",
+  "source": "ai_curiosity",
+  "status": "pending"
+}

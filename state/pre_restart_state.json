@@ -1,0 +1,41 @@
+{
+  "goals": {
+    "active": 1,
+    "pending": 2
+  },
+  "active_goal": {
+    "goal_id": "fbee3333-e82f-49ab-96e7-c99c8bac7aa7",
+    "description": "\u5b8c\u6210 Aeon v3.1 \u67b6\u6784\u8bbe\u8ba1",
+    "status": "active",
+    "priority": 1,
+    "parent_goal_id": null,
+    "sub_goals": [],
+    "context": {
+      "keywords": [
+        "aeon",
+        "v3.1",
+        "architecture",
+        "design"
+      ]
+    },
+    "success_criteria": [
+      "\u6587\u6863\u5b8c\u6210",
+      "\u4ee3\u7801\u5b9e\u73b0"
+    ],
+    "created_at": 1775460528.4593995,
+    "activated_at": 1775460528.4622095,
+    "completed_at": null,
+    "related_task_ids": [],
+    "auto_completed": false,
+    "result": null,
+    "failure_reason": null,
+    "keywords": [
+      "v3.1",
+      "aeon",
+      "design",
+      "architecture"
+    ]
+  },
+  "queue_size": 0,
+  "timestamp": 1775462195.9563508
+}
