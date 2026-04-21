@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Logs
+logs/*.log
+logs/*.log.*
+logs/*.gz
+*.log
+
+# Databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.bak.*
+*.backup
+*~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# State files that shouldn't be versioned
+# (keep structure, ignore content)
+state/pre_restart_state.json
+state/*.json
+
+# Large media
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mov

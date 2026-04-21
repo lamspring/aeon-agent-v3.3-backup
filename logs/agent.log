@@ -27110,3 +27110,7 @@
 [2026-04-21T13:14:57.583746] [INFO] [trace:6d4a34c1] [CognitionLoop] [Trace] tick=4768d9f2 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.9ms
 [2026-04-21T13:15:28.305909] [INFO] [trace:414f4ac3] [CognitionLoop] [Trace] tick=127de4f7 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.6ms
 [2026-04-21T13:15:59.028670] [INFO] [trace:263fd664] [CognitionLoop] [Trace] tick=f087a3c3 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=722.2ms
+[2026-04-21T13:16:29.750467] [INFO] [trace:62bf09ad] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:16:29.750615] [INFO] [trace:0fb9ef5d] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:16:29.754447] [INFO] [trace:fb46aa22] [CognitionLoop] [Trace] tick=6955fddc goal=fbee3333 events=0 tasks=0 queue=1 mem=21% time=725.2ms
+[2026-04-21T13:17:00.497370] [INFO] [trace:559e3b56] [CognitionLoop] [Trace] tick=d1ac4d43 goal=fbee3333 events=2 tasks=0 queue=0 mem=22% time=736.5ms
