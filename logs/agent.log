@@ -27114,3 +27114,268 @@
 [2026-04-21T13:16:29.750615] [INFO] [trace:0fb9ef5d] [CognitionLoop] Executing plan: 保持观察，等待重要事件
 [2026-04-21T13:16:29.754447] [INFO] [trace:fb46aa22] [CognitionLoop] [Trace] tick=6955fddc goal=fbee3333 events=0 tasks=0 queue=1 mem=21% time=725.2ms
 [2026-04-21T13:17:00.497370] [INFO] [trace:559e3b56] [CognitionLoop] [Trace] tick=d1ac4d43 goal=fbee3333 events=2 tasks=0 queue=0 mem=22% time=736.5ms
+[2026-04-21T13:17:33.039988] [INFO] [trace:9deaadb3] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:17:33.040395] [INFO] [trace:529877b8] [CognitionLoop] [Trace] tick=4d258c82 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=2542.5ms
+[2026-04-21T13:18:03.764441] [INFO] [trace:22c0e817] [CognitionLoop] [Trace] tick=fd62ca3c goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=723.5ms
+[2026-04-21T13:18:34.485667] [INFO] [trace:86471a13] [CognitionLoop] [Trace] tick=40ee2832 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=720.7ms
+[2026-04-21T13:19:05.208235] [INFO] [trace:c494a453] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:19:05.208374] [INFO] [trace:ac78896d] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:19:05.213249] [INFO] [trace:f327a50c] [CognitionLoop] [Trace] tick=6d5062b1 goal=fbee3333 events=0 tasks=0 queue=1 mem=22% time=726.9ms
+[2026-04-21T13:19:06.901144] [INFO] [trace:19d16bc5] [agent] [HEALTH] Heartbeat #5715
+[2026-04-21T13:19:35.941918] [INFO] [trace:f083a506] [CognitionLoop] [Trace] tick=1c511a72 goal=fbee3333 events=1 tasks=0 queue=0 mem=22% time=728.1ms
+[2026-04-21T13:19:45.705959] [INFO] [trace:924fae25] [agent] [HEALTH] Heartbeat #3965
+[2026-04-21T13:20:06.663447] [INFO] [trace:6837f84b] [CognitionLoop] [Trace] tick=0e958676 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.0ms
+[2026-04-21T13:20:37.384745] [INFO] [trace:d04596b2] [CognitionLoop] [Trace] tick=ccae0aaf goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=720.7ms
+[2026-04-21T13:21:08.110096] [INFO] [trace:69c2ed2b] [CognitionLoop] [Trace] tick=6d0d2631 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=724.8ms
+[2026-04-21T13:21:40.658369] [INFO] [trace:e1daf7f0] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:21:40.658594] [INFO] [trace:5b3bfd20] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:21:40.658714] [INFO] [trace:a2f1d22f] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:21:40.662472] [INFO] [trace:435891dc] [CognitionLoop] [Trace] tick=4b6cc8e8 goal=fbee3333 events=0 tasks=0 queue=1 mem=22% time=2551.8ms
+[2026-04-21T13:21:40.664737] [INFO] [trace:85af8a42] [CognitionLoop] Reflection completed: decision=continue, reason=every_4_heartbeats
+[2026-04-21T13:22:11.398948] [INFO] [trace:2a19503d] [CognitionLoop] [Trace] tick=63b29873 goal=fbee3333 events=2 tasks=0 queue=0 mem=22% time=729.5ms
+[2026-04-21T13:22:42.121649] [INFO] [trace:fe600345] [CognitionLoop] [Trace] tick=693d9760 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=722.1ms
+[2026-04-21T13:23:12.844051] [INFO] [trace:3139b418] [CognitionLoop] [Trace] tick=2a8a586c goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.9ms
+[2026-04-21T13:23:43.566363] [INFO] [trace:5113b1ae] [CognitionLoop] [Trace] tick=d781a19c goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.7ms
+[2026-04-21T13:24:06.903356] [INFO] [trace:10c95439] [agent] [HEALTH] Heartbeat #5720
+[2026-04-21T13:24:14.288207] [INFO] [trace:357a768b] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:24:14.288366] [INFO] [trace:21264c92] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:24:14.292258] [INFO] [trace:b21ecf41] [CognitionLoop] [Trace] tick=4e227f67 goal=fbee3333 events=0 tasks=0 queue=1 mem=22% time=725.3ms
+[2026-04-21T13:24:44.706525] [INFO] [trace:1aa1f09b] [agent] [MEMORY_GUARD] Current usage: 0.07GB / 2GB
+[2026-04-21T13:24:45.021208] [INFO] [trace:78563543] [CognitionLoop] [Trace] tick=a5141cc3 goal=fbee3333 events=1 tasks=0 queue=0 mem=22% time=728.4ms
+[2026-04-21T13:24:45.708162] [INFO] [trace:23990a0f] [agent] [HEALTH] Heartbeat #3970
+[2026-04-21T13:25:15.742637] [INFO] [trace:2767a39e] [CognitionLoop] [Trace] tick=2bdb0838 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=720.9ms
+[2026-04-21T13:25:46.465128] [INFO] [trace:5de04551] [CognitionLoop] [Trace] tick=4f24a2de goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.9ms
+[2026-04-21T13:26:17.187958] [INFO] [trace:98397b9b] [CognitionLoop] [Trace] tick=4fe85d15 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=722.3ms
+[2026-04-21T13:26:47.909827] [INFO] [trace:69a77280] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:26:47.912447] [INFO] [trace:cc1f1ed0] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:26:47.916710] [INFO] [trace:82323b8f] [CognitionLoop] [Trace] tick=3eeeb288 goal=fbee3333 events=0 tasks=0 queue=1 mem=22% time=728.1ms
+[2026-04-21T13:27:18.653306] [INFO] [trace:3e1ac67e] [CognitionLoop] [Trace] tick=be36746b goal=fbee3333 events=2 tasks=0 queue=0 mem=22% time=730.2ms
+[2026-04-21T13:27:51.199467] [INFO] [trace:d0914abb] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:27:51.199945] [INFO] [trace:6786fe57] [CognitionLoop] [Trace] tick=7c13fd9c goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=2546.0ms
+[2026-04-21T13:28:21.923559] [INFO] [trace:f4b49c63] [CognitionLoop] [Trace] tick=e498b9fc goal=fbee3333 events=0 tasks=0 queue=0 mem=24% time=723.1ms
+[2026-04-21T13:28:52.646390] [INFO] [trace:d149f4a3] [CognitionLoop] [Trace] tick=18b6f94d goal=fbee3333 events=0 tasks=0 queue=0 mem=24% time=722.3ms
+[2026-04-21T13:29:06.905530] [INFO] [trace:97ef0e54] [agent] [HEALTH] Heartbeat #5725
+[2026-04-21T13:29:23.368483] [INFO] [trace:75b6ed0f] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:29:23.368639] [INFO] [trace:c1e9579d] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:29:23.373717] [INFO] [trace:ab4f1e9e] [CognitionLoop] [Trace] tick=5cf2b756 goal=fbee3333 events=0 tasks=0 queue=1 mem=24% time=726.6ms
+[2026-04-21T13:29:45.710368] [INFO] [trace:6261013b] [agent] [HEALTH] Heartbeat #3975
+[2026-04-21T13:29:54.102755] [INFO] [trace:ed425f6d] [CognitionLoop] [Trace] tick=ddc88605 goal=fbee3333 events=1 tasks=0 queue=0 mem=24% time=728.5ms
+[2026-04-21T13:30:24.824265] [INFO] [trace:548e2db9] [CognitionLoop] [Trace] tick=32b0d9a8 goal=fbee3333 events=0 tasks=0 queue=0 mem=24% time=721.0ms
+[2026-04-21T13:30:55.547298] [INFO] [trace:84afa8d5] [CognitionLoop] [Trace] tick=4884e6c8 goal=fbee3333 events=0 tasks=0 queue=0 mem=24% time=722.5ms
+[2026-04-21T13:31:26.270842] [INFO] [trace:d17236d3] [CognitionLoop] [Trace] tick=e89d47d9 goal=fbee3333 events=0 tasks=0 queue=0 mem=24% time=720.5ms
+[2026-04-21T13:31:56.993573] [INFO] [trace:7c9f6b43] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:31:56.993732] [INFO] [trace:ef9fbeed] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:31:56.999269] [INFO] [trace:91c041d7] [CognitionLoop] [Trace] tick=9198022d goal=fbee3333 events=0 tasks=0 queue=1 mem=25% time=727.8ms
+[2026-04-21T13:32:27.736347] [INFO] [trace:e7c87924] [CognitionLoop] [Trace] tick=cc50d44e goal=fbee3333 events=2 tasks=0 queue=0 mem=24% time=729.2ms
+[2026-04-21T13:32:58.457952] [INFO] [trace:ba58cfb8] [CognitionLoop] [Trace] tick=f3cd5f14 goal=fbee3333 events=0 tasks=0 queue=0 mem=25% time=721.0ms
+[2026-04-21T13:33:29.182888] [INFO] [trace:bb3732e0] [CognitionLoop] [Trace] tick=6a47ad0f goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=724.3ms
+[2026-04-21T13:33:59.904407] [INFO] [trace:40ffae60] [CognitionLoop] [Trace] tick=97ecb90c goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.0ms
+[2026-04-21T13:34:06.907769] [INFO] [trace:5ac29627] [agent] [HEALTH] Heartbeat #5730
+[2026-04-21T13:34:30.627815] [INFO] [trace:62d1fd6e] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:34:30.627947] [INFO] [trace:0531e1a3] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:34:30.631973] [INFO] [trace:ccb17f38] [CognitionLoop] [Trace] tick=1b833359 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=726.9ms
+[2026-04-21T13:34:44.709090] [INFO] [trace:114ff807] [agent] [MEMORY_GUARD] Current usage: 0.07GB / 2GB
+[2026-04-21T13:34:45.712680] [INFO] [trace:28ad1764] [agent] [HEALTH] Heartbeat #3980
+[2026-04-21T13:35:01.359438] [INFO] [trace:2e2297c5] [CognitionLoop] [Trace] tick=9ca7a571 goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=727.0ms
+[2026-04-21T13:35:18.052788] [INFO] [trace:78fc9967] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T13:35:32.088616] [INFO] [trace:19491848] [CognitionLoop] [Trace] tick=66d5bd81 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=728.6ms
+[2026-04-21T13:35:51.582970] [INFO] [trace:bbe7a53d] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T13:35:56.207154] [INFO] [trace:f1662a93] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T13:35:56.207424] [WARNING] [trace:b7f86b19] [TraitDrift] Trait drift detected: critical
+[2026-04-21T13:35:56.207715] [WARNING] [trace:63c6a236] [TraitDrift] Trait drift detected: critical
+[2026-04-21T13:36:02.813072] [INFO] [trace:ad1374e0] [CognitionLoop] [Trace] tick=e8412df4 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=723.9ms
+[2026-04-21T13:36:35.356440] [INFO] [trace:1607b404] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:36:35.356911] [INFO] [trace:217f2af1] [CognitionLoop] [Trace] tick=cb8ec61b goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=2543.2ms
+[2026-04-21T13:37:03.762495] [INFO] [trace:285cb17e] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T13:37:03.762797] [INFO] [trace:24bbf6b8] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T13:37:03.762928] [INFO] [trace:b8a9c963] [PersonaIntegration] PersonaIntegration initialized
+[2026-04-21T13:37:03.766615] [WARNING] [trace:ac755030] [TraitDrift] Trait drift detected: critical
+[2026-04-21T13:37:03.766858] [WARNING] [trace:85f9682d] [PersonaIntegration] Trait drift detected: critical
+[2026-04-21T13:37:03.767039] [WARNING] [trace:9954b5ca] [PersonaIntegration] Persona health report: critical
+[2026-04-21T13:37:07.900645] [INFO] [trace:74fa0bc2] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:37:07.900848] [INFO] [trace:4f960292] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:37:07.900941] [INFO] [trace:185a734d] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:37:07.905135] [INFO] [trace:bcf726fd] [CognitionLoop] [Trace] tick=2a71e318 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=2547.7ms
+[2026-04-21T13:37:38.642639] [INFO] [trace:b25cee9b] [CognitionLoop] [Trace] tick=994980db goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=732.6ms
+[2026-04-21T13:38:09.363936] [INFO] [trace:c949f01d] [CognitionLoop] [Trace] tick=2e1b6722 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.7ms
+[2026-04-21T13:38:40.085160] [INFO] [trace:b831a0d5] [CognitionLoop] [Trace] tick=3643b378 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.7ms
+[2026-04-21T13:39:06.910125] [INFO] [trace:665a1ae1] [agent] [HEALTH] Heartbeat #5735
+[2026-04-21T13:39:10.806143] [INFO] [trace:0f7c5fdf] [CognitionLoop] [Trace] tick=d2dc033f goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.4ms
+[2026-04-21T13:39:41.528067] [INFO] [trace:bc75f618] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:39:41.528219] [INFO] [trace:243f2d82] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:39:41.532558] [INFO] [trace:186eafcc] [CognitionLoop] [Trace] tick=a62fdd9f goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.7ms
+[2026-04-21T13:39:45.714951] [INFO] [trace:57000ca3] [agent] [HEALTH] Heartbeat #3985
+[2026-04-21T13:40:12.265949] [INFO] [trace:5d59a25f] [CognitionLoop] [Trace] tick=d658def7 goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=732.8ms
+[2026-04-21T13:40:42.986654] [INFO] [trace:4df11f9b] [CognitionLoop] [Trace] tick=f75855b8 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.1ms
+[2026-04-21T13:41:13.708858] [INFO] [trace:16d825ad] [CognitionLoop] [Trace] tick=dee64dda goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.6ms
+[2026-04-21T13:41:44.429987] [INFO] [trace:79773eb1] [CognitionLoop] [Trace] tick=88f8d384 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.6ms
+[2026-04-21T13:42:15.151400] [INFO] [trace:81bf8b48] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:42:15.151546] [INFO] [trace:05b90a97] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:42:15.156767] [INFO] [trace:1a060331] [CognitionLoop] [Trace] tick=728cd0fd goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=726.2ms
+[2026-04-21T13:42:15.159544] [INFO] [trace:fea8b4ba] [CognitionLoop] Reflection completed: decision=continue, reason=every_4_heartbeats
+[2026-04-21T13:42:45.902120] [INFO] [trace:a09d957d] [CognitionLoop] [Trace] tick=203465d4 goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=736.4ms
+[2026-04-21T13:43:16.623803] [INFO] [trace:f5c65cda] [CognitionLoop] [Trace] tick=c7871d3a goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.1ms
+[2026-04-21T13:43:47.344698] [INFO] [trace:3d7e3e98] [CognitionLoop] [Trace] tick=fca9b708 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.3ms
+[2026-04-21T13:44:06.912307] [INFO] [trace:2eae0489] [agent] [HEALTH] Heartbeat #5740
+[2026-04-21T13:44:18.066832] [INFO] [trace:dffedfe0] [CognitionLoop] [Trace] tick=7e5c851c goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.5ms
+[2026-04-21T13:44:44.711503] [INFO] [trace:3ac7930e] [agent] [MEMORY_GUARD] Current usage: 0.07GB / 2GB
+[2026-04-21T13:44:45.717245] [INFO] [trace:00edaa23] [agent] [HEALTH] Heartbeat #3990
+[2026-04-21T13:44:48.788382] [INFO] [trace:27c4c6d2] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:44:48.788528] [INFO] [trace:9d943ca5] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:44:48.792895] [INFO] [trace:700e56e7] [CognitionLoop] [Trace] tick=12ee52a0 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.3ms
+[2026-04-21T13:45:19.520465] [INFO] [trace:c4e0bac9] [CognitionLoop] [Trace] tick=8bdc045a goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=727.0ms
+[2026-04-21T13:45:50.242562] [INFO] [trace:6821dbea] [CognitionLoop] [Trace] tick=277b8230 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.5ms
+[2026-04-21T13:46:20.966715] [INFO] [trace:57bd708f] [CognitionLoop] [Trace] tick=a655e3a1 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.0ms
+[2026-04-21T13:46:51.687872] [INFO] [trace:ee6db78c] [CognitionLoop] [Trace] tick=21436909 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.6ms
+[2026-04-21T13:47:22.408445] [INFO] [trace:52ae454a] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:47:22.408580] [INFO] [trace:f3d4ad74] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:47:22.414051] [INFO] [trace:2801cdb9] [CognitionLoop] [Trace] tick=70b3a4ba goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.6ms
+[2026-04-21T13:47:53.151629] [INFO] [trace:01a4a204] [CognitionLoop] [Trace] tick=3647541f goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=730.8ms
+[2026-04-21T13:48:23.873377] [INFO] [trace:5fa610ca] [CognitionLoop] [Trace] tick=670404fc goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.2ms
+[2026-04-21T13:48:54.595167] [INFO] [trace:8436f4c8] [CognitionLoop] [Trace] tick=c6ae9d7e goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.2ms
+[2026-04-21T13:49:06.914481] [INFO] [trace:6d2ed4f5] [agent] [HEALTH] Heartbeat #5745
+[2026-04-21T13:49:25.316257] [INFO] [trace:050103bf] [CognitionLoop] [Trace] tick=37d3be60 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.6ms
+[2026-04-21T13:49:45.719475] [INFO] [trace:8aec937b] [agent] [HEALTH] Heartbeat #3995
+[2026-04-21T13:49:56.037068] [INFO] [trace:c0ac36a6] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:49:56.037202] [INFO] [trace:6927a990] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:49:56.041412] [INFO] [trace:1ab7b3be] [CognitionLoop] [Trace] tick=ee2b8e05 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=724.5ms
+[2026-04-21T13:50:28.597350] [INFO] [trace:2f8a7a54] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T13:50:28.597838] [INFO] [trace:3ba765fa] [CognitionLoop] [Trace] tick=cb9a23e8 goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=2555.8ms
+[2026-04-21T13:50:59.320013] [INFO] [trace:80ba0c56] [CognitionLoop] [Trace] tick=e2498a90 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.7ms
+[2026-04-21T13:51:30.041543] [INFO] [trace:5a9907cd] [CognitionLoop] [Trace] tick=e7dbf9d3 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.0ms
+[2026-04-21T13:52:00.763058] [INFO] [trace:1a1d1615] [CognitionLoop] [Trace] tick=297a040c goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.9ms
+[2026-04-21T13:52:31.485026] [INFO] [trace:d995ef1d] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:52:31.485184] [INFO] [trace:c010e3b8] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:52:31.489160] [INFO] [trace:eeed1ad6] [CognitionLoop] [Trace] tick=e9122f15 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.5ms
+[2026-04-21T13:53:02.225788] [INFO] [trace:e32e40d6] [CognitionLoop] [Trace] tick=bffc9042 goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=729.1ms
+[2026-04-21T13:53:32.947427] [INFO] [trace:ecaebd2a] [CognitionLoop] [Trace] tick=f543459f goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.1ms
+[2026-04-21T13:54:03.668155] [INFO] [trace:a4677d89] [CognitionLoop] [Trace] tick=33186505 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.2ms
+[2026-04-21T13:54:06.916764] [INFO] [trace:6364aee0] [agent] [HEALTH] Heartbeat #5750
+[2026-04-21T13:54:34.389673] [INFO] [trace:65c0fd3e] [CognitionLoop] [Trace] tick=aab01136 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.0ms
+[2026-04-21T13:54:44.713992] [INFO] [trace:8976865c] [agent] [MEMORY_GUARD] Current usage: 0.07GB / 2GB
+[2026-04-21T13:54:45.723660] [INFO] [trace:92a15d63] [agent] [HEALTH] Heartbeat #4000
+[2026-04-21T13:55:05.114626] [INFO] [trace:44e2c514] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:55:05.114764] [INFO] [trace:65d15865] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:55:05.119687] [INFO] [trace:8ccedeec] [CognitionLoop] [Trace] tick=671adb66 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=729.3ms
+[2026-04-21T13:55:35.848940] [INFO] [trace:4e69b533] [CognitionLoop] [Trace] tick=6cf12324 goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=728.7ms
+[2026-04-21T13:56:06.571005] [INFO] [trace:99371755] [CognitionLoop] [Trace] tick=4903c423 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.5ms
+[2026-04-21T13:56:37.292283] [INFO] [trace:59fbf217] [CognitionLoop] [Trace] tick=63aee7e5 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.7ms
+[2026-04-21T13:57:08.013279] [INFO] [trace:e64c148d] [CognitionLoop] [Trace] tick=49a601af goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.4ms
+[2026-04-21T13:57:38.736439] [INFO] [trace:29fd5307] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T13:57:38.736582] [INFO] [trace:ca3cbaf8] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T13:57:38.740207] [INFO] [trace:56676fa9] [CognitionLoop] [Trace] tick=8a75be4b goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=726.3ms
+[2026-04-21T13:58:09.475233] [INFO] [trace:b80e2222] [CognitionLoop] [Trace] tick=9872bcec goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=729.9ms
+[2026-04-21T13:58:40.197774] [INFO] [trace:ef305504] [CognitionLoop] [Trace] tick=2910ce39 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=722.0ms
+[2026-04-21T13:59:06.919016] [INFO] [trace:92448d6d] [agent] [HEALTH] Heartbeat #5755
+[2026-04-21T13:59:10.923697] [INFO] [trace:3e2d1527] [CognitionLoop] [Trace] tick=ba3ac08a goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=725.3ms
+[2026-04-21T13:59:41.645450] [INFO] [trace:b5a2aab6] [CognitionLoop] [Trace] tick=0dab673b goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.2ms
+[2026-04-21T13:59:45.728280] [INFO] [trace:0eda58be] [agent] [HEALTH] Heartbeat #4005
+[2026-04-21T14:00:12.367253] [INFO] [trace:1cc10090] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:00:12.367403] [INFO] [trace:7af2367b] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:00:12.371613] [INFO] [trace:a2af9f02] [CognitionLoop] [Trace] tick=cc1e2efd goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.5ms
+[2026-04-21T14:00:43.100863] [INFO] [trace:01f76c26] [CognitionLoop] [Trace] tick=4de98235 goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=728.7ms
+[2026-04-21T14:01:13.823757] [INFO] [trace:359be5d6] [CognitionLoop] [Trace] tick=05cd430e goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=722.3ms
+[2026-04-21T14:01:44.547164] [INFO] [trace:47aa45e0] [CognitionLoop] [Trace] tick=c73ad7ca goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=722.8ms
+[2026-04-21T14:02:15.269368] [INFO] [trace:8a74fada] [CognitionLoop] [Trace] tick=dd847e5b goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.6ms
+[2026-04-21T14:02:47.818168] [INFO] [trace:7bfc680b] [CognitionLoop] Planning triggered by alerts: 1 alert(s)
+[2026-04-21T14:02:47.818370] [INFO] [trace:572d1cbb] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:02:47.818487] [INFO] [trace:4bf80490] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:02:47.823186] [INFO] [trace:ddb91f6e] [CognitionLoop] [Trace] tick=ba9f1e3c goal=fbee3333 events=0 tasks=0 queue=1 mem=21% time=2553.2ms
+[2026-04-21T14:02:47.825463] [INFO] [trace:08f15382] [CognitionLoop] Reflection completed: decision=continue, reason=every_4_heartbeats
+[2026-04-21T14:03:18.566692] [INFO] [trace:7bbfe2be] [CognitionLoop] [Trace] tick=9b378de7 goal=fbee3333 events=2 tasks=0 queue=0 mem=21% time=736.5ms
+[2026-04-21T14:03:23.114674] [INFO] [trace:fa368146] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:03:23.117586] [INFO] [trace:dc7c430d] [CognitionLoop] World Input initialized
+[2026-04-21T14:03:23.118709] [INFO] [trace:a46b8f34] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:03:23.118921] [INFO] [trace:fe7525d6] [CognitionLoop] CognitionIntegrations initialized
+[2026-04-21T14:03:23.122324] [INFO] [trace:02c55f14] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T14:03:23.122538] [INFO] [trace:3c10697c] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T14:03:23.122663] [INFO] [trace:9d228455] [PersonaIntegration] PersonaIntegration initialized
+[2026-04-21T14:03:23.122740] [INFO] [trace:60401832] [CognitionLoop] PersonaIntegration enabled
+[2026-04-21T14:03:49.288629] [INFO] [trace:10bac568] [CognitionLoop] [Trace] tick=5a218c62 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.3ms
+[2026-04-21T14:04:06.921341] [INFO] [trace:0fd300e4] [agent] [HEALTH] Heartbeat #5760
+[2026-04-21T14:04:20.011290] [INFO] [trace:c4d021bb] [CognitionLoop] [Trace] tick=0b8df2f8 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=722.1ms
+[2026-04-21T14:04:44.716542] [INFO] [trace:2bbe5f1d] [agent] [MEMORY_GUARD] Current usage: 0.08GB / 2GB
+[2026-04-21T14:04:45.730517] [INFO] [trace:d4bda9a1] [agent] [HEALTH] Heartbeat #4010
+[2026-04-21T14:04:50.732652] [INFO] [trace:a0c44ec5] [CognitionLoop] [Trace] tick=2c42eff4 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=720.8ms
+[2026-04-21T14:05:21.454630] [INFO] [trace:7d5024a6] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:05:21.454767] [INFO] [trace:9c2fb9c2] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:05:21.458750] [INFO] [trace:7ce4cee4] [CognitionLoop] [Trace] tick=31b7b89b goal=fbee3333 events=0 tasks=0 queue=1 mem=21% time=725.5ms
+[2026-04-21T14:05:52.192933] [INFO] [trace:54ab4991] [CognitionLoop] [Trace] tick=bc8c710c goal=fbee3333 events=1 tasks=0 queue=0 mem=21% time=733.7ms
+[2026-04-21T14:06:22.914973] [INFO] [trace:38bc3c22] [CognitionLoop] [Trace] tick=e26d337c goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.5ms
+[2026-04-21T14:06:53.637592] [INFO] [trace:a1c4e1a4] [CognitionLoop] [Trace] tick=331a7334 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=722.1ms
+[2026-04-21T14:07:24.359926] [INFO] [trace:3f419d22] [CognitionLoop] [Trace] tick=55b39613 goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.8ms
+[2026-04-21T14:07:55.082939] [INFO] [trace:2568c084] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:07:55.083081] [INFO] [trace:2876fda5] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:07:55.087701] [INFO] [trace:6976165a] [CognitionLoop] [Trace] tick=0035eb79 goal=fbee3333 events=0 tasks=0 queue=1 mem=21% time=727.1ms
+[2026-04-21T14:08:25.828088] [INFO] [trace:fb2f1561] [CognitionLoop] [Trace] tick=7e7aa5ff goal=fbee3333 events=2 tasks=0 queue=0 mem=21% time=735.0ms
+[2026-04-21T14:08:56.550200] [INFO] [trace:13159155] [CognitionLoop] [Trace] tick=cc60bd4d goal=fbee3333 events=0 tasks=0 queue=0 mem=21% time=721.6ms
+[2026-04-21T14:09:06.923525] [INFO] [trace:3cfb8bca] [agent] [HEALTH] Heartbeat #5765
+[2026-04-21T14:09:27.272436] [INFO] [trace:067aff8f] [CognitionLoop] [Trace] tick=ee55f1cf goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.7ms
+[2026-04-21T14:09:45.734723] [INFO] [trace:9afa746c] [agent] [HEALTH] Heartbeat #4015
+[2026-04-21T14:09:57.994437] [INFO] [trace:43f4e040] [CognitionLoop] [Trace] tick=ab76aa85 goal=fbee3333 events=0 tasks=0 queue=0 mem=22% time=721.5ms
+[2026-04-21T14:10:28.715852] [INFO] [trace:c9deda9e] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:10:28.715994] [INFO] [trace:87fd2092] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:10:28.719762] [INFO] [trace:b6ff9cd1] [CognitionLoop] [Trace] tick=8054facd goal=fbee3333 events=0 tasks=0 queue=1 mem=22% time=724.7ms
+[2026-04-21T14:10:59.448477] [INFO] [trace:d1845c03] [CognitionLoop] [Trace] tick=b695f964 goal=fbee3333 events=1 tasks=0 queue=0 mem=22% time=728.2ms
+[2026-04-21T14:11:20.448863] [INFO] [trace:dee867b0] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:11:30.170220] [INFO] [trace:dd3f70bb] [CognitionLoop] [Trace] tick=65c8c532 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.2ms
+[2026-04-21T14:12:00.896765] [INFO] [trace:88930dbf] [CognitionLoop] [Trace] tick=7085f20f goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=726.0ms
+[2026-04-21T14:12:31.620814] [INFO] [trace:46c4da41] [CognitionLoop] [Trace] tick=02841e73 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=723.5ms
+[2026-04-21T14:13:02.343085] [INFO] [trace:6a9da464] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:13:02.343224] [INFO] [trace:d3f5a8ff] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:13:02.347440] [INFO] [trace:e72ad926] [CognitionLoop] [Trace] tick=46ccfd24 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=726.0ms
+[2026-04-21T14:13:33.084919] [INFO] [trace:cb610afe] [CognitionLoop] [Trace] tick=92c25811 goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=731.8ms
+[2026-04-21T14:13:51.082239] [INFO] [trace:ca99c7d0] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:13:51.085138] [INFO] [trace:c324c1f1] [CognitionLoop] World Input initialized
+[2026-04-21T14:13:51.086234] [INFO] [trace:bcdd68da] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:13:51.086503] [INFO] [trace:a47d9e3b] [CognitionLoop] CognitionIntegrations initialized
+[2026-04-21T14:13:51.088564] [INFO] [trace:51961757] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T14:13:51.088784] [INFO] [trace:39f195a2] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T14:13:51.088881] [INFO] [trace:c5c52954] [PersonaIntegration] PersonaIntegration initialized
+[2026-04-21T14:13:51.088950] [INFO] [trace:053e4982] [CognitionLoop] PersonaIntegration enabled
+[2026-04-21T14:14:03.806263] [INFO] [trace:5d98d949] [CognitionLoop] [Trace] tick=40d5b84e goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.8ms
+[2026-04-21T14:14:06.925731] [INFO] [trace:f1791f49] [agent] [HEALTH] Heartbeat #5770
+[2026-04-21T14:14:34.527738] [INFO] [trace:367e2b1e] [CognitionLoop] [Trace] tick=4ac95ff0 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.9ms
+[2026-04-21T14:14:39.396162] [INFO] [trace:2573b2f1] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:14:39.398926] [INFO] [trace:6eac53e8] [CognitionLoop] World Input initialized
+[2026-04-21T14:14:39.400034] [INFO] [trace:7d86ffcf] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:14:39.400252] [INFO] [trace:4592f9af] [CognitionLoop] CognitionIntegrations initialized
+[2026-04-21T14:14:39.402279] [INFO] [trace:9bbee89d] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T14:14:39.402478] [INFO] [trace:fd62bbe9] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T14:14:39.402570] [INFO] [trace:5c46c21f] [PersonaIntegration] PersonaIntegration initialized
+[2026-04-21T14:14:39.402667] [INFO] [trace:0ce46252] [CognitionLoop] PersonaIntegration enabled
+[2026-04-21T14:14:44.721832] [INFO] [trace:0e346164] [agent] [MEMORY_GUARD] Current usage: 0.07GB / 2GB
+[2026-04-21T14:14:45.736893] [INFO] [trace:7f10fed7] [agent] [HEALTH] Heartbeat #4020
+[2026-04-21T14:15:05.251584] [INFO] [trace:e3f33b50] [CognitionLoop] [Trace] tick=d147a362 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=723.3ms
+[2026-04-21T14:15:35.973195] [INFO] [trace:e7b7be80] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:15:35.973345] [INFO] [trace:70cf203c] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:15:35.977679] [INFO] [trace:eadbb242] [CognitionLoop] [Trace] tick=eb5a21bc goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=725.5ms
+[2026-04-21T14:16:06.705131] [INFO] [trace:9261a996] [CognitionLoop] [Trace] tick=cea3ecfa goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=726.9ms
+[2026-04-21T14:16:37.425963] [INFO] [trace:d5d4c255] [CognitionLoop] [Trace] tick=704c3b0a goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.3ms
+[2026-04-21T14:17:08.147462] [INFO] [trace:48ed0b69] [CognitionLoop] [Trace] tick=a9a4a730 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=720.9ms
+[2026-04-21T14:17:38.872796] [INFO] [trace:ede5276e] [CognitionLoop] [Trace] tick=3e68e171 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=724.7ms
+[2026-04-21T14:18:09.594800] [INFO] [trace:27b091f2] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:18:09.594959] [INFO] [trace:c8e00a8f] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:18:09.600260] [INFO] [trace:1d0d49d1] [CognitionLoop] [Trace] tick=b2dda491 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=726.7ms
+[2026-04-21T14:18:40.338569] [INFO] [trace:6d31cfd5] [CognitionLoop] [Trace] tick=edb8ef8c goal=fbee3333 events=2 tasks=0 queue=0 mem=23% time=732.9ms
+[2026-04-21T14:19:06.927828] [INFO] [trace:d7ab33d7] [agent] [HEALTH] Heartbeat #5775
+[2026-04-21T14:19:11.061689] [INFO] [trace:73323e1d] [CognitionLoop] [Trace] tick=2b0c42e2 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=722.5ms
+[2026-04-21T14:19:15.079478] [INFO] [trace:0418de19] [MetaCognition] MetaCognitionLayer initialized
+[2026-04-21T14:19:15.079850] [WARNING] [trace:5b16bf1b] [MetaCognition] Plan critique: warning for process_request
+[2026-04-21T14:19:41.785199] [INFO] [trace:cbb9e48c] [CognitionLoop] [Trace] tick=e3b2b471 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=723.0ms
+[2026-04-21T14:19:45.739147] [INFO] [trace:5e76c007] [agent] [HEALTH] Heartbeat #4025
+[2026-04-21T14:20:12.507540] [INFO] [trace:4886df7f] [CognitionLoop] [Trace] tick=f9c81266 goal=fbee3333 events=0 tasks=0 queue=0 mem=23% time=721.8ms
+[2026-04-21T14:20:43.228592] [INFO] [trace:ac39396f] [CognitionLoop] My decision: observe - 系统稳定，继续保持观察
+[2026-04-21T14:20:43.228746] [INFO] [trace:2bd0bad5] [CognitionLoop] Executing plan: 保持观察，等待重要事件
+[2026-04-21T14:20:43.232697] [INFO] [trace:a35c8b78] [CognitionLoop] [Trace] tick=4ca015e9 goal=fbee3333 events=0 tasks=0 queue=1 mem=23% time=724.5ms
+[2026-04-21T14:20:54.008046] [INFO] [trace:b3c59932] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:20:54.010818] [INFO] [trace:55e6b043] [CognitionLoop] World Input initialized
+[2026-04-21T14:20:54.011879] [INFO] [trace:c1b52e97] [agent] [SYSTEM] AsyncTaskRunner | initialized with timeout=60s, max_concurrent=3
+[2026-04-21T14:20:54.012085] [INFO] [trace:ab261434] [CognitionLoop] CognitionIntegrations initialized
+[2026-04-21T14:20:54.015690] [INFO] [trace:41f623c0] [MetaCognition] MetaCognitionLayer initialized
+[2026-04-21T14:20:54.015795] [INFO] [trace:798e24ae] [CognitionLoop] MetaCognitionLayer enabled
+[2026-04-21T14:20:54.017342] [INFO] [trace:066e2ebe] [MemoryAnchor] MemoryAnchorSystem loaded: 9 anchors
+[2026-04-21T14:20:54.017536] [INFO] [trace:b8fe05f5] [TraitDrift] TraitDriftDetector loaded: 4 traits
+[2026-04-21T14:20:54.017645] [INFO] [trace:0c5824b8] [PersonaIntegration] PersonaIntegration initialized
+[2026-04-21T14:20:54.017720] [INFO] [trace:8f47e1ff] [CognitionLoop] PersonaIntegration enabled
+[2026-04-21T14:21:13.963223] [INFO] [trace:667db7f6] [CognitionLoop] [Trace] tick=e9c37b0b goal=fbee3333 events=1 tasks=0 queue=0 mem=23% time=730.0ms

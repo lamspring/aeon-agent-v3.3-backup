@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "timestamp": "2026-04-21T13:16:59.774203",
+  "timestamp": "2026-04-21T14:21:13.241768",
   "time": {
-    "hour": 13,
-    "minute": 16,
+    "hour": 14,
+    "minute": 21,
     "day_of_week": 1,
     "day_name": "周二",
     "date": "2026-04-21",
@@ -13,19 +13,19 @@
     "special_day": null
   },
   "system": {
-    "cpu_percent": 1.0,
-    "memory_percent": 21.6,
-    "disk_percent": 37.3,
+    "cpu_percent": 0.5,
+    "memory_percent": 22.9,
+    "disk_percent": 37.4,
     "load_average": [
-      0.11,
-      0.03,
-      0.01
+      0.0,
+      0.0,
+      0.0
     ],
     "status": "idle"
   },
   "network": {
     "is_connected": true,
-    "timestamp": "2026-04-21T13:17:00.454584"
+    "timestamp": "2026-04-21T14:21:13.922023"
   },
   "user_activity": {
     "last_interaction": null,

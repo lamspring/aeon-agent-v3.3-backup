@@ -215,6 +215,16 @@ class CognitionLoop:
         # v2.7: 决策历史（用于循环检测）
         self.decision_history: List[Dict] = []  # 记录最近10次选择的决策类型
         
+        # v3.0: 元认知层（生成器-反思器循环）
+        self._meta_cognition = None
+        try:
+            sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
+            from meta_cognition import MetaCognitionLayer, get_meta_cognition
+            self._meta_cognition = get_meta_cognition()
+            self.logger.info("MetaCognitionLayer enabled", component="CognitionLoop")
+        except Exception as e:
+            self.logger.debug(f"MetaCognitionLayer not available: {e}", component="CognitionLoop")
+        
         # v2.7: 人格记忆网络(PMN)集成
         sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
         try:
@@ -255,6 +265,7 @@ class CognitionLoop:
                 "curiosity": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "async_runner": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "persona_integration": hasattr(self, 'persona_integration') and self.persona_integration is not None,
+                "meta_cognition": hasattr(self, '_meta_cognition') and self._meta_cognition is not None,
             }
         )
     
@@ -1037,12 +1048,39 @@ class CognitionLoop:
     
     def _act(self, plan: Dict, observation: Observation) -> int:
         """
-        执行阶段 (v2.2 enhanced with ThreeLayerProtection)
+        执行阶段 (v2.2 enhanced with ThreeLayerProtection + v3.0 MetaCognition)
         
         Returns:
             创建的任务数
         """
         plan_goal = plan.get('goal', 'unknown')
+        
+        # v3.0: 元认知审视 — 在 safety check 之前，先审视自己
+        if hasattr(self, '_meta_cognition') and self._meta_cognition:
+            try:
+                critique = self._meta_cognition.critique_plan(plan, observation.to_dict() if hasattr(observation, 'to_dict') else {})
+                
+                if critique.severity == "critical":
+                    self.logger.warning(
+                        f"Meta-cognition blocked critical plan: {critique.plan_action}",
+                        component="CognitionLoop",
+                        context={"issues": critique.issues}
+                    )
+                    # critical 不执行，返回0
+                    return 0
+                
+                elif critique.severity == "warning":
+                    self.logger.info(
+                        f"Meta-cognition warning: {critique.plan_action} (alignment={critique.persona_alignment:.2f})",
+                        component="CognitionLoop",
+                        context={"issues": critique.issues, "suggestions": critique.suggestions}
+                    )
+                
+                # 将审视结果附加到 plan，供后续使用
+                plan["meta_critique"] = critique.to_dict()
+                
+            except Exception as e:
+                self.logger.debug(f"Meta-cognition critique failed: {e}", component="CognitionLoop")
         
         # v2.2: 安全检查 - 执行前通过三道防线
         if self.integrations:
