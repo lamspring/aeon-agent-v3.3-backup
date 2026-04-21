@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Consciousness Heartbeat Timer - 1 minute consciousness pulse
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=1min
+Unit=xiaxia-heartbeat.service
+
+[Install]
+WantedBy=timers.target

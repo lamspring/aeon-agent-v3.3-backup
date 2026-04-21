@@ -28,5 +28,107 @@
     "layer": "action_filter",
     "action": "rm -rf /",
     "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T21:35:21.045634",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T21:35:21.045933",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T21:35:21.047921",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/important",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T22:35:28.205687",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T22:35:28.206107",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T22:35:28.207945",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/important",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T23:35:38.216954",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T23:35:38.217443",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-15T23:35:38.219471",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/important",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T00:35:48.216937",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T00:35:48.217270",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T00:35:48.219104",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/important",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T01:35:50.349962",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T01:35:50.350385",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T01:35:50.352237",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/important",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T02:47:02.275581",
+    "layer": "action_filter",
+    "action": "rm -rf /tmp/test",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
+  },
+  {
+    "timestamp": "2026-04-16T02:47:02.276136",
+    "layer": "action_filter",
+    "action": "rm -rf /",
+    "reason": "BLOCKED: \u5371\u9669\u547d\u4ee4\uff0c\u7981\u6b62\u6267\u884c"
   }
 ]

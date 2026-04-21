@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Violation Alert Timer - 5 minute violation check
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Unit=xiaxia-violation-alert.service
+
+[Install]
+WantedBy=timers.target

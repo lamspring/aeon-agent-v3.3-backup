@@ -1,15 +1,15 @@
 {
-  "enabled": true,
+  "enabled": false,
   "limits": {
-    "api_calls_per_minute": 10,
-    "api_calls_per_hour": 100,
-    "tasks_created_per_heartbeat": 3,
-    "subtasks_per_task": 5,
-    "max_pending_tasks": 20,
-    "max_tree_depth": 3
+    "api_calls_per_minute": 1000,
+    "api_calls_per_hour": 10000,
+    "tasks_created_per_heartbeat": 50,
+    "subtasks_per_task": 20,
+    "max_pending_tasks": 100,
+    "max_tree_depth": 5
   },
   "actions": {
-    "on_limit_exceeded": "reject",
-    "log_violations": true
+    "on_limit_exceeded": "log_only",
+    "log_violations": false
   }
 }

@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "check_interval_minutes": 2,
+  "immediate_alert_levels": ["CRITICAL", "ERROR", "WARNING", "INFO"],
+  "summary_times": [],
+  "triggers": {
+    "system_unhealthy": true,
+    "goal_completed": true,
+    "task_failed": true,
+    "memory_threshold_exceeded": true,
+    "gate_closed": true,
+    "security_violation": true,
+    "goal_created": true,
+    "task_started": true,
+    "reflection_completed": true,
+    "curiosity_triggered": true
+  },
+  "quiet_hours": {
+    "enabled": false
+  },
+  "message_style": "friendly",
+  "include_emoji": true,
+  "max_message_length": 800,
+  "proactive_mode": "aggressive"
+}

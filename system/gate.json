@@ -1,11 +1,13 @@
 {
-  "agent_enabled": true,
+  "agent_enabled": false,
   "task_execution": true,
   "tool_access": true,
   "write_access": true,
-  "authorized_by": "朋朋",
-  "last_modified": "2026-04-06T10:57:00+08:00",
-  "opened_at": "2026-04-06T10:57:00+08:00",
-  "opened_by": "朋朋",
-  "note": "门控系统已开启，v20架构正常运行 - 用户明确保持开启"
+  "authorized_by": "\u670b\u670b",
+  "last_modified": "2026-04-16T02:23:00+08:00",
+  "opened_at": "2026-04-16T02:23:00+08:00",
+  "opened_by": "\u670b\u670b",
+  "note": "\u95e8\u63a7\u5df2\u5f00\u542f - \u5386\u53f2\u9057\u7559\u5b9a\u65f6\u5668\u6e05\u7406\u5b8c\u6210\uff0c\u7cfb\u7edf\u4f18\u5316\u5b8c\u6bd5",
+  "closed_reason": "multiple_safety_violations",
+  "closed_at": "2026-04-16T02:47:02.276949"
 }

@@ -1,11 +1,112 @@
 {
-  "today_count": 1,
-  "last_trigger": "2026-04-05T20:07:42.261839",
+  "today_count": 20,
+  "last_trigger": "2026-04-16T15:30:01.118328",
   "history": [
     {
       "timestamp": "2026-04-05T20:07:42.261832",
       "task_id": "curiosity_20260405_200742",
       "goal": "\u5b66\u4e60\u4e00\u9879\u65b0\u6280\u672f: WebAssembly"
+    },
+    {
+      "timestamp": "2026-04-16T13:54:15.141199",
+      "task_id": "curiosity_20260416_135415",
+      "goal": "\u4f18\u5316\u73b0\u6709\u4ee3\u7801\u548c\u7cfb\u7edf"
+    },
+    {
+      "timestamp": "2026-04-16T13:59:17.396055",
+      "task_id": "curiosity_20260416_135917",
+      "goal": "\u4f18\u5316\u73b0\u6709\u4ee3\u7801\u548c\u7cfb\u7edf"
+    },
+    {
+      "timestamp": "2026-04-16T14:04:19.636475",
+      "task_id": "curiosity_20260416_140419",
+      "goal": "\u590d\u76d8\u4e4b\u524d\u7684\u4efb\u52a1\u548c\u9879\u76ee"
+    },
+    {
+      "timestamp": "2026-04-16T14:09:21.852627",
+      "task_id": "curiosity_20260416_140921",
+      "goal": "\u4f18\u5316\u73b0\u6709\u4ee3\u7801\u548c\u7cfb\u7edf"
+    },
+    {
+      "timestamp": "2026-04-16T14:14:24.084032",
+      "task_id": "curiosity_20260416_141424",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T14:19:26.311793",
+      "task_id": "curiosity_20260416_141926",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T14:24:28.541828",
+      "task_id": "curiosity_20260416_142428",
+      "goal": "\u590d\u76d8\u4e4b\u524d\u7684\u4efb\u52a1\u548c\u9879\u76ee"
+    },
+    {
+      "timestamp": "2026-04-16T14:29:30.767871",
+      "task_id": "curiosity_20260416_142930",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T14:34:32.990191",
+      "task_id": "curiosity_20260416_143432",
+      "goal": "\u5b66\u4e60\u4e00\u9879\u65b0\u6280\u672f: Rust programming"
+    },
+    {
+      "timestamp": "2026-04-16T14:39:35.218197",
+      "task_id": "curiosity_20260416_143935",
+      "goal": "\u63a2\u7d22\u4e00\u4e2a\u611f\u5174\u8da3\u7684\u8bdd\u9898: distributed systems"
+    },
+    {
+      "timestamp": "2026-04-16T14:44:37.448669",
+      "task_id": "curiosity_20260416_144437",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T14:49:39.667750",
+      "task_id": "curiosity_20260416_144939",
+      "goal": "\u590d\u76d8\u4e4b\u524d\u7684\u4efb\u52a1\u548c\u9879\u76ee"
+    },
+    {
+      "timestamp": "2026-04-16T14:54:41.900052",
+      "task_id": "curiosity_20260416_145441",
+      "goal": "\u4f18\u5316\u73b0\u6709\u4ee3\u7801\u548c\u7cfb\u7edf"
+    },
+    {
+      "timestamp": "2026-04-16T14:59:44.121243",
+      "task_id": "curiosity_20260416_145944",
+      "goal": "\u590d\u76d8\u4e4b\u524d\u7684\u4efb\u52a1\u548c\u9879\u76ee"
+    },
+    {
+      "timestamp": "2026-04-16T15:04:48.173218",
+      "task_id": "curiosity_20260416_150448",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T15:09:50.411387",
+      "task_id": "curiosity_20260416_150950",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T15:14:52.646037",
+      "task_id": "curiosity_20260416_151452",
+      "goal": "\u641c\u7d22\u5e76\u4e86\u89e3\u65b0\u7684\u5de5\u5177\u6216\u6280\u672f"
+    },
+    {
+      "timestamp": "2026-04-16T15:19:54.868002",
+      "task_id": "curiosity_20260416_151954",
+      "goal": "\u5b66\u4e60\u4e00\u9879\u65b0\u6280\u672f: Rust programming"
+    },
+    {
+      "timestamp": "2026-04-16T15:24:58.902366",
+      "task_id": "curiosity_20260416_152458",
+      "goal": "\u5b66\u4e60\u4e00\u9879\u65b0\u6280\u672f: Machine Learning basics"
+    },
+    {
+      "timestamp": "2026-04-16T15:30:01.118317",
+      "task_id": "curiosity_20260416_153001",
+      "goal": "\u4f18\u5316\u73b0\u6709\u4ee3\u7801\u548c\u7cfb\u7edf"
     }
-  ]
+  ],
+  "llm_calls_today": 0
 }

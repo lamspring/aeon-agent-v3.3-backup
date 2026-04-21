@@ -1,0 +1,15 @@
+[Unit]
+Description=Xiaxia Violation Alert - Real-time Violation Monitoring
+After=network.target agent.service
+Wants=agent.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/.openclaw/workspace/agent/system
+ExecStart=/usr/bin/python3 /root/.openclaw/workspace/agent/system/violation_alert.py
+StandardOutput=append:/var/log/xiaxia-violation-alert.log
+StandardError=append:/var/log/xiaxia-violation-alert.log
+
+[Install]
+WantedBy=multi-user.target

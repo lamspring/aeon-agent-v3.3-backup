@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-04-06T20:05:23.458862",
+  "timestamp": "2026-04-21T13:12:01.535334",
   "checks": {
     "gate": {
-      "enabled": true,
+      "enabled": false,
       "authorized_by": "\u670b\u670b"
     },
     "governance": {

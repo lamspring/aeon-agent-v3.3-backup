@@ -1,0 +1,501 @@
+#!/usr/bin/env python3
+"""
+CognitionLoop Integrations - 集成封装模块 v1.2 (完全体)
+
+封装所有模块：
+- LifeRhythm, ReflectionEngine, ThreeLayerProtection
+- GoalGenerator, CuriosityTrigger, AsyncTaskRunner
+- ActionApproval, RateLimiter
+
+为 CognitionLoop 提供统一的调用接口
+
+版本: v1.2
+更新: 2026-04-16 - 添加 ActionApproval, RateLimiter，完成完全体
+"""
+
+import sys
+from pathlib import Path
+from typing import Dict, Tuple, Optional, Any
+from datetime import datetime
+
+# 添加 agent 目录到路径
+AGENT_DIR = Path("/root/.openclaw/workspace/agent")
+sys.path.insert(0, str(AGENT_DIR))
+sys.path.insert(0, str(AGENT_DIR / "system"))
+sys.path.insert(0, str(AGENT_DIR / "cognition"))
+
+# 导入所有核心模块
+from life_rhythm import LifeRhythm
+from reflection_engine import ReflectionEngine
+from three_layer_protection import ThreeLayerProtection
+from goal_generator import GoalGenerator
+from curiosity_trigger import CuriosityTrigger
+from async_task_runner import AsyncTaskRunner
+from action_approval import ActionApproval
+from rate_limiter import RateLimiter
+
+
+class LifeRhythmIntegration:
+    """LifeRhythm 集成层 - 节律感知影响决策权重"""
+    
+    def __init__(self):
+        self.rhythm = LifeRhythm()
+        self._weight_adjustments = {
+            "morning": {"exploration_weight": 1.2, "reflection_weight": 0.8, "execution_weight": 1.0},
+            "afternoon": {"exploration_weight": 1.0, "reflection_weight": 0.9, "execution_weight": 1.1},
+            "night": {"exploration_weight": 0.8, "reflection_weight": 1.3, "execution_weight": 0.9},
+            "late_night": {"exploration_weight": 0.6, "reflection_weight": 1.0, "execution_weight": 0.7}
+        }
+    
+    def get_current_weights(self) -> Dict[str, float]:
+        """获取当前时间段的权重调整"""
+        cycle = self.rhythm.get_current_cycle()
+        if not cycle:
+            return {"exploration_weight": 1.0, "reflection_weight": 1.0, "execution_weight": 1.0, 
+                    "cycle_name": "unknown", "focus": "general", "should_suspend_long_tasks": False}
+        
+        cycle_name = cycle.get("name", "unknown")
+        focus = cycle.get("focus", "general")
+        weights = self._weight_adjustments.get(cycle_name, 
+                {"exploration_weight": 1.0, "reflection_weight": 1.0, "execution_weight": 1.0})
+        
+        special = self.rhythm.is_special_phase()
+        should_suspend = bool(special and special.get("is_preparation_phase"))
+        
+        return {**weights, "cycle_name": cycle_name, "focus": focus, 
+                "should_suspend_long_tasks": should_suspend}
+    
+    def should_execute_task(self, task_type: str) -> str:
+        return self.rhythm.should_do_task(task_type)
+    
+    def get_rhythm_summary(self) -> Dict[str, Any]:
+        return self.rhythm.get_rhythm_summary()
+
+
+class ReflectionIntegration:
+    """ReflectionEngine 集成层 - 实际反思执行"""
+    
+    def __init__(self, queue_manager=None):
+        self.engine = ReflectionEngine()
+        self.queue_manager = queue_manager
+    
+    def should_reflect(self, running_task: Dict, action_result: Dict) -> Tuple[bool, str]:
+        return self.engine.should_reflect(running_task, action_result)
+    
+    def reflect(self, observation: Dict, plan: Dict, action_result: Dict, running_task: Dict = None) -> Dict:
+        task = running_task or {
+            "goal": plan.get("goal", "unknown"),
+            "type": plan.get("type", "general"),
+            "task_id": plan.get("task_id", "unknown")
+        }
+        running_state = {
+            "progress": action_result.get("progress", 0),
+            "retry_count": running_task.get("retry_count", 0) if running_task else 0,
+            "total_steps": plan.get("total_steps", 4)
+        }
+        current_step = action_result.get("step", 0)
+        
+        result = self.engine.reflect_and_spawn(
+            task=task, current_step=current_step, step_result=action_result,
+            running_state=running_state, queue_manager=self.queue_manager
+        )
+        
+        if running_task:
+            self.engine.log_reflection(task.get("task_id", "unknown"), current_step,
+                                     action_result.get("action", "unknown"),
+                                     f"{running_state['progress']*100:.0f}%", result)
+        return result
+    
+    def apply_decision(self, decision: str, running_task: Dict) -> Tuple[Optional[Dict], bool]:
+        if not self.queue_manager:
+            if decision == "stop":
+                return None, False
+            elif decision == "adjust":
+                running_task["retry_count"] = running_task.get("retry_count", 0) + 1
+                return running_task, True
+            return running_task, True
+        return self.engine.apply_decision(decision, running_task, self.queue_manager)
+
+
+class SafetyIntegration:
+    """ThreeLayerProtection 集成层 - 执行前安全检查"""
+    
+    def __init__(self):
+        self.protection = ThreeLayerProtection()
+    
+    def check_action(self, action: str, action_type: str = "exec") -> Dict:
+        return self.protection.check_action(action, action_type)
+    
+    def confirm_action(self, confirmation_id: str, approved: bool) -> bool:
+        return self.protection.confirm_action(confirmation_id, approved)
+    
+    def get_stats(self) -> Dict:
+        return self.protection.get_stats()
+
+
+class GoalGeneratorIntegration:
+    """GoalGenerator 集成层 - 自主目标生成"""
+    
+    def __init__(self):
+        self.generator = GoalGenerator()
+    
+    def should_generate(self, current_state: Dict) -> bool:
+        return self.generator.should_generate_goal(current_state)
+    
+    def generate(self, current_state: Dict = None) -> Optional[Dict]:
+        if current_state is None:
+            current_state = {}
+        return self.generator.generate(current_state)
+    
+    def get_stats(self) -> Dict:
+        return self.generator.get_stats()
+
+
+class CuriosityTriggerIntegration:
+    """CuriosityTrigger 集成层 - 空闲时主动探索"""
+    
+    def __init__(self):
+        self.curiosity = CuriosityTrigger()
+    
+    def should_trigger(self, task_state: Dict) -> Tuple[bool, str]:
+        return self.curiosity.should_trigger(task_state)
+    
+    def generate_task(self) -> Optional[Dict]:
+        return self.curiosity.generate_curiosity_task()
+    
+    def get_stats(self) -> Dict:
+        return self.curiosity.get_stats()
+
+
+class AsyncTaskRunnerIntegration:
+    """AsyncTaskRunner 集成层 - 异步任务执行防阻塞"""
+    
+    def __init__(self, timeout: int = 60, max_concurrent: int = 3):
+        self.runner = AsyncTaskRunner(timeout=timeout, max_concurrent=max_concurrent)
+    
+    async def run_task(self, task_func, *args, task_id: str = "", **kwargs) -> Dict:
+        return await self.runner.run_task(task_func, *args, task_id=task_id, **kwargs)
+    
+    async def run_tasks_concurrent(self, tasks: list, task_id_prefix: str = "batch") -> list:
+        return await self.runner.run_tasks_concurrent(tasks, task_id_prefix)
+    
+    def shutdown(self):
+        self.runner.shutdown()
+
+
+class ActionApprovalIntegration:
+    """ActionApproval 集成层 - 操作审批系统"""
+    
+    def __init__(self):
+        self.approval = ActionApproval()
+    
+    def check_action(self, tool_name: str, params: Dict = None) -> Dict:
+        """
+        检查操作是否需要审批
+        
+        Returns:
+            {
+                "allowed": bool,
+                "requires_approval": bool,
+                "risk_level": str,
+                "reason": str,
+                "approval_id": str | None
+            }
+        """
+        return self.approval.check_action(tool_name, params)
+    
+    def approve_action(self, approval_id: str, approved: bool = True) -> bool:
+        """手动批准/拒绝操作"""
+        return self.approval.approve_action(approval_id, approved)
+    
+    def get_stats(self) -> Dict:
+        return self.approval.get_stats()
+
+
+class RateLimiterIntegration:
+    """RateLimiter 集成层 - API和任务限流"""
+    
+    def __init__(self):
+        self.limiter = RateLimiter()
+    
+    def check_api_call(self, action: str = "generic") -> Tuple[bool, str, int]:
+        """
+        检查是否可以进行API调用
+        
+        Returns:
+            (allowed, reason, remaining)
+        """
+        return self.limiter.check_api_call(action)
+    
+    def check_task_creation(self, task_type: str = "generic", parent_depth: int = 0) -> Tuple[bool, str]:
+        """检查是否可以创建任务"""
+        return self.limiter.check_task_creation(task_type, parent_depth)
+    
+    def check_subtask_spawn(self, parent_task: Dict) -> Tuple[bool, str]:
+        """检查是否可以产生子任务"""
+        return self.limiter.check_subtask_spawn(parent_task)
+    
+    def get_stats(self) -> Dict:
+        return self.limiter.get_stats()
+
+
+class CognitionIntegrations:
+    """统一的 CognitionLoop 集成管理器 - 完全体 v1.2"""
+    
+    def __init__(self, queue_manager=None, async_timeout: int = 60):
+        # v2.2 核心模块
+        self.life_rhythm = LifeRhythmIntegration()
+        self.reflection = ReflectionIntegration(queue_manager=queue_manager)
+        self.safety = SafetyIntegration()
+        
+        # v2.3 自主模块
+        self.goal_generator = GoalGeneratorIntegration()
+        self.curiosity = CuriosityTriggerIntegration()
+        self.async_runner = AsyncTaskRunnerIntegration(timeout=async_timeout)
+        
+        # v2.4 完全体新增
+        self.action_approval = ActionApprovalIntegration()
+        self.rate_limiter = RateLimiterIntegration()
+        
+        # v2.5 准自主模式 - System Bridge
+        self.system_bridge = SystemBridgeIntegration(mode="AUTONOMOUS_PLUS_NOTIFY")
+        
+        self._initialized_at = datetime.now().isoformat()
+    
+    def get_status(self) -> Dict:
+        """获取集成模块状态"""
+        return {
+            "initialized_at": self._initialized_at,
+            "version": "v1.2_complete",
+            "modules": {
+                "life_rhythm": {
+                    "current_cycle": self.life_rhythm.rhythm.get_cycle_name(),
+                    "current_focus": self.life_rhythm.rhythm.get_focus()
+                },
+                "reflection": {
+                    "enabled": self.reflection.engine.config.get("enabled", True)
+                },
+                "safety": self.safety.get_stats(),
+                "goal_generator": self.goal_generator.get_stats(),
+                "curiosity": self.curiosity.get_stats(),
+                "async_runner": {
+                    "timeout": self.async_runner.runner.timeout,
+                    "max_concurrent": self.async_runner.runner.max_concurrent
+                },
+                "action_approval": self.action_approval.get_stats(),
+                "rate_limiter": self.rate_limiter.get_stats(),
+                "system_bridge": self.system_bridge.get_stats() if self.system_bridge else None
+            }
+        }
+
+
+class SystemBridgeIntegration:
+    """
+    System Bridge 集成层 - 准自主模式系统执行
+    
+    让 Aeon 能真正操作系统，同时保持审计和安全
+    
+    模式: AUTONOMOUS_PLUS_NOTIFY
+    - 大部分操作自主执行
+    - 极高风险操作(删系统/改核心)需要确认
+    - 执行后立即通知用户
+    - 完整审计日志
+    """
+    
+    def __init__(self, mode: str = "AUTONOMOUS_PLUS_NOTIFY"):
+        self.bridge_script = "/root/aeon_system_bridge.sh"
+        self.log_file = "/var/log/aeon_bridge.log"
+        self.mode = mode
+        self.approval = ActionApprovalIntegration()
+        self._execution_history = []
+        self._max_history = 100
+    
+    def execute(self, cmd: str, context: str = "") -> Dict:
+        """
+        执行系统命令（准自主模式）
+        
+        Args:
+            cmd: 要执行的命令
+            context: 执行上下文/原因
+        
+        Returns:
+            {
+                "success": bool,
+                "exit_code": int,
+                "risk_level": str,
+                "cmd": str,
+                "stdout": str,
+                "duration_seconds": float,
+                "mode": str
+            }
+        """
+        import subprocess
+        import json
+        from datetime import datetime
+        
+        # 1. 前置安全检查
+        if self._is_ultra_high_risk(cmd):
+            result = {
+                "success": False,
+                "error": "极高风险操作被拦截，需要手动确认",
+                "risk_level": "ULTRA_HIGH",
+                "cmd": cmd,
+                "requires_manual_confirmation": True,
+                "mode": self.mode
+            }
+            self._log_execution(result, context)
+            return result
+        
+        # 2. 执行命令（通过桥接脚本）
+        try:
+            start_time = datetime.now()
+            
+            result = subprocess.run(
+                ["bash", self.bridge_script, cmd],
+                capture_output=True,
+                text=True,
+                timeout=300,  # 5分钟超时
+                shell=False
+            )
+            
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+            
+            # 3. 解析桥接脚本返回的 JSON
+            try:
+                # 尝试从 stdout 解析 JSON
+                output_lines = result.stdout.strip().split('\n')
+                json_lines = []
+                in_json = False
+                
+                for line in output_lines:
+                    if line.startswith('{'):
+                        in_json = True
+                    if in_json:
+                        json_lines.append(line)
+                    if line.startswith('}'):
+                        break
+                
+                if json_lines:
+                    result_data = json.loads('\n'.join(json_lines))
+                else:
+                    # 回退到简单解析
+                    result_data = {
+                        "success": result.returncode == 0,
+                        "exit_code": result.returncode,
+                        "stdout": result.stdout[:1000],
+                        "stderr": result.stderr[:500],
+                        "risk_level": "UNKNOWN",
+                        "cmd": cmd,
+                        "mode": self.mode
+                    }
+                    
+            except json.JSONDecodeError:
+                result_data = {
+                    "success": result.returncode == 0,
+                    "exit_code": result.returncode,
+                    "stdout": result.stdout[:1000],
+                    "stderr": result.stderr[:500],
+                    "risk_level": "UNKNOWN",
+                    "cmd": cmd,
+                    "mode": self.mode,
+                    "parse_error": True
+                }
+            
+            # 4. 添加执行元数据
+            result_data["executed_at"] = start_time.isoformat()
+            result_data["duration_seconds"] = duration
+            result_data["context"] = context
+            
+            # 5. 记录到历史
+            self._log_execution(result_data, context)
+            
+            return result_data
+            
+        except subprocess.TimeoutExpired:
+            result = {
+                "success": False,
+                "error": "命令执行超时(5分钟)",
+                "cmd": cmd,
+                "risk_level": "TIMEOUT",
+                "mode": self.mode
+            }
+            self._log_execution(result, context)
+            return result
+            
+        except Exception as e:
+            result = {
+                "success": False,
+                "error": str(e),
+                "cmd": cmd,
+                "risk_level": "ERROR",
+                "mode": self.mode
+            }
+            self._log_execution(result, context)
+            return result
+    
+    def _is_ultra_high_risk(self, cmd: str) -> bool:
+        """检查是否为极高风险操作（准自主模式的最后防线）"""
+        ultra_high_patterns = [
+            "rm -rf /", "mkfs", "dd if=/dev/zero", "> /etc/passwd",
+            "chmod 777 /", "userdel root", "rm -rf /root", 
+            "rm -rf /etc", "rm -rf /var", "mkfs.ext4"
+        ]
+        
+        cmd_lower = cmd.lower()
+        for pattern in ultra_high_patterns:
+            if pattern in cmd_lower:
+                return True
+        return False
+    
+    def _log_execution(self, result: Dict, context: str):
+        """记录执行历史"""
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "cmd": result.get("cmd", ""),
+            "success": result.get("success", False),
+            "risk_level": result.get("risk_level", "UNKNOWN"),
+            "context": context,
+            "exit_code": result.get("exit_code", -1)
+        }
+        
+        self._execution_history.append(entry)
+        
+        # 限制历史大小
+        if len(self._execution_history) > self._max_history:
+            self._execution_history = self._execution_history[-self._max_history:]
+    
+    def get_execution_history(self, limit: int = 10) -> list:
+        """获取最近执行历史"""
+        return self._execution_history[-limit:]
+    
+    def get_stats(self) -> Dict:
+        """获取执行统计"""
+        if not self._execution_history:
+            return {"total": 0, "success_rate": 0, "mode": self.mode}
+        
+        total = len(self._execution_history)
+        successful = sum(1 for e in self._execution_history if e.get("success"))
+        
+        return {
+            "total": total,
+            "successful": successful,
+            "failed": total - successful,
+            "success_rate": successful / total if total > 0 else 0,
+            "mode": self.mode,
+            "bridge_script": self.bridge_script
+        }
+    
+    def tail_log(self, lines: int = 20) -> str:
+        """读取最近日志"""
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["tail", "-n", str(lines), self.log_file],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            return result.stdout if result.returncode == 0 else f"无法读取日志: {result.stderr}"
+        except Exception as e:
+            return f"读取日志失败: {e}"

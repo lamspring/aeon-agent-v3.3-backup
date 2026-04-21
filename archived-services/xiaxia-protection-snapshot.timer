@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Protection Snapshot Timer - Hourly state snapshot
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1h
+Unit=xiaxia-protection-snapshot.service
+
+[Install]
+WantedBy=timers.target

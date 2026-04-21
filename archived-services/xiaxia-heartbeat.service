@@ -1,0 +1,16 @@
+[Unit]
+Description=Xiaxia Consciousness Heartbeat
+After=network.target agent.service
+Wants=agent.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/.openclaw/workspace/agent
+Environment=PYTHONPATH=/root/.openclaw/workspace/agent
+ExecStart=/usr/bin/python3 /root/.openclaw/workspace/agent/system/simple_logger.py --heartbeat
+StandardOutput=append:/var/log/xiaxia-heartbeat.log
+StandardError=append:/var/log/xiaxia-heartbeat.log
+
+[Install]
+WantedBy=multi-user.target

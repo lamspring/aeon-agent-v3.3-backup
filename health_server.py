@@ -142,7 +142,7 @@ aeon_up 1
             active_goal = gm.get_active_goal()
             
             status = {
-                "version": "3.1",
+                "version": "3.3",
                 "timestamp": datetime.now().isoformat(),
                 "goals": {
                     "statistics": goal_stats,
@@ -190,7 +190,7 @@ aeon_up 1
         """根路径 - API 文档"""
         doc = {
             "service": "Aeon Agent Health API",
-            "version": "3.1",
+            "version": "3.3",
             "endpoints": {
                 "/health": "Health check (JSON)",
                 "/metrics": "Prometheus metrics (text)",

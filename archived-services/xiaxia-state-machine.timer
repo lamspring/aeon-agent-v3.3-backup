@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia State Machine Timer - 2 minute state update
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+Unit=xiaxia-state-machine.service
+
+[Install]
+WantedBy=timers.target

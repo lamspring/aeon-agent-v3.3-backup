@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Reflection Timer - 15 minute self reflection
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Unit=xiaxia-reflection.service
+
+[Install]
+WantedBy=timers.target

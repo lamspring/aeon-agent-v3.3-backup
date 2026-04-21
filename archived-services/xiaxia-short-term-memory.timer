@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Short Term Memory Timer - 1 minute memory update
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=xiaxia-short-term-memory.service
+
+[Install]
+WantedBy=timers.target

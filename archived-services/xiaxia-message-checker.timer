@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Message Checker Timer - 3 minute message check
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=3min
+Unit=xiaxia-message-checker.service
+
+[Install]
+WantedBy=timers.target

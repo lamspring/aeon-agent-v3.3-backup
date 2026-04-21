@@ -1,0 +1,10 @@
+[Unit]
+Description=Xiaxia Watchdog Timer - 10 minute task timeout check
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+Unit=xiaxia-watchdog.service
+
+[Install]
+WantedBy=timers.target
