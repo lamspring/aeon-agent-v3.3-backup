@@ -225,6 +225,16 @@ class CognitionLoop:
         except Exception as e:
             self.logger.debug(f"MetaCognitionLayer not available: {e}", component="CognitionLoop")
         
+        # v3.1: 经验记录器（客观+主观+身体）
+        self.experience_logger = None
+        try:
+            sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
+            from experience_logger import ExperienceLogger, get_experience_logger
+            self.experience_logger = get_experience_logger()
+            self.logger.info("ExperienceLogger enabled", component="CognitionLoop")
+        except Exception as e:
+            self.logger.debug(f"ExperienceLogger not available: {e}", component="CognitionLoop")
+        
         # v2.7: 人格记忆网络(PMN)集成
         sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
         try:
@@ -266,6 +276,7 @@ class CognitionLoop:
                 "async_runner": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "persona_integration": hasattr(self, 'persona_integration') and self.persona_integration is not None,
                 "meta_cognition": hasattr(self, '_meta_cognition') and self._meta_cognition is not None,
+                "experience_logger": hasattr(self, 'experience_logger') and self.experience_logger is not None,
             }
         )
     
@@ -803,6 +814,7 @@ class CognitionLoop:
     def _score_candidate(self, candidate: Dict, observation: Observation) -> float:
         """
         v2.7: 三维评分 — 紧迫性 + 目标对齐 + 执行成本
+        v3.1: 预留历史成功率维度（等30+条记录后启用）
         
         权重: urgency(0.35) + alignment(0.35) + cost_score(0.30)
         """
@@ -836,7 +848,22 @@ class CognitionLoop:
         cost = candidate.get("estimated_cost", 0.5)
         cost_score = 1.0 - cost
         
-        # 加权
+        # v3.1: 维度4: 历史成功率（预留，等30+条记录后启用）
+        history_score = 0.5  # 中性默认值
+        history_bonus = 0.0
+        if hasattr(self, 'experience_logger') and self.experience_logger:
+            try:
+                action = candidate.get("action")
+                success_rate = self.experience_logger.get_success_rate(action, min_samples=5)
+                if success_rate is not None:
+                    # 有数据，但暂不加入评分（等30条再启用）
+                    # history_score = success_rate
+                    # history_bonus = 0.0
+                    pass  # 预留，暂不启用
+            except Exception:
+                pass
+        
+        # 加权（目前只用三维，历史维度预留）
         score = urgency * 0.35 + alignment * 0.35 + cost_score * 0.30
         
         # 记录各维度（便于调试）
@@ -844,6 +871,7 @@ class CognitionLoop:
             "urgency": round(urgency, 2),
             "alignment": round(alignment, 2),
             "cost_score": round(cost_score, 2),
+            "history_score": round(history_score, 2),  # 预留显示
             "total": round(score, 3),
         }
         
@@ -1188,6 +1216,26 @@ class CognitionLoop:
         )
         
         self.last_activity = time.time()
+        
+        # v3.1: 记录经验（客观数据）
+        if hasattr(self, 'experience_logger') and self.experience_logger:
+            try:
+                decision = plan.get("decision_context", {})
+                task_count = len(plan.get('steps', [])) + executed_commands
+                
+                # 构建结果
+                result = {
+                    "success": task_count > 0,  # 至少执行了1步就算成功
+                    "duration_ms": 0,  # 简化：暂不计时
+                    "attempts": 1,
+                    "token_cost": 0,  # 简化：暂不采集
+                    "response_time_ms": 0,
+                    "error_count": 0 if task_count > 0 else 1,
+                }
+                
+                self.experience_logger.log_from_cognition(plan, result)
+            except Exception as e:
+                self.logger.debug(f"Experience logging failed: {e}", component="CognitionLoop")
         
         # 返回创建的任务数
         return len(plan.get('steps', [])) + executed_commands

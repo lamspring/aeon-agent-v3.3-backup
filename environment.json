@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "timestamp": "2026-04-21T14:21:13.241768",
+  "timestamp": "2026-04-21T16:42:35.737218",
   "time": {
-    "hour": 14,
-    "minute": 21,
+    "hour": 16,
+    "minute": 42,
     "day_of_week": 1,
     "day_name": "周二",
     "date": "2026-04-21",
@@ -13,19 +13,19 @@
     "special_day": null
   },
   "system": {
-    "cpu_percent": 0.5,
-    "memory_percent": 22.9,
+    "cpu_percent": 1.5,
+    "memory_percent": 23.0,
     "disk_percent": 37.4,
     "load_average": [
-      0.0,
-      0.0,
-      0.0
+      0.01,
+      0.16,
+      0.09
     ],
     "status": "idle"
   },
   "network": {
-    "is_connected": true,
-    "timestamp": "2026-04-21T14:21:13.922023"
+    "is_connected": false,
+    "timestamp": "2026-04-21T16:42:38.239431"
   },
   "user_activity": {
     "last_interaction": null,
@@ -42,5 +42,7 @@
     "enabled": false
   },
   "world_events": [],
-  "alerts": []
+  "alerts": [
+    "❌ 网络连接中断"
+  ]
 }
