@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-21T16:37:18.201315",
+  "timestamp": "2026-04-21T16:57:38.201149",
   "hour": 16,
   "current_cycle": "afternoon",
   "display_name": "工作模式",
@@ -9,12 +9,12 @@
   "restart_info": {
     "is_preparation_time": false,
     "is_imminent": false,
-    "minutes_to_restart": 682.6966450333333,
-    "minutes_to_prep": 562.6966450333333
+    "minutes_to_restart": 662.3633144833333,
+    "minutes_to_prep": 542.3633144833333
   },
   "recommended_tasks": [
     {
-      "task_id": "rhythm_execution_163718",
+      "task_id": "rhythm_execution_165738",
       "type": "execution",
       "goal": "[生命周期] 工作模式 - execution任务",
       "priority": 3,
@@ -23,7 +23,7 @@
       "auto_generated": true
     },
     {
-      "task_id": "rhythm_build_163718",
+      "task_id": "rhythm_build_165738",
       "type": "build",
       "goal": "[生命周期] 工作模式 - build任务",
       "priority": 3,
@@ -32,7 +32,7 @@
       "auto_generated": true
     },
     {
-      "task_id": "rhythm_fix_163718",
+      "task_id": "rhythm_fix_165738",
       "type": "fix",
       "goal": "[生命周期] 工作模式 - fix任务",
       "priority": 3,

@@ -1,16 +1,6 @@
 {
   "experiences": [
     {
-      "timestamp": "2026-04-20T06:33:31.264978",
-      "task": "保持观察，等待重要事件",
-      "task_type": "monitoring",
-      "result": "successful",
-      "decision": "continue",
-      "progress_status": "moderate",
-      "strategy_status": "effective",
-      "lesson": "稳步推进，保持当前节奏"
-    },
-    {
       "timestamp": "2026-04-20T06:54:00.223787",
       "task": "保持观察，等待重要事件",
       "task_type": "monitoring",
@@ -999,14 +989,19 @@
       "progress_status": "moderate",
       "strategy_status": "effective",
       "lesson": "稳步推进，保持当前节奏"
+    },
+    {
+      "timestamp": "2026-04-21T16:47:14.802469",
+      "task": "保持观察，等待重要事件",
+      "task_type": "monitoring",
+      "result": "successful",
+      "decision": "continue",
+      "progress_status": "moderate",
+      "strategy_status": "effective",
+      "lesson": "稳步推进，保持当前节奏"
     }
   ],
   "lessons_learned": [
-    {
-      "timestamp": "2026-04-20T23:41:12.448082",
-      "lesson": "稳步推进，保持当前节奏",
-      "context": "保持观察，等待重要事件"
-    },
     {
       "timestamp": "2026-04-21T00:01:50.624119",
       "lesson": "稳步推进，保持当前节奏",
@@ -1249,6 +1244,11 @@
     },
     {
       "timestamp": "2026-04-21T16:26:42.123637",
+      "lesson": "稳步推进，保持当前节奏",
+      "context": "保持观察，等待重要事件"
+    },
+    {
+      "timestamp": "2026-04-21T16:47:14.802469",
       "lesson": "稳步推进，保持当前节奏",
       "context": "保持观察，等待重要事件"
     }
