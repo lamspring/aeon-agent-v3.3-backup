@@ -202,6 +202,22 @@ class CognitionLoop:
         
         # v2.6: 我的思考记忆 - 基于我自己的真实决策
         self.recent_thoughts: List[Dict] = []  # 存储最近5次思考
+        
+        # v2.7: 人格记忆网络(PMN)集成
+        sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
+        try:
+            from persona_integration import PersonaIntegration, create_persona_integration
+            PERSONA_INTEGRATION_AVAILABLE = True
+        except ImportError:
+            PERSONA_INTEGRATION_AVAILABLE = False
+        
+        self.persona_integration = None
+        if PERSONA_INTEGRATION_AVAILABLE:
+            try:
+                self.persona_integration = create_persona_integration(self)
+                self.logger.info("PersonaIntegration enabled", component="CognitionLoop")
+            except Exception as e:
+                self.logger.warning(f"PersonaIntegration failed: {e}", component="CognitionLoop")
     
     def start(self):
         """启动认知循环"""
@@ -213,7 +229,7 @@ class CognitionLoop:
         self._thread.start()
         
         self.logger.info(
-            "CognitionLoop v2.5 started (with 6 Integrations + System Bridge AUTONOMOUS)",
+            "CognitionLoop v2.5 started (with 6 Integrations + System Bridge AUTONOMOUS + PMN)",
             component="CognitionLoop",
             context={
                 "tick_interval": self.tick_interval,
@@ -226,6 +242,7 @@ class CognitionLoop:
                 "goal_generator": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "curiosity": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "async_runner": INTEGRATIONS_AVAILABLE and self.integrations is not None,
+                "persona_integration": hasattr(self, 'persona_integration') and self.persona_integration is not None,
             }
         )
     
@@ -321,6 +338,20 @@ class CognitionLoop:
             with self._lock:
                 self.state = CognitionState.REFLECTING
             self._reflect(observation, plan)
+        
+        # v2.7: PMN 定期健康报告（每20 ticks ≈ 10分钟）
+        if self.tick_count % 20 == 0:
+            if hasattr(self, 'persona_integration') and self.persona_integration:
+                try:
+                    report = self.persona_integration.periodic_health_report(self.tick_count)
+                    if report and report.get("overall_status") != "healthy":
+                        self.logger.warning(
+                            f"Persona health: {report['overall_status']}",
+                            component="CognitionLoop",
+                            context={"recommendations": report.get("recommendations", [])}
+                        )
+                except Exception as e:
+                    self.logger.error(f"Health report failed: {e}", component="CognitionLoop")
         
         with self._lock:
             self.state = CognitionState.IDLE
@@ -491,7 +522,7 @@ class CognitionLoop:
             "rhythm": rhythm_context,  # v2.2: 添加节律信息
         }
         
-        return Observation(
+        observation = Observation(
             timestamp=time.time(),
             events=self.context_cache.recent_events,
             tasks=tasks,
@@ -499,6 +530,24 @@ class CognitionLoop:
             environment=environment,
             queue_size=self.event_bus.get_queue_size(),
         )
+        
+        # v2.7: PMN 记忆锚点注入
+        if hasattr(self, 'persona_integration') and self.persona_integration:
+            try:
+                obs_dict = observation.to_dict()
+                enriched = self.persona_integration.enrich_observation(obs_dict)
+                if enriched.get("memory_anchors"):
+                    # 动态附加到 observation（Observation 是 dataclass，支持 setattr）
+                    observation.memory_anchors = enriched["memory_anchors"]
+                    self.logger.debug(
+                        f"Injected {len(enriched['memory_anchors'])} memory anchors",
+                        component="CognitionLoop",
+                        context={"anchors": [a['event'] for a in enriched['memory_anchors']]}
+                    )
+            except Exception as e:
+                self.logger.error(f"Memory anchor injection failed: {e}", component="CognitionLoop")
+        
+        return observation
     
     def _needs_planning(self, observation: Observation) -> bool:
         """
