@@ -203,6 +203,15 @@ class CognitionLoop:
         # v2.6: 我的思考记忆 - 基于我自己的真实决策
         self.recent_thoughts: List[Dict] = []  # 存储最近5次思考
         
+        # v2.7: 候选生成器注册表（函数列表，轻量可扩展）
+        self.candidate_generators = [
+            self._gen_check_health,
+            self._gen_process_queue,
+            self._gen_continue_goal,
+            self._gen_explore,
+            self._gen_observe,
+        ]
+        
         # v2.7: 决策历史（用于循环检测）
         self.decision_history: List[Dict] = []  # 记录最近10次选择的决策类型
         
@@ -759,112 +768,82 @@ class CognitionLoop:
     
     def _generate_candidates(self, observation: Observation) -> List[Dict]:
         """
-        v2.7: 生成多个候选决策 - 多路径规划入口
+        v2.7: 生成多个候选决策 - 函数列表驱动（轻量可扩展）
         
-        返回多个候选，每个候选包含：
-        - action: 动作类型
-        - reason: 选择理由
-        - confidence: 置信度 (0-1)
-        - priority: high/medium/low
-        - base_score: 基础评分（用于后续选择）
+        每个候选生成器是独立函数，返回完整候选（含plan）。
+        新增生成器只需往 candidate_generators 列表追加。
         """
         candidates = []
         
-        try:
-            # 准备上下文
-            mem_pct = observation.environment.get("memory_percent", 50)
-            queue_size = observation.queue_size
-            has_goal = observation.goal is not None
-            
-            # 候选1: 高优先级 - 系统健康
-            if mem_pct > 85:
-                candidates.append({
-                    "action": "check_health",
-                    "reason": f"内存使用率高({mem_pct}%)，需要检查系统健康",
-                    "confidence": 0.9,
-                    "priority": "high",
-                    "base_score": 0.95,
-                })
-            
-            # 候选2: 高优先级 - 队列处理
-            if queue_size > 10:
-                candidates.append({
-                    "action": "process_queue",
-                    "reason": f"事件队列堆积({queue_size}个)，需要优先处理",
-                    "confidence": 0.85,
-                    "priority": "high",
-                    "base_score": 0.90,
-                })
-            elif queue_size > 5:
-                # 中度堆积，降低优先级
-                candidates.append({
-                    "action": "process_queue",
-                    "reason": f"事件队列有({queue_size}个)，建议处理",
-                    "confidence": 0.7,
-                    "priority": "medium",
-                    "base_score": 0.75,
-                })
-            
-            # 候选3: 中优先级 - 继续目标
-            if has_goal and queue_size > 0:
-                candidates.append({
-                    "action": "continue_goal",
-                    "reason": "有活跃目标和待处理事件，继续执行",
-                    "confidence": 0.7,
-                    "priority": "medium",
-                    "base_score": 0.70,
-                })
-            
-            # 候选4: 低优先级 - 探索
-            if not has_goal and queue_size == 0:
-                rhythm = observation.environment.get("rhythm", {})
-                if rhythm.get("exploration_weight", 1.0) > 1.0:
-                    candidates.append({
-                        "action": "explore",
-                        "reason": "系统空闲且处于高探索权重时段，生成探索任务",
-                        "confidence": 0.5,
-                        "priority": "low",
-                        "base_score": 0.55,
-                    })
-                else:
-                    candidates.append({
-                        "action": "explore",
-                        "reason": "系统空闲，可以探索",
-                        "confidence": 0.4,
-                        "priority": "low",
-                        "base_score": 0.50,
-                    })
-            
-            # 候选5: 兜底 - 观察
-            candidates.append({
-                "action": "observe",
-                "reason": "系统稳定，继续保持观察",
-                "confidence": 0.6,
-                "priority": "low",
-                "base_score": 0.60,
-            })
-            
-        except Exception as e:
-            self.logger.debug(f"Generate candidates failed: {e}", component="CognitionLoop")
+        for generator in self.candidate_generators:
+            try:
+                candidate = generator(observation)
+                if candidate:
+                    candidates.append(candidate)
+            except Exception as e:
+                self.logger.debug(f"Candidate generator failed: {e}", component="CognitionLoop")
         
-        # 如果完全没有候选，返回一个观察候选
+        # 如果完全没有候选，返回兜底观察
         if not candidates:
-            candidates.append({
-                "action": "observe",
-                "reason": "候选生成失败，安全兜底",
-                "confidence": 0.5,
-                "priority": "low",
-                "base_score": 0.50,
-            })
+            candidates.append(self._gen_observe(observation))
         
         return candidates
+    
+    def _score_candidate(self, candidate: Dict, observation: Observation) -> float:
+        """
+        v2.7: 三维评分 — 紧迫性 + 目标对齐 + 执行成本
+        
+        权重: urgency(0.35) + alignment(0.35) + cost_score(0.30)
+        """
+        # 维度1: 紧迫性 (0-1)
+        mem_pct = observation.environment.get("memory_percent", 50)
+        queue_size = observation.queue_size
+        urgency = 0.0
+        if mem_pct > 85: urgency += 0.5
+        if mem_pct > 70: urgency += 0.3
+        if queue_size > 10: urgency += 0.5
+        if queue_size > 5: urgency += 0.3
+        urgency = min(urgency, 1.0)
+        
+        # 维度2: 目标对齐 (0-1)
+        alignment = 0.5  # 默认中性
+        current_goal = observation.goal
+        if current_goal:
+            goal_desc = current_goal.get("description", "").lower()
+            if candidate["action"] in goal_desc:
+                alignment = 0.9
+            elif candidate["priority"] == "high":
+                alignment = 0.7
+            else:
+                alignment = 0.5
+        else:
+            # 没有目标时，观察/探索对齐度更高
+            if candidate["action"] in ["observe", "explore"]:
+                alignment = 0.8
+        
+        # 维度3: 执行成本 (0-1，越低越好)
+        cost = candidate.get("estimated_cost", 0.5)
+        cost_score = 1.0 - cost
+        
+        # 加权
+        score = urgency * 0.35 + alignment * 0.35 + cost_score * 0.30
+        
+        # 记录各维度（便于调试）
+        candidate["_scores"] = {
+            "urgency": round(urgency, 2),
+            "alignment": round(alignment, 2),
+            "cost_score": round(cost_score, 2),
+            "total": round(score, 3),
+        }
+        
+        return score
     
     def _select_best_candidate(self, candidates: List[Dict], observation: Observation) -> Optional[Dict]:
         """
         v2.7: 选择最优候选
         
         策略:
-        1. 基础评分排序
+        1. 三维评分排序
         2. 循环检测：如果最近3次选择了同一类型，强制选择次优
         3. 小概率随机探索(10%)
         """
@@ -875,8 +854,8 @@ class CognitionLoop:
             candidates[0]["selection_reason"] = "only candidate"
             return candidates[0]
         
-        # 按 base_score 排序
-        scored = [(c, c.get("base_score", 0.5)) for c in candidates]
+        # 评分
+        scored = [(c, self._score_candidate(c, observation)) for c in candidates]
         scored.sort(key=lambda x: x[1], reverse=True)
         
         # 检查循环（最近3次是否同一类型）
@@ -894,7 +873,6 @@ class CognitionLoop:
         # 小概率随机探索（10%）
         import random
         if random.random() < 0.1 and len(scored) > 1:
-            # 从非最优候选中随机选
             non_top = [c for c, _ in scored[1:]]
             chosen = random.choice(non_top).copy()
             chosen["selection_reason"] = "random_exploration"
@@ -906,56 +884,118 @@ class CognitionLoop:
         best["selection_reason"] = "highest_score"
         return best
     
-    def _decision_to_plan(self, decision: Dict, observation: Observation) -> Dict:
-        """
-        v2.6: 将我的决策转换为可执行计划
-        """
-        action = decision.get("action", "observe")
-        
-        plans = {
-            "check_health": {
-                "plan_id": f"health_check_{generate_tick_id()}",
-                "goal": "检查系统健康状态",
-                "type": "maintenance",
-                "steps": [
-                    {"action": "log_status", "priority": "high"},
-                    {"action": "check_memory", "priority": "high"},
-                    {"action": "report_health", "priority": "medium"}
-                ],
-            },
-            "process_queue": {
-                "plan_id": f"process_queue_{generate_tick_id()}",
-                "goal": "处理事件队列中的任务",
-                "type": "execution",
-                "steps": [
-                    {"action": "process_pending_events", "priority": "high"},
-                ],
-            },
-            "continue_goal": {
-                "plan_id": f"continue_{generate_tick_id()}",
-                "goal": observation.goal.get("description", "继续当前目标") if observation.goal else "继续执行",
-                "type": "execution",
-                "steps": [
-                    {"action": "execute_next_task", "priority": "medium"},
-                ],
-            },
-            "explore": {
-                "plan_id": f"explore_{generate_tick_id()}",
-                "goal": "生成探索任务，学习新能力",
-                "type": "exploration",
-                "steps": [
-                    {"action": "generate_curiosity_task", "priority": "low"},
-                ],
-            },
-            "observe": {
-                "plan_id": f"observe_{generate_tick_id()}",
+    def _gen_check_health(self, observation: Observation) -> Optional[Dict]:
+        """候选生成器: 检查系统健康"""
+        mem_pct = observation.environment.get("memory_percent", 50)
+        if mem_pct > 80:
+            return {
+                "action": "check_health",
+                "reason": f"内存使用率高({mem_pct}%)，需要检查系统健康",
+                "confidence": 0.9,
+                "priority": "high",
+                "estimated_cost": 0.3,
+                "plan": {
+                    "goal": "检查系统健康状态",
+                    "type": "maintenance",
+                    "steps": [
+                        {"action": "log_status", "priority": "high"},
+                        {"action": "check_memory", "priority": "high"},
+                        {"action": "report_health", "priority": "medium"}
+                    ],
+                }
+            }
+        return None
+    
+    def _gen_process_queue(self, observation: Observation) -> Optional[Dict]:
+        """候选生成器: 处理事件队列"""
+        queue_size = observation.queue_size
+        if queue_size > 5:
+            return {
+                "action": "process_queue",
+                "reason": f"事件队列堆积({queue_size}个)，需要优先处理",
+                "confidence": 0.85 if queue_size > 10 else 0.7,
+                "priority": "high" if queue_size > 10 else "medium",
+                "estimated_cost": 0.5,
+                "plan": {
+                    "goal": "处理事件队列中的任务",
+                    "type": "execution",
+                    "steps": [
+                        {"action": "process_pending_events", "priority": "high"},
+                    ],
+                }
+            }
+        return None
+    
+    def _gen_continue_goal(self, observation: Observation) -> Optional[Dict]:
+        """候选生成器: 继续当前目标"""
+        if observation.goal and observation.queue_size > 0:
+            return {
+                "action": "continue_goal",
+                "reason": "有活跃目标和待处理事件，继续执行",
+                "confidence": 0.7,
+                "priority": "medium",
+                "estimated_cost": 0.4,
+                "plan": {
+                    "goal": observation.goal.get("description", "继续当前目标") if observation.goal else "继续执行",
+                    "type": "execution",
+                    "steps": [
+                        {"action": "execute_next_task", "priority": "medium"},
+                    ],
+                }
+            }
+        return None
+    
+    def _gen_explore(self, observation: Observation) -> Optional[Dict]:
+        """候选生成器: 探索新内容"""
+        if not observation.goal and observation.queue_size == 0:
+            rhythm = observation.environment.get("rhythm", {})
+            exp_weight = rhythm.get("exploration_weight", 1.0)
+            return {
+                "action": "explore",
+                "reason": "系统空闲且处于高探索权重时段，生成探索任务" if exp_weight > 1.0 else "系统空闲，可以探索",
+                "confidence": 0.5 if exp_weight > 1.0 else 0.4,
+                "priority": "low",
+                "estimated_cost": 0.7,
+                "plan": {
+                    "goal": "生成探索任务，学习新能力",
+                    "type": "exploration",
+                    "steps": [
+                        {"action": "generate_curiosity_task", "priority": "low"},
+                    ],
+                }
+            }
+        return None
+    
+    def _gen_observe(self, observation: Observation) -> Dict:
+        """候选生成器: 保持观察（兜底，总是返回）"""
+        return {
+            "action": "observe",
+            "reason": "系统稳定，继续保持观察",
+            "confidence": 0.6,
+            "priority": "low",
+            "estimated_cost": 0.1,
+            "plan": {
                 "goal": "保持观察，等待重要事件",
                 "type": "monitoring",
                 "steps": [],
             }
         }
+    
+    def _decision_to_plan(self, decision: Dict, observation: Observation) -> Dict:
+        """
+        v2.7: 将决策转换为可执行计划
         
-        plan = plans.get(action, plans["observe"]).copy()
+        候选已经自带plan，这里只做补充。
+        """
+        # 从候选中提取plan
+        plan = decision.get("plan", {
+            "goal": "未知目标",
+            "type": "general",
+            "steps": [],
+        }).copy()
+        
+        # 补充元数据
+        plan["plan_id"] = f"{decision.get('action', 'unknown')}_{generate_tick_id()}"
         plan["decision_context"] = decision
         plan["rhythm_context"] = observation.environment.get("rhythm", {})
         
