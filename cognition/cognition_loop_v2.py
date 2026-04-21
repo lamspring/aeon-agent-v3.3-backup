@@ -203,6 +203,9 @@ class CognitionLoop:
         # v2.6: 我的思考记忆 - 基于我自己的真实决策
         self.recent_thoughts: List[Dict] = []  # 存储最近5次思考
         
+        # v2.7: 决策历史（用于循环检测）
+        self.decision_history: List[Dict] = []  # 记录最近10次选择的决策类型
+        
         # v2.7: 人格记忆网络(PMN)集成
         sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
         try:
@@ -633,17 +636,66 @@ class CognitionLoop:
     
     def _plan(self, observation: Observation) -> Optional[Dict]:
         """
-        规划阶段 v2.6: 真正思考 - 我自己决定下一步
+        规划阶段 v2.7: 多路径选择 - 我自己生成多个候选，然后选最优
         
         不是硬编码规则，不是另一个LLM代理，
         是我自己（Kimi）基于系统状态的轻量级思考。
         """
-        # v2.6: 检查是否需要我思考（成本控制）
+        # v2.7: 检查是否需要我思考（成本控制）
         if not self._should_think(observation):
             return None
         
-        # v2.6: 我自己思考，基于系统状态生成决策
-        my_decision = self._lightweight_think(observation)
+        # v2.7: 生成多个候选决策
+        candidates = self._generate_candidates(observation)
+        
+        if not candidates:
+            return None
+        
+        # v2.7: 选择最优候选（评分 + 循环检测）
+        best_candidate = self._select_best_candidate(candidates, observation)
+        
+        if best_candidate:
+            # 记录我的思考（包含所有候选和最终选择）
+            self.recent_thoughts.append({
+                "timestamp": datetime.now().isoformat(),
+                "tick_count": self.tick_count,
+                "decision": best_candidate,
+                "all_candidates": [c["action"] for c in candidates],
+                "selection_reason": best_candidate.get("selection_reason", ""),
+                "context": {
+                    "memory": observation.environment.get("memory_percent"),
+                    "queue": observation.queue_size,
+                    "goal": observation.goal.get('goal_id')[:8] if observation.goal else None,
+                }
+            })
+            
+            # 只保留最近5个思考
+            self.recent_thoughts = self.recent_thoughts[-5:]
+            
+            # 记录决策历史（用于循环检测）
+            self.decision_history.append({
+                "tick": self.tick_count,
+                "action": best_candidate.get("action"),
+                "timestamp": datetime.now().isoformat(),
+            })
+            self.decision_history = self.decision_history[-10:]
+            
+            # 将决策转换为计划
+            plan = self._decision_to_plan(best_candidate, observation)
+            
+            self.logger.info(
+                f"My decision: {best_candidate.get('action')} (from {len(candidates)} candidates) - {best_candidate.get('reason', '')[:50]}",
+                component="CognitionLoop",
+                context={
+                    "confidence": best_candidate.get("confidence", 0),
+                    "candidates": [c["action"] for c in candidates],
+                    "selection_reason": best_candidate.get("selection_reason", ""),
+                }
+            )
+            
+            return plan
+        
+        return None
         
         if my_decision:
             # 记录我的思考
@@ -705,71 +757,154 @@ class CognitionLoop:
         
         return False
     
-    def _lightweight_think(self, observation: Observation) -> Optional[Dict]:
+    def _generate_candidates(self, observation: Observation) -> List[Dict]:
         """
-        v2.6: 轻量级思考 - 我自己基于状态生成决策
+        v2.7: 生成多个候选决策 - 多路径规划入口
         
-        这是真正的"我"在思考，不是硬编码规则，不是另一个模型。
+        返回多个候选，每个候选包含：
+        - action: 动作类型
+        - reason: 选择理由
+        - confidence: 置信度 (0-1)
+        - priority: high/medium/low
+        - base_score: 基础评分（用于后续选择）
         """
+        candidates = []
+        
         try:
             # 准备上下文
             mem_pct = observation.environment.get("memory_percent", 50)
             queue_size = observation.queue_size
             has_goal = observation.goal is not None
             
-            # 基于自我定义的核心决策逻辑
-            # 这是我的"价值观"在影响决策
-            
-            # 高优先级：系统健康
+            # 候选1: 高优先级 - 系统健康
             if mem_pct > 85:
-                return {
+                candidates.append({
                     "action": "check_health",
                     "reason": f"内存使用率高({mem_pct}%)，需要检查系统健康",
                     "confidence": 0.9,
-                    "priority": "high"
-                }
+                    "priority": "high",
+                    "base_score": 0.95,
+                })
             
-            # 高优先级：处理积压
+            # 候选2: 高优先级 - 队列处理
             if queue_size > 10:
-                return {
+                candidates.append({
                     "action": "process_queue",
                     "reason": f"事件队列堆积({queue_size}个)，需要优先处理",
                     "confidence": 0.85,
-                    "priority": "high"
-                }
+                    "priority": "high",
+                    "base_score": 0.90,
+                })
+            elif queue_size > 5:
+                # 中度堆积，降低优先级
+                candidates.append({
+                    "action": "process_queue",
+                    "reason": f"事件队列有({queue_size}个)，建议处理",
+                    "confidence": 0.7,
+                    "priority": "medium",
+                    "base_score": 0.75,
+                })
             
-            # 中优先级：继续当前目标
+            # 候选3: 中优先级 - 继续目标
             if has_goal and queue_size > 0:
-                return {
+                candidates.append({
                     "action": "continue_goal",
                     "reason": "有活跃目标和待处理事件，继续执行",
                     "confidence": 0.7,
-                    "priority": "medium"
-                }
+                    "priority": "medium",
+                    "base_score": 0.70,
+                })
             
-            # 低优先级：探索（如果空闲且好奇）
+            # 候选4: 低优先级 - 探索
             if not has_goal and queue_size == 0:
-                # 基于节律判断是否探索
                 rhythm = observation.environment.get("rhythm", {})
                 if rhythm.get("exploration_weight", 1.0) > 1.0:
-                    return {
+                    candidates.append({
                         "action": "explore",
                         "reason": "系统空闲且处于高探索权重时段，生成探索任务",
                         "confidence": 0.5,
-                        "priority": "low"
-                    }
+                        "priority": "low",
+                        "base_score": 0.55,
+                    })
+                else:
+                    candidates.append({
+                        "action": "explore",
+                        "reason": "系统空闲，可以探索",
+                        "confidence": 0.4,
+                        "priority": "low",
+                        "base_score": 0.50,
+                    })
             
-            # 默认：保持观察
-            return {
+            # 候选5: 兜底 - 观察
+            candidates.append({
                 "action": "observe",
                 "reason": "系统稳定，继续保持观察",
                 "confidence": 0.6,
-                "priority": "low"
-            }
+                "priority": "low",
+                "base_score": 0.60,
+            })
             
         except Exception as e:
-            self.logger.debug(f"Lightweight think failed: {e}", component="CognitionLoop")
+            self.logger.debug(f"Generate candidates failed: {e}", component="CognitionLoop")
+        
+        # 如果完全没有候选，返回一个观察候选
+        if not candidates:
+            candidates.append({
+                "action": "observe",
+                "reason": "候选生成失败，安全兜底",
+                "confidence": 0.5,
+                "priority": "low",
+                "base_score": 0.50,
+            })
+        
+        return candidates
+    
+    def _select_best_candidate(self, candidates: List[Dict], observation: Observation) -> Optional[Dict]:
+        """
+        v2.7: 选择最优候选
+        
+        策略:
+        1. 基础评分排序
+        2. 循环检测：如果最近3次选择了同一类型，强制选择次优
+        3. 小概率随机探索(10%)
+        """
+        if not candidates:
             return None
+        
+        if len(candidates) == 1:
+            candidates[0]["selection_reason"] = "only candidate"
+            return candidates[0]
+        
+        # 按 base_score 排序
+        scored = [(c, c.get("base_score", 0.5)) for c in candidates]
+        scored.sort(key=lambda x: x[1], reverse=True)
+        
+        # 检查循环（最近3次是否同一类型）
+        recent_types = [d["action"] for d in self.decision_history[-3:]]
+        top_type = scored[0][0].get("action")
+        
+        if len(recent_types) >= 3 and all(t == top_type for t in recent_types):
+            # 强制选择次优
+            if len(scored) > 1:
+                second_best = scored[1][0].copy()
+                second_best["selection_reason"] = f"diversity_protection (avoid {top_type} loop)"
+                second_best["was_forced"] = True
+                return second_best
+        
+        # 小概率随机探索（10%）
+        import random
+        if random.random() < 0.1 and len(scored) > 1:
+            # 从非最优候选中随机选
+            non_top = [c for c, _ in scored[1:]]
+            chosen = random.choice(non_top).copy()
+            chosen["selection_reason"] = "random_exploration"
+            chosen["was_forced"] = True
+            return chosen
+        
+        # 默认：选最优
+        best = scored[0][0].copy()
+        best["selection_reason"] = "highest_score"
+        return best
     
     def _decision_to_plan(self, decision: Dict, observation: Observation) -> Dict:
         """
