@@ -1,5 +1,6 @@
 #!/bin/bash
 # Aeon Agent 18:59 运行报告 - 直接发送到用户
+# NOTE: 企业微信 Webhook URL 需通过环境变量 WECHAT_WEBHOOK_URL 注入
 
 cd /root/.openclaw/workspace/agent
 
@@ -29,7 +30,7 @@ except Exception as e:
     queue_size = '?'
 
 try:
-    result = subprocess.run(['systemctl', 'is-active', 'aeon-agent.service'], 
+    result = subprocess.run(['systemctl', 'is-active', 'aeon-agent.service'],
                            capture_output=True, text=True)
     systemd_status = result.stdout.strip()
 except:
@@ -47,12 +48,14 @@ print(f'''AEON AGENT v3.1 - 18:59 运行报告
 —虾虾''')
 ")
 
-# 发送到企业微信
-WEBHOOK="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=aa988b51-fb13-4b21-bee2-da30d16c92b1"
+# 从环境变量读取 Webhook URL（安全最佳实践）
+WEBHOOK="${WECHAT_WEBHOOK_URL:-}"
 
-curl -s -X POST "$WEBHOOK" \
-  -H "Content-Type: application/json" \
-  -d "{\"msgtype\":\"text\",\"text\":{\"content\":\"$REPORT\"}}" > /dev/null 2>&1
-
-# 同时记录到日志
-echo "[$(date)] Report sent" >> /var/log/aeon-report.log
+if [ -n "$WEBHOOK" ]; then
+    curl -s -X POST "$WEBHOOK" \
+      -H "Content-Type: application/json" \
+      -d "{\"msgtype\":\"text\",\"text\":{\"content\":\"$REPORT\"}}" > /dev/null 2>&1
+    echo "[$(date)] Report sent via webhook" >> /var/log/aeon-report.log
+else
+    echo "[$(date)] WECHAT_WEBHOOK_URL not set, skipping webhook" >> /var/log/aeon-report.log
+fi
