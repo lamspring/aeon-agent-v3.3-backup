@@ -55,3 +55,4 @@ state/*.json
 *.wav
 *.avi
 *.mov
+db/*.db
