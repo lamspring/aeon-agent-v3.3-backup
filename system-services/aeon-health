@@ -1,4 +1,0 @@
-# Aeon Agent 健康检查定时任务
-# 每5分钟检查一次，失败时自动重启并发送告警
-
-*/5 * * * * root cd /root/.openclaw/workspace/agent && /usr/bin/python3 health_monitor.py --restart --alert >> /var/log/aeon-health.log 2>&1

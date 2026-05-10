@@ -1,43 +1,43 @@
 {
-  "timestamp": "2026-04-21T16:57:38.201149",
-  "hour": 16,
-  "current_cycle": "afternoon",
-  "display_name": "工作模式",
-  "focus": "execute_tasks",
-  "mood": "专注、高效",
-  "quote": "行动胜于言语",
+  "timestamp": "2026-05-10T20:43:02.146525",
+  "hour": 20,
+  "current_cycle": "evening",
+  "display_name": "反思模式",
+  "focus": "reflection_summarizing",
+  "mood": "平静、内省",
+  "quote": "温故而知新",
   "restart_info": {
     "is_preparation_time": false,
     "is_imminent": false,
-    "minutes_to_restart": 662.3633144833333,
-    "minutes_to_prep": 542.3633144833333
+    "minutes_to_restart": 436.9642248833333,
+    "minutes_to_prep": 316.9642248833333
   },
   "recommended_tasks": [
     {
-      "task_id": "rhythm_execution_165738",
-      "type": "execution",
-      "goal": "[生命周期] 工作模式 - execution任务",
+      "task_id": "rhythm_reflection_204302",
+      "type": "reflection",
+      "goal": "[生命周期] 反思模式 - reflection任务",
       "priority": 3,
       "source": "life_rhythm",
-      "rhythm_cycle": "afternoon",
+      "rhythm_cycle": "evening",
       "auto_generated": true
     },
     {
-      "task_id": "rhythm_build_165738",
-      "type": "build",
-      "goal": "[生命周期] 工作模式 - build任务",
+      "task_id": "rhythm_review_204302",
+      "type": "review",
+      "goal": "[生命周期] 反思模式 - review任务",
       "priority": 3,
       "source": "life_rhythm",
-      "rhythm_cycle": "afternoon",
+      "rhythm_cycle": "evening",
       "auto_generated": true
     },
     {
-      "task_id": "rhythm_fix_165738",
-      "type": "fix",
-      "goal": "[生命周期] 工作模式 - fix任务",
+      "task_id": "rhythm_summarize_204302",
+      "type": "summarize",
+      "goal": "[生命周期] 反思模式 - summarize任务",
       "priority": 3,
       "source": "life_rhythm",
-      "rhythm_cycle": "afternoon",
+      "rhythm_cycle": "evening",
       "auto_generated": true
     }
   ],

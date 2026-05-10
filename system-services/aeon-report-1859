@@ -1,4 +1,0 @@
-# Aeon Agent 18:59 运行报告
-# 直接发送到企业微信，不依赖虾虾在线
-
-59 18 * * * root /root/.openclaw/workspace/agent/send_report_1859.sh

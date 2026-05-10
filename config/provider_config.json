@@ -1,0 +1,66 @@
+{
+  "version": "3.1",
+  "description": "Aeon v3.1 插件化架构配置",
+  "active": {
+    "model": "openclaw",
+    "tool": "openclaw",
+    "channel": "openclaw"
+  },
+  "providers": {
+    "openclaw": {
+      "name": "OpenClaw 完整集成",
+      "description": "通过 OpenClaw Gateway 和 CLI 提供全部能力",
+      "module": "providers",
+      "class": "OpenClawProvider",
+      "config": {
+        "default_target": "o9cq806JQxsn4CVsKFpl4wX-kCr8@im.wechat"
+      },
+      "capabilities": [
+        "model",
+        "tool",
+        "channel"
+      ]
+    },
+    "native_kimi": {
+      "name": "原生 Kimi API",
+      "description": "直接 HTTP 调用 Kimi API，不依赖 OpenClaw Gateway",
+      "module": "providers.native_kimi_provider",
+      "class": "NativeKimiProvider",
+      "config": {
+        "api_key": "${KIMI_API_KEY}",
+        "base_url": "https://api.kimi.com/coding",
+        "default_model": "k2.6",
+        "default_target": "o9cq806JQxsn4CVsKFpl4wX-kCr8@im.wechat"
+      },
+      "capabilities": [
+        "model",
+        "tool",
+        "channel"
+      ]
+    }
+  },
+    "mimo": {
+      "name": "MiMo V2.5",
+      "description": "小米 MiMo 百万亿 Token 计划 - Max 档位 16亿 Credits",
+      "module": "providers.native_kimi_provider",
+      "class": "NativeKimiProvider",
+      "config": {
+        "api_key": "${MIMO_API_KEY}",
+        "base_url": "https://token-plan-cn.xiaomimimo.com/v1",
+        "default_model": "mimo-v2.5",
+        "default_target": "o9cq806JQxsn4CVsKFpl4wX-kCr8@im.wechat"
+      },
+      "capabilities": ["model", "tool", "channel"]
+    }
+  },
+  "fallback": {
+    "model": "native_kimi",
+    "tool": "native_kimi",
+    "channel": "openclaw"
+  },
+  "notes": {
+    "切换方式": "修改 active 字段，然后重启 Aeon 或调用 ProviderFactory.switch()",
+    "fallback": "当 active provider health_check 失败时，自动切换到 fallback",
+    "env_vars": "${KIMI_API_KEY} 会从环境变量读取"
+  }
+}

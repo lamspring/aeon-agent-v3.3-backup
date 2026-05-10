@@ -6,9 +6,16 @@
       "date": "2026-04-05",
       "time": "2026-04-05T19:46:48.411762",
       "task_id": "pending"
+    },
+    {
+      "id": "explore_tools",
+      "text": "explore new tools or skills",
+      "date": "2026-04-29",
+      "time": "2026-04-29T21:31:19.208936",
+      "task_id": "pending"
     }
   ],
-  "last_goal_time": "2026-04-05T19:46:48.411764",
+  "last_goal_time": "2026-04-29T21:31:19.208939",
   "goal_history": [],
   "daily_stats": {}
 }

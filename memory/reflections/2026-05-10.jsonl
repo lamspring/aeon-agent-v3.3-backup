@@ -1,0 +1,102 @@
+{"timestamp": "2026-05-10T00:20:07.377849", "tick_count": 43350, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T00:48:14.576629", "tick_count": 43400, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T01:16:34.670954", "tick_count": 43450, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T01:44:35.661777", "tick_count": 43500, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T02:12:31.733682", "tick_count": 43550, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T02:40:33.583111", "tick_count": 43600, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T03:08:41.285543", "tick_count": 43650, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T03:36:58.131504", "tick_count": 43700, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T04:05:03.165986", "tick_count": 43750, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T04:33:14.232420", "tick_count": 43800, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T05:01:23.788253", "tick_count": 43850, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T05:29:28.016440", "tick_count": 43900, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 71 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T05:57:35.635804", "tick_count": 43950, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T06:25:41.164357", "tick_count": 44000, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T06:53:55.627285", "tick_count": 44050, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 71 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T07:22:10.818744", "tick_count": 44100, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T07:50:32.478373", "tick_count": 44150, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T08:18:41.763137", "tick_count": 44200, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T08:46:53.932330", "tick_count": 44250, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T09:15:12.257149", "tick_count": 44300, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T09:43:21.693030", "tick_count": 44350, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T10:11:41.117674", "tick_count": 44400, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T10:40:02.618056", "tick_count": 44450, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T11:08:14.741935", "tick_count": 44500, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T11:36:27.197701", "tick_count": 44550, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 67 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T12:04:55.786699", "tick_count": 44600, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 70 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T12:33:09.533727", "tick_count": 44650, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T13:01:30.190828", "tick_count": 44700, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T13:29:50.099050", "tick_count": 44750, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 70 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T13:58:22.416031", "tick_count": 44800, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T14:26:41.450952", "tick_count": 44850, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 68 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T14:54:59.823922", "tick_count": 44900, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 70 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T15:23:21.390496", "tick_count": 44950, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": "2026-05-10T15:51:46.105584", "tick_count": 45000, "insights": ["无归档错误可供分析", "目标堆积: 17 pending", "队列堆积: 66 个事件"], "actions": [{"type": "suggest_cleanup"}, {"type": "suggest_process"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778399883.0982938, "tick_count": 10, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778399883.1144233, "tick_count": 10, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400210.5481956, "tick_count": 20, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400210.554543, "tick_count": 20, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400529.8974657, "tick_count": 30, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400529.904892, "tick_count": 30, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400850.9043944, "tick_count": 40, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778400850.9143322, "tick_count": 40, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778401170.2284546, "tick_count": 50, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778401170.2499213, "tick_count": 50, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T16:19:30.323080", "tick_count": 50, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778401494.8220706, "tick_count": 60, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778401494.8300471, "tick_count": 60, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778401818.741797, "tick_count": 70, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778401818.7507885, "tick_count": 70, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402141.4581184, "tick_count": 80, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402141.4665267, "tick_count": 80, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402459.0538778, "tick_count": 90, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402459.062942, "tick_count": 90, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402780.0952098, "tick_count": 100, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778402780.1027431, "tick_count": 100, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T16:46:20.111708", "tick_count": 100, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778403115.1236587, "tick_count": 110, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778403115.132887, "tick_count": 110, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778403437.7075853, "tick_count": 120, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778403437.714457, "tick_count": 120, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778403761.8101552, "tick_count": 130, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778403761.822132, "tick_count": 130, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778404082.2288787, "tick_count": 140, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778404082.2364233, "tick_count": 140, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778404404.3535433, "tick_count": 150, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778404404.3629212, "tick_count": 150, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T17:13:24.369272", "tick_count": 150, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778404721.3837538, "tick_count": 160, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778404721.3924527, "tick_count": 160, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405041.7867715, "tick_count": 170, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405041.7972052, "tick_count": 170, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405360.6752543, "tick_count": 180, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405360.6856375, "tick_count": 180, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405682.7849834, "tick_count": 190, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405682.7935863, "tick_count": 190, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405999.824542, "tick_count": 200, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778405999.8327434, "tick_count": 200, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T17:39:59.839383", "tick_count": 200, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778406340.3197918, "tick_count": 210, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778406340.3284118, "tick_count": 210, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778406659.0548234, "tick_count": 220, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778406659.06487, "tick_count": 220, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778406979.5158818, "tick_count": 230, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778406979.5266938, "tick_count": 230, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778407345.4912317, "tick_count": 240, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778407345.5001636, "tick_count": 240, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778407682.9386485, "tick_count": 250, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778407682.9492593, "tick_count": 250, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T18:08:02.955861", "tick_count": 250, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778408038.6389852, "tick_count": 260, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778408038.650334, "tick_count": 260, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778408377.7513888, "tick_count": 270, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778408377.761152, "tick_count": 270, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778408716.722963, "tick_count": 280, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778408716.7298582, "tick_count": 280, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778409052.5921874, "tick_count": 290, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778409052.6039083, "tick_count": 290, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778409388.2228713, "tick_count": 300, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778409388.230202, "tick_count": 300, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": "2026-05-10T18:36:28.236793", "tick_count": 300, "insights": ["无归档错误可供分析", "目标堆积: 17 pending"], "actions": [{"type": "suggest_cleanup"}], "semantic_analysis": true, "mood": null, "auto_fixed": []}
+{"timestamp": 1778410043.3057272, "tick_count": 10, "depth": "simple", "insights": [], "mood": "neutral"}
+{"timestamp": 1778410043.3142176, "tick_count": 10, "depth": "simple", "insights": [], "mood": "neutral"}

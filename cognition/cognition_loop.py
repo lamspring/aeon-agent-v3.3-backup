@@ -161,6 +161,29 @@ class CognitionLoop:
             except Exception as e:
                 self.logger.warning(f"Failed to initialize World Input: {e}", component="CognitionLoop")
         
+        # === v3.3: 元认知模块集成 (虾虾 2026-05-01) ===
+        self.reflection_module = None
+        self.planning_module = None
+        self.execution_module = None
+        
+        # 初始化 ReflectionModule（元认知核心）
+        try:
+            from reflection import ReflectionModule
+            self.reflection_module = ReflectionModule(
+                event_bus=self.event_bus,
+                mimo_api_key=None,  # 使用默认
+                logger=self.logger,
+            )
+            self.logger.info("ReflectionModule v2.0 integrated", component="CognitionLoop")
+        except Exception as e:
+            self.logger.warning(f"ReflectionModule init failed: {e}", component="CognitionLoop")
+        
+        # 初始化自省计数器
+        self.last_introspection_tick = 0
+        self.introspection_interval = 50  # 每50 tick自省一次
+        
+        # === v3.3 集成结束 ===
+        
         self.state = CognitionState.IDLE
         self.tick_count = 0
         self.last_activity = time.time()
@@ -549,14 +572,137 @@ class CognitionLoop:
         return len(plan.get('steps', []))
     
     def _reflect(self, observation: Observation, plan: Optional[Dict]):
-        """反思阶段"""
+        """
+        反思阶段 v3.3 — 元认知集成
+        
+        1. 基础反思：发布事件到EventBus
+        2. ReflectionModule深度反思（如果可用）
+        3. 自省心跳检查（每50 tick）
+        """
         self.logger.debug("Reflecting...", component="CognitionLoop")
         
+        # 1. 基础反思：发布事件
         self.event_bus.publish_simple(
             "cognition.reflect",
             {
                 "tick_count": self.tick_count,
                 "observation": observation.to_dict()
+            }
+        )
+        
+        # 2. ReflectionModule 深度反思
+        if self.reflection_module:
+            try:
+                # 构建tick_result对象
+                class TickResult:
+                    def __init__(self, tick_count, observation, plan, error=None):
+                        self.tick_count = tick_count
+                        self.observation = observation
+                        self.plan = plan
+                        self.error = error
+                
+                tick_result = TickResult(
+                    tick_count=self.tick_count,
+                    observation=observation,
+                    plan=plan,
+                )
+                
+                reflection_result = self.reflection_module.reflect(tick_result)
+                
+                if reflection_result.get("insights"):
+                    insights = reflection_result["insights"]
+                    self.logger.info(
+                        f"Reflection insights: {len(insights)}",
+                        component="CognitionLoop",
+                        context={
+                            "mood": reflection_result.get("mood"),
+                            "insights_count": len(insights),
+                        }
+                    )
+                    
+                    # 如果有重要洞察，发布到EventBus
+                    if len(insights) > 0:
+                        self.event_bus.publish_simple(
+                            "cognition.insight",
+                            {
+                                "tick_count": self.tick_count,
+                                "insights": insights,
+                                "mood": reflection_result.get("mood"),
+                            }
+                        )
+                        
+            except Exception as e:
+                self.logger.warning(f"ReflectionModule failed: {e}", component="CognitionLoop")
+        
+        # 3. 自省心跳（每50 tick深度反思）
+        if self.tick_count - self.last_introspection_tick >= self.introspection_interval:
+            self._introspection(observation)
+            self.last_introspection_tick = self.tick_count
+    
+    def _introspection(self, observation: Observation):
+        """
+        自省心跳 — 深度元认知反思
+        
+        每50 tick运行一次，检查：
+        1. 自身状态（健康、目标进展）
+        2. 系统性能（tick耗时、内存）
+        3. 目标对齐（当前行动是否服务长期目标）
+        4. 是否需要调整策略
+        """
+        self.logger.info(
+            "=== 自省心跳 ===",
+            component="CognitionLoop",
+            context={"tick_count": self.tick_count}
+        )
+        
+        # 1. 检查目标进展
+        goal = self.goal_manager.get_active_goal()
+        if goal:
+            self.logger.info(
+                f"目标进展检查: {goal.description[:50] if goal.description else 'none'}",
+                component="CognitionLoop",
+                context={
+                    "goal_id": goal.goal_id,
+                    "progress": getattr(goal, 'progress', 'unknown'),
+                }
+            )
+        
+        # 2. 系统健康检查
+        try:
+            import psutil
+            memory = psutil.virtual_memory()
+            cpu = psutil.cpu_percent(interval=0.1)
+            
+            health_status = "healthy"
+            if memory.percent > 90:
+                health_status = "critical_memory"
+            elif cpu > 80:
+                health_status = "high_cpu"
+            elif memory.percent > 70:
+                health_status = "elevated_memory"
+            
+            self.logger.info(
+                f"系统健康: {health_status}",
+                component="CognitionLoop",
+                context={
+                    "memory_percent": memory.percent,
+                    "cpu_percent": cpu,
+                    "status": health_status,
+                }
+            )
+            
+        except Exception:
+            pass
+        
+        # 3. 元认知日志
+        self.logger.info(
+            f"元认知状态: tick={self.tick_count}, state={self.state.value}, "
+            f"last_activity={int(time.time() - self.last_activity)}s ago",
+            component="CognitionLoop",
+            context={
+                "tick_count": self.tick_count,
+                "state": self.state.value,
+                "idle_seconds": int(time.time() - self.last_activity),
             }
         )
     

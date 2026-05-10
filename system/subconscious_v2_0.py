@@ -122,26 +122,36 @@ class BodyAwareness:
             return None
     
     def feel_errors(self) -> Optional[BodySignal]:
-        """感受错误日志 - 敏感度影响"""
+        """感受错误日志 - v2.1: 24小时窗口，避免历史疤痕永远影响"""
         if not self.log_file.exists():
             return None
         
         try:
-            # 根据敏感度调整时间窗口
-            window_minutes = max(1, int(5 / self.sensitivity))  # 高敏感度=更短窗口=更快发现
-            cutoff = datetime.now() - timedelta(minutes=window_minutes)
+            # v2.1: 固定24小时窗口，不再用敏感度控制窗口大小
+            cutoff = datetime.now() - timedelta(hours=24)
             recent_errors = []
             
             with open(self.log_file, 'r') as f:
                 lines = f.readlines()
-                for line in lines[-100:]:
+                # 扫描最近1000行（约1-2天日志），但只保留24小时内的
+                for line in lines[-1000:]:
+                    # 尝试解析时间戳过滤
+                    if '[' in line and ']' in line:
+                        try:
+                            ts_str = line[line.find('[')+1:line.find(']')]
+                            line_time = datetime.strptime(ts_str, '%Y-%m-%dT%H:%M:%S.%f')
+                            if line_time < cutoff:
+                                continue  # 跳过24小时前的错误
+                        except:
+                            pass  # 解析失败则保留（保守）
+                    
                     if 'ERROR' in line or 'Error' in line or 'Traceback' in line:
                         recent_errors.append(line.strip())
             
             if not recent_errors:
                 return None
             
-            # 错误类型分析
+            # 错误类型分析（只分析24小时内的）
             error_types = {}
             for err in recent_errors:
                 if 'NameError' in err:
@@ -155,18 +165,22 @@ class BodyAwareness:
             
             count = len(recent_errors)
             
-            # 敏感度影响阈值
-            pain_threshold = max(3, int(10 / self.sensitivity))  # 高敏感度=更低阈值
-            
-            if count > pain_threshold:
+            # v2.1: 基于24小时绝对阈值，不受敏感度扭曲
+            if count > 50:  # 24小时内50+错误 = 系统真的病了
                 sensation = "剧痛"
-                intensity = min(count / 20, 1.0)
-            elif count > pain_threshold / 2:
+                intensity = min(count / 100, 1.0)
+            elif count > 20:
                 sensation = "疼"
+                intensity = count / 50
+            elif count > 5:
+                sensation = "刺痛"
+                intensity = count / 20
+            elif count > 0:
+                # v2.1: 少量错误不再触发强限制，只是记录
+                sensation = "微痒"
                 intensity = count / 10
             else:
-                sensation = "刺痛"
-                intensity = count / 5
+                return None
             
             # 模式描述
             if len(error_types) == 1:
@@ -183,7 +197,9 @@ class BodyAwareness:
                     "count": count,
                     "error_types": error_types,
                     "samples": recent_errors[:3],
-                    "window_minutes": window_minutes
+                    "window_hours": 24,
+                    "note": "v2.1: 只统计最近24小时",
+                    "sensitivity_applied": self.sensitivity
                 },
                 intensity=min(intensity * self.sensitivity, 1.0),
                 pattern=pattern

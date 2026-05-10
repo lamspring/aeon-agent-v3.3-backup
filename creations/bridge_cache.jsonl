@@ -1,3 +1,0 @@
-{"hash": "0e4ce390b70cc44f", "plan": {"action": "查询", "safety_level": "unknown", "confidence": 0.6, "note": "低置信意图，完全由LLM生成计划", "requires_review": true}, "success_rate": 1.0, "count": 1, "saved_at": "2026-04-18T10:39:58.709592"}
-{"hash": "41ae19ead7355789", "plan": {"action": "创建文件", "safety_level": "unknown", "confidence": 0.6, "note": "低置信意图，完全由LLM生成计划", "requires_review": true}, "success_rate": 1.0, "count": 1, "saved_at": "2026-04-18T10:39:58.709630"}
-{"hash": "d26a189c0fdd427c", "plan": {"action": "UNKNOWN", "safety_level": "unknown", "confidence": 0.6, "note": "低置信意图，完全由LLM生成计划", "requires_review": true}, "success_rate": 0.0, "count": 1, "saved_at": "2026-04-18T10:39:58.709643"}

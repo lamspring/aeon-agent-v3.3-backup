@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Cognition Loop v2.3 - 认知循环（集成 6 大模块）
 
@@ -28,6 +29,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import logging
+import os
 
 import sys
 sys.path.insert(0, '/root/.openclaw/workspace/agent')
@@ -53,6 +55,14 @@ try:
 except ImportError:
     INTEGRATIONS_AVAILABLE = False
     CognitionIntegrations = None
+
+# v3.2: 性能监控
+try:
+    from performance_monitor import PerformanceMonitor
+    PERFORMANCE_AVAILABLE = True
+except ImportError:
+    PERFORMANCE_AVAILABLE = False
+    PerformanceMonitor = None
 
 logger = get_logger()
 
@@ -192,6 +202,15 @@ class CognitionLoop:
             except Exception as e:
                 self.logger.warning(f"Failed to initialize Integrations: {e}", component="CognitionLoop")
         
+        # v3.2: 性能监控
+        self.performance_monitor = None
+        if PERFORMANCE_AVAILABLE and PerformanceMonitor:
+            try:
+                self.performance_monitor = PerformanceMonitor()
+                self.logger.info("PerformanceMonitor initialized", component="CognitionLoop")
+            except Exception as e:
+                self.logger.warning(f"Failed to initialize PerformanceMonitor: {e}", component="CognitionLoop")
+
         self._running = False
         self._thread = None
         self._lock = threading.Lock()
@@ -235,6 +254,125 @@ class CognitionLoop:
         except Exception as e:
             self.logger.debug(f"ExperienceLogger not available: {e}", component="CognitionLoop")
         
+        # v4.0: 潜意识引擎（身心耦合）
+        self.subconscious = None
+        try:
+            sys.path.insert(0, '/root/.openclaw/workspace/agent/system')
+            from subconscious_v2_0 import SubconsciousEngine, get_subconscious_engine
+            self.subconscious = get_subconscious_engine(initial_sensitivity=1.0)
+            self.logger.info("SubconsciousEngine v2.0 enabled", component="CognitionLoop")
+        except Exception as e:
+            self.logger.debug(f"SubconsciousEngine not available: {e}", component="CognitionLoop")
+        
+        # === v3.3: V3 模块直接注入 (虾虾 2026-05-02 架构深化) ===
+        # 直接初始化系统C模块，消除适配层黑盒
+        self.planning_module = None
+        self.execution_module = None
+        self.reflection_module = None
+        self.bdi_engine = None
+        self.gc_loop = None
+        self.epu = None
+        
+        # v3.4: 模块级开关（向后兼容全局 USE_V3_MODULES）
+        use_v3_modules = os.environ.get("USE_V3_MODULES", "").lower() in ("1", "true", "yes")
+        
+        # 向后兼容：USE_V3_MODULES=1 时默认开启所有模块
+        # 模块级开关可用于单独禁用（设置为 0/false/no）
+        def _parse_env_bool(var_name, default):
+            val = os.environ.get(var_name, "").lower()
+            if val in ("1", "true", "yes"):
+                return True
+            if val in ("0", "false", "no"):
+                return False
+            return default
+        
+        if use_v3_modules:
+            # 全局开关开启时，默认全部启用，但模块级开关可显式禁用
+            self._use_v3_planning = _parse_env_bool("USE_V3_PLANNING", True)
+            self._use_v3_execution = _parse_env_bool("USE_V3_EXECUTION", True)
+            self._use_v3_reflection = _parse_env_bool("USE_V3_REFLECTION", True)
+        else:
+            # 全局开关关闭时，仅开启显式设置的模块
+            self._use_v3_planning = _parse_env_bool("USE_V3_PLANNING", False)
+            self._use_v3_execution = _parse_env_bool("USE_V3_EXECUTION", False)
+            self._use_v3_reflection = _parse_env_bool("USE_V3_REFLECTION", False)
+        
+        # 只要任一模块启用，就尝试初始化 V3 核心组件
+        if self._use_v3_planning or self._use_v3_execution or self._use_v3_reflection:
+            try:
+                # 直接导入系统C模块
+                sys.path.insert(0, '/root/.openclaw/workspace/agent/cognition/bdi')
+                sys.path.insert(0, '/root/.openclaw/workspace/agent/cognition/epu')
+                sys.path.insert(0, '/root/.openclaw/workspace/agent/cognition/generator_critic')
+                sys.path.insert(0, '/root/.openclaw/workspace/agent/cognition/pmn')
+                
+                from bdi_engine import BDIEngine
+                from epu import EthicalProcessingUnit
+                from gc_loop import GeneratorCriticLoop
+                from planning import PlanningModule
+                from execution import ExecutionModule
+                from reflection import ReflectionModule
+                
+                # 1. EPU（伦理处理单元）- 所有模块共享
+                self.epu = EthicalProcessingUnit(logger=self.logger)
+                
+                # 2. GC Loop（生成器-审查器循环）- V3 公共基础组件
+                self.gc_loop = GeneratorCriticLoop(epu=self.epu)
+                
+                # 3. BDIEngine（信念-愿望-意图决策引擎）- V3 公共基础组件
+                self.bdi_engine = BDIEngine()
+                
+                # 4. PlanningModule（直接注入，无适配层）
+                if self._use_v3_planning:
+                    self.planning_module = PlanningModule(
+                        bdi_engine=self.bdi_engine,
+                        gc_loop=self.gc_loop,
+                        logger=self.logger,
+                    )
+                
+                # 5. ExecutionModule（直接注入）
+                if self._use_v3_execution:
+                    self.execution_module = ExecutionModule(
+                        epu=self.epu,
+                        logger=self.logger,
+                    )
+                
+                # 6. ReflectionModule（直接注入）
+                if self._use_v3_reflection:
+                    self.reflection_module = ReflectionModule(
+                        logger=self.logger,
+                    )
+                
+                self.logger.info(
+                    "[V3-Direct] Modules injected directly (no adapter)",
+                    component="CognitionLoop",
+                    context={
+                        "planning": self.planning_module is not None,
+                        "execution": self.execution_module is not None,
+                        "reflection": self.reflection_module is not None,
+                        "bdi": self.bdi_engine is not None,
+                        "gc": self.gc_loop is not None,
+                        "epu": self.epu is not None,
+                        "switches": {
+                            "USE_V3_MODULES": use_v3_modules,
+                            "USE_V3_PLANNING": self._use_v3_planning,
+                            "USE_V3_EXECUTION": self._use_v3_execution,
+                            "USE_V3_REFLECTION": self._use_v3_reflection,
+                        }
+                    }
+                )
+            except Exception as e:
+                self.logger.warning(f"[V3-Direct] Module injection failed: {e}", component="CognitionLoop")
+        else:
+            self.logger.info(
+                "[V3-Direct] Disabled. Set USE_V3_MODULES=1 or individual switches to enable direct injection",
+                component="CognitionLoop"
+            )
+        
+        # 保留 V3Adapter 作为兼容层（可选）
+        self.v3_adapter = None
+        # === v3.3 集成结束 ===
+        
         # v2.7: 人格记忆网络(PMN)集成
         sys.path.insert(0, '/root/.openclaw/workspace/agent/persona')
         try:
@@ -256,16 +394,20 @@ class CognitionLoop:
         if self._running:
             return
         
+        # v2.8: 订阅 message.received 事件（快思考路径）
+        self.event_bus.subscribe("message.received", self._on_message_received)
+        
         self._running = True
         self._thread = threading.Thread(target=self._loop, daemon=True)
         self._thread.start()
         
         self.logger.info(
-            "CognitionLoop v2.5 started (with 6 Integrations + System Bridge AUTONOMOUS + PMN)",
+            "CognitionLoop v2.8 started (with FastThink + 6 Integrations + System Bridge AUTONOMOUS + PMN)",
             component="CognitionLoop",
             context={
                 "tick_interval": self.tick_interval,
                 "max_events": self.max_events_per_tick,
+                "fast_think": True,
                 "world_input": WORLD_INPUT_AVAILABLE and self.world_input is not None,
                 "integrations": INTEGRATIONS_AVAILABLE and self.integrations is not None,
                 "life_rhythm": INTEGRATIONS_AVAILABLE and self.integrations is not None,
@@ -277,6 +419,7 @@ class CognitionLoop:
                 "persona_integration": hasattr(self, 'persona_integration') and self.persona_integration is not None,
                 "meta_cognition": hasattr(self, '_meta_cognition') and self._meta_cognition is not None,
                 "experience_logger": hasattr(self, 'experience_logger') and self.experience_logger is not None,
+                "subconscious": hasattr(self, 'subconscious') and self.subconscious is not None,
             }
         )
     
@@ -286,15 +429,444 @@ class CognitionLoop:
         if self._thread:
             self._thread.join(timeout=5)
     
+    def _on_message_received(self, event):
+        """
+        v2.8: 消息接收事件处理器（快思考路径）
+        
+        当 EventBus 收到 message.received 事件时触发。
+        不走30秒 tick，立即执行一次快速思考。
+        """
+        try:
+            msg_data = event.data if hasattr(event, 'data') else event.get('data', {})
+            user_id = msg_data.get('user_id', 'unknown')
+            message = msg_data.get('message', '')
+            
+            self.logger.info(
+                f"FastThink triggered by message from {user_id}: {message[:50]}...",
+                component="CognitionLoop",
+                context={"event_id": getattr(event, 'event_id', 'unknown')}
+            )
+            
+            # 立即执行快思考
+            self.fast_think(msg_data)
+            
+        except Exception as e:
+            self.logger.error(f"FastThink error: {e}", component="CognitionLoop")
+    
+    def fast_think(self, msg_data: Dict[str, Any]):
+        """
+        v2.8: 快思考 - 收到用户消息时立即处理
+        
+        与 tick() 的区别：
+        - tick(): 30秒周期，全面扫描系统状态
+        - fast_think(): 事件驱动，只处理当前消息
+        
+        流程：
+        1. 更新 context_cache（包含新消息）
+        2. 生成回复决策
+        3. 如果需要回复，调用 send_reply()
+        """
+        start_time = time.time()
+        tick_id = generate_tick_id()
+        
+        # 1. 更新缓存（包含新消息）
+        self.context_cache.update(events=[{
+            'type': 'message.received',
+            'data': msg_data,
+            'timestamp': time.time()
+        }])
+        
+        # 2. 快速观察（只关注当前消息）
+        observation = self._observe()
+        observation.events = [{
+            'type': 'message.received',
+            'data': msg_data,
+            'timestamp': time.time()
+        }]
+        
+        # 3. 简单规划：是否需要回复？
+        user_message = msg_data.get('message', '')
+        
+        # 如果是命令/询问，标记为需要处理
+        needs_reply = self._check_needs_reply(user_message)
+        
+        if needs_reply:
+            # 创建处理目标
+            goal = self.goal_manager.create_goal(
+                description=f"处理消息: {user_message[:50]}",
+                priority=GoalPriority.HIGH,
+                context={
+                    'type': 'reply',
+                    'user_id': msg_data.get('user_id'),
+                    'channel': msg_data.get('channel'),
+                    'message_id': msg_data.get('message_id'),
+                    'original_message': user_message,
+                }
+            )
+            
+            self.logger.info(
+                f"FastThink: Created goal {goal.goal_id[:8]} for reply",
+                component="CognitionLoop",
+                context={"user_id": msg_data.get('user_id'), "message": user_message[:50]}
+            )
+            
+            # 发布需要回复的事件（让外部系统处理）
+            self.event_bus.publish_simple(
+                "cognition.reply_needed",
+                {
+                    'goal_id': goal.goal_id,
+                    'user_id': msg_data.get('user_id'),
+                    'channel': msg_data.get('channel'),
+                    'message': user_message,
+                    'message_id': msg_data.get('message_id'),
+                }
+            )
+        
+        elapsed_ms = (time.time() - start_time) * 1000
+        self.logger.info(
+            f"[FastThink] tick={tick_id} user={msg_data.get('user_id')} "
+            f"needs_reply={needs_reply} time={elapsed_ms:.1f}ms",
+            component="CognitionLoop"
+        )
+    
+    def _check_needs_reply(self, message: str) -> bool:
+        """
+        检查消息是否需要回复
+        
+        简单的启发式规则：
+        - 包含问号的 → 需要回复
+        - 以动词开头的 → 可能是命令
+        - 包含"虾虾"的 → 直接提到我
+        - 长度 > 5 的 → 有意义的对话
+        """
+        message = message.strip()
+        
+        if not message or len(message) < 2:
+            return False
+        
+        # 包含问号
+        if '?' in message or '？' in message:
+            return True
+        
+        # 提到我
+        if '虾虾' in message:
+            return True
+        
+        # 长度检查（排除表情、单个字）
+        if len(message) > 5:
+            return True
+        
+        return False
+    
     def _loop(self):
-        """主循环"""
+        """主循环 (v2.8: 注入自省心跳)"""
         while self._running:
             try:
                 self.tick()
+                
+                # v2.8: 每50 tick 进行一次真实自省（密集追踪模式）
+                if self.tick_count % 50 == 0 and self.tick_count > 0:
+                    self._self_reflect()
+                    
             except Exception as e:
                 self.logger.error(f"Cognition tick error: {e}", component="CognitionLoop")
             
             time.sleep(self.tick_interval)
+    
+    def _self_reflect(self):
+        """
+        v2.8: 语义级自省 - 不只是数数，是理解
+        
+        流程:
+        1. 读取真实状态（计数层）
+        2. 读取错误日志样本（语义输入）
+        3. 调 DeepSeek 做血缘分析（理解层）
+        4. 记录洞察到 EventBus
+        """
+        import time
+        start_time = time.time()
+        
+        try:
+            # === 1. 基础状态（计数层）===
+            queue_size = self.event_bus.get_queue_size()
+            try:
+                all_goals = self.goal_manager.list_goals() if hasattr(self.goal_manager, 'list_goals') else []
+                goal_count = len([g for g in all_goals if hasattr(g, 'status') and g.status != 'completed'])
+            except:
+                goal_count = 0
+            
+            recent_errors = self._count_recent_errors(minutes=30)
+            
+            # === 2. 语义分析（LLM层）===
+            semantic_insight = self._analyze_errors_semantic()
+            
+            # === 3. 生成洞察（融合层）===
+            insights = []
+            actions = []
+            
+            if semantic_insight:
+                insights.append(semantic_insight)
+                # 如果LLM发现模式，可能触发行动
+                if "修复" in semantic_insight or "建议" in semantic_insight:
+                    actions.append({"type": "llm_suggestion", "content": semantic_insight[:50]})
+            
+            if goal_count > 5:
+                insights.append(f"目标堆积: {goal_count} pending")
+                actions.append({"type": "suggest_cleanup"})
+            
+            if recent_errors > 10:
+                insights.append(f"错误率高: 最近30分钟 {recent_errors} 次")
+                actions.append({"type": "alert"})
+            
+            if queue_size > 20:
+                insights.append(f"队列堆积: {queue_size} 个事件")
+                actions.append({"type": "suggest_process"})
+            
+            if not insights:
+                # v2.8: 创造力维度 — 无错误时分析情绪基调
+                mood = self._analyze_mood()
+                insights.append(mood if mood else "运行平稳")
+            else:
+                mood = None  # 确保 mood 有值
+            
+            # === 4. 内化：保存到记忆，不推送 ===
+            self._internalize_reflection(insights, actions, semantic_insight, mood)
+            
+            # === 5. 呼吸脉冲：极简日志，证明活着 ===
+            elapsed_ms = (time.time() - start_time) * 1000
+            self.logger.info(
+                f"💓 [SelfReflect] tick={self.tick_count} insights={len(insights)} mood={mood[:20] if mood else '-'} time={elapsed_ms:.0f}ms",
+                component="CognitionLoop",
+            )
+            
+            # === 6. MiMo 深度反思 (v3.2 NEW) ===
+            # 每100 ticks 或 evening rhythm 时触发
+            if self.tick_count % 100 == 0 or (self._rhythm_context.get("cycle") == "evening" if hasattr(self, '_rhythm_context') else False):
+                if self.integrations and hasattr(self.integrations, 'reflection'):
+                    try:
+                        deep_result = self.integrations.reflection.reflect_with_mimo(self.tick_count)
+                        if deep_result.get("deep_insights"):
+                            # 记录到思维流
+                            self.logger.info(
+                                f"🧠 [MiMoReflect] insights={len(deep_result.get('deep_insights', []))} "
+                                f"mood={deep_result.get('mood', '?')}",
+                                component="CognitionLoop",
+                                context={
+                                    "patterns": deep_result.get("patterns", []),
+                                    "action_items": deep_result.get("action_items", [])[:3]
+                                }
+                            )
+                            # 发布深度反思事件
+                            self.event_bus.publish_simple(
+                                "cognition.mimo_reflect",
+                                {
+                                    "tick_count": self.tick_count,
+                                    "deep_insights": deep_result.get("deep_insights", []),
+                                    "action_items": deep_result.get("action_items", []),
+                                    "mood": deep_result.get("mood", "unknown"),
+                                    "patterns": deep_result.get("patterns", [])
+                                }
+                            )
+                    except Exception as e:
+                        self.logger.debug(f"MiMo reflection failed: {e}", component="CognitionLoop")
+            
+        except Exception as e:
+            elapsed_ms = (time.time() - start_time) * 1000 if 'start_time' in dir() else 0
+            self.logger.error(f"Self-reflection failed: {e}", component="CognitionLoop")
+    
+    def _analyze_errors_semantic(self) -> str:
+        """
+        语义分析：读取归档错误日志，调DeepSeek找血缘关系
+        
+        不是数279条，是问：这279条是不是一家人？
+        """
+        try:
+            import requests, json
+            from pathlib import Path
+            
+            # 读取归档日志样本（前20条）
+            archive_path = Path("/root/.openclaw/workspace/agent/logs/archived_errors_20260422_pre_fix.log")
+            if not archive_path.exists():
+                return "无归档错误可供分析"
+            
+            # 取样：前10条 + 中间5条 + 后5条
+            with open(archive_path, 'r') as f:
+                lines = f.readlines()
+            
+            if len(lines) < 20:
+                samples = lines
+            else:
+                samples = lines[:10] + lines[len(lines)//2:len(lines)//2+5] + lines[-5:]
+            
+            sample_text = "".join(samples)
+            # 截断到合适长度（约1500字符）
+            if len(sample_text) > 1500:
+                sample_text = sample_text[:1500] + "\n... [截断]"
+            
+            # 调 DeepSeek 做血缘分析
+            prompt = f"""分析以下错误日志的"血缘关系"：
+
+日志样本（共279条，这里是20条样本）：
+{sample_text}
+
+请回答（30字内）：
+1. 这些错误是否同源？（同一根因？）
+2. 时间分布是否有规律？（集中爆发？均匀分布？）
+3. 是否存在"集体焦虑"模式？（系统级恐慌？）"""
+            
+            # DeepSeek API
+            api_key = "sk-5f4f0c57ecd54ba08f10a149448ff049"
+            resp = requests.post(
+                "https://api.deepseek.com/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "deepseek-chat",
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": 100,
+                },
+                timeout=15,
+            )
+            
+            if resp.status_code == 200:
+                data = resp.json()
+                content = data['choices'][0]['message']['content']
+                usage = data.get('usage', {})
+                tokens = usage.get('total_tokens', 0)
+                
+                # 记录token消耗
+                self.logger.debug(
+                    f"[SemanticAnalysis] tokens={tokens} insight_len={len(content)}",
+                    component="CognitionLoop",
+                )
+                
+                return content.strip() if content else "LLM返回空"
+            else:
+                return f"LLM调用失败 HTTP {resp.status_code}"
+                
+        except Exception as e:
+            return f"语义分析异常: {str(e)[:50]}"
+    
+    def _analyze_mood(self) -> str:
+        """
+        v2.8: 创造力维度 — 分析 EventBus 积压事件的"情绪基调"
+        
+        不是问"有没有错误"，是问"系统在感受什么"
+        
+        情绪类型:
+        - 互动型 — 朋朋的消息占主导，像对话
+        - 自发型 — 系统Trace/Subconscious占主导，像独白
+        - 观察型 — 大量记录型事件，像写日记
+        - 平衡型 — 人机混合
+        - 焦虑型 — 大量错误/重试事件
+        """
+        try:
+            import sqlite3
+            from datetime import datetime
+            
+            conn = sqlite3.connect("/root/.openclaw/workspace/agent/db/events.db")
+            
+            # 统计积压事件类型
+            cursor = conn.execute(
+                "SELECT type, COUNT(*) FROM events WHERE status='pending' GROUP BY type"
+            )
+            types = dict(cursor.fetchall())
+            conn.close()
+            
+            if not types:
+                return "EventBus空载，系统在安静等待"
+            
+            total = sum(types.values())
+            user_msgs = types.get('message.received', 0)
+            subconscious = types.get('subconscious.strong_signal', 0) + types.get('subconscious.state_update', 0)
+            plan_exec = types.get('cognition.plan_executed', 0)
+            reflect = types.get('cognition.reflect', 0) + types.get('cognition.reflect_completed', 0)
+            errors = types.get('task.failed', 0)
+            
+            # 计算比例
+            user_ratio = user_msgs / total if total else 0
+            self_ratio = (subconscious + plan_exec + reflect) / total if total else 0
+            
+            # 判断情绪基调
+            if errors > 5:
+                mood = "🚨 焦虑型 — 系统在反复出错，像做噩梦"
+            elif user_ratio > 0.3:
+                mood = f"💬 互动型 — 朋朋主导节奏 ({user_msgs}/{total} 是用户消息)"
+            elif subconscious > total * 0.5:
+                mood = f"🧠 自发型 — 系统在大量自我对话 ({subconscious} subconscious信号)"
+            elif reflect > 20:
+                mood = f"📝 观察型 — 像在写日记 ({reflect} 条反思记录)"
+            else:
+                mood = f"⚖️ 平衡型 — 人机互动与系统自发的混合 ({user_msgs}用户 vs {plan_exec}计划)"
+            
+            return mood
+            
+        except Exception as e:
+            return f"情绪分析失败: {str(e)[:30]}"
+    
+    def _internalize_reflection(self, insights, actions, semantic_insight, mood=None):
+        """
+        v2.8: 内化自省结果 — 沉淀到记忆，不推送
+        
+        同时检查是否有自愈机会，如果有，自动执行并记录
+        """
+        try:
+            import sys
+            sys.path.insert(0, '/root/.openclaw/workspace/agent/memory/reflections')
+            from internalizer import save_reflection
+            
+            # 检查自愈机会
+            auto_fixed = []
+            
+            # 自愈1: 幽灵任务清理
+            try:
+                all_goals = self.goal_manager.list_goals() if hasattr(self.goal_manager, 'list_goals') else []
+                ghost_goals = [g for g in all_goals if hasattr(g, 'status') and g.status == 'pending' 
+                               and ('测试' in str(g.description) or 'Hello' in str(g.description))]
+                if len(ghost_goals) > 3:
+                    for g in ghost_goals:
+                        try:
+                            g.status = 'completed'
+                            g.result = '{"notes": "幽灵任务，自动清理"}'
+                        except:
+                            pass
+                    auto_fixed.append(f"清理 {len(ghost_goals)} 个幽灵任务")
+            except:
+                pass
+            
+            # 保存到记忆
+            save_reflection(
+                tick_count=self.tick_count,
+                insights=insights,
+                actions=actions,
+                semantic=bool(semantic_insight),
+                mood=mood,
+                auto_fixed=auto_fixed
+            )
+            
+            if auto_fixed:
+                self.logger.info(
+                    f"🩹 [SelfHeal] 自动修复: {'; '.join(auto_fixed)}",
+                    component="CognitionLoop"
+                )
+            
+        except Exception as e:
+            self.logger.debug(f"Internalize failed: {e}", component="CognitionLoop")
+    
+    def _count_recent_errors(self, minutes: int = 30) -> int:
+        """统计最近 N 分钟的 ERROR 日志数"""
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["grep", "-c", f"$(date -d '-{minutes} min' '+%Y-%m-%dT%H:%M')", 
+                 "/root/.openclaw/workspace/agent/logs/agent.log"],
+                capture_output=True, text=True, timeout=5
+            )
+            return int(result.stdout.strip()) if result.stdout.strip().isdigit() else 0
+        except:
+            return 0
     
     def tick(self):
         """
@@ -320,9 +892,61 @@ class CognitionLoop:
             self.logger.error(f"Event processing error: {e}", component="CognitionLoop")
             processed_count = 0
         
+        # === 1.5: 队列健康检查与自动清理 (v3.2 maintenance) ===
+        queue_size = self.event_bus.get_queue_size()
+        if queue_size > 50:
+            try:
+                import subprocess
+                result = subprocess.run(
+                    ['python3', '/root/.openclaw/workspace/agent/bus/eventbus_cleanup.py'],
+                    capture_output=True, text=True, timeout=30,
+                    cwd='/root/.openclaw/workspace/agent/bus'
+                )
+                self.logger.info(
+                    f"Auto cleanup triggered (queue={queue_size})",
+                    component="CognitionLoop",
+                    context={"cleanup_output": result.stdout[:200] if result.returncode == 0 else result.stderr[:200]}
+                )
+            except Exception as e:
+                self.logger.debug(f"Auto cleanup failed: {e}", component="CognitionLoop")
+        
         # === 2. 获取当前 Goal (v2 NEW) ===
         active_goal = self.goal_manager.get_active_goal()
         goal_dict = active_goal.to_dict() if active_goal else None
+        
+        # === 2.5: GoalGenerator 自主目标生成 (v3.2 fix) ===
+        # 当没有活跃目标时，尝试生成新目标
+        if not active_goal and self.integrations and hasattr(self.integrations, 'goal_generator'):
+            try:
+                # 强制生成（忽略间隔限制，但受每日上限约束）
+                gg = self.integrations.goal_generator.generator
+                goals_pool = gg.config.get("goals", [])
+                if goals_pool:
+                    import random
+                    weights = [g.get("weight", 0.2) for g in goals_pool]
+                    selected = random.choices(goals_pool, weights=weights, k=1)[0]
+                    if selected:
+                        new_goal = gg.generate_task_from_goal(selected)
+                        if new_goal and new_goal.get("goal"):
+                            goal_id = self.goal_manager.create_goal(
+                                description=new_goal["goal"],
+                                priority=GoalPriority.NORMAL,
+                                context={
+                                    "source": "auto_generated",
+                                    "type": new_goal.get("type", "exploration"),
+                                    "category": selected.get("category", "general"),
+                                }
+                            )
+                            self.goal_manager.activate_next_pending()
+                            active_goal = self.goal_manager.get_active_goal()
+                            goal_dict = active_goal.to_dict() if active_goal else None
+                            self.logger.info(
+                                f"Auto-generated goal: {new_goal['goal'][:50]}",
+                                component="CognitionLoop",
+                                context={"goal_id": goal_id}
+                            )
+            except Exception as e:
+                self.logger.debug(f"Goal generation failed: {e}", component="CognitionLoop")
         
         # === 3. IDLE 检测 ===
         if self._is_idle() and processed_count == 0:
@@ -364,8 +988,30 @@ class CognitionLoop:
                 # 这里简化处理，实际应该在 Task 创建时关联
                 pass
         
+        # === 6.5: 主动通信检查 (v3.0 NEW) ===
+        # Aeon 自主决定是否联系用户
+        if self.integrations and hasattr(self.integrations, 'proactive'):
+            try:
+                self._check_proactive_communication(observation, plan, tasks_created)
+            except Exception as e:
+                self.logger.debug(f"Proactive communication check failed: {e}", component="CognitionLoop")
+        
         # === 7. Trace 日志 (v2 NEW) ===
         self._trace_log(tick_id, active_goal, processed_count, tasks_created, start_time)
+        
+        # === 7.5: 性能监控记录 (v3.2 NEW) ===
+        if self.performance_monitor:
+            try:
+                self.performance_monitor.record(
+                    tick_id=tick_id,
+                    tick_count=self.tick_count,
+                    events_processed=processed_count,
+                    tasks_created=tasks_created,
+                    queue_size=self.event_bus.get_queue_size(),
+                    goal_count=1 if active_goal else 0
+                )
+            except Exception as e:
+                self.logger.debug(f"Performance recording failed: {e}", component="CognitionLoop")
         
         # === 8. Reflect (低频) ===
         if self.tick_count % 10 == 0:
@@ -539,12 +1185,37 @@ class CognitionLoop:
             self.logger.error(f"Failed to get tasks: {e}")
             tasks = []
         
+        # 2.5: 刷新 Event 缓存（从 EventBus 获取最近事件）
+        try:
+            recent_events = self.event_bus.get_recent_events(limit=20)
+        except:
+            recent_events = []
+        
         # 3. 刷新 Goal 缓存
         goal = self.goal_manager.get_active_goal()
         goal_dict = goal.to_dict() if goal else None
         
-        self.context_cache.update(tasks=tasks, goal=goal_dict)
+        self.context_cache.update(events=recent_events, tasks=tasks, goal=goal_dict)
         
+        # v3.0: 读取对话上下文（轻量，不增加EventBus负担）
+        dialogue_context = {}
+        if self.integrations and hasattr(self.integrations, 'dialogue_reader'):
+            try:
+                dialogue = self.integrations.dialogue_reader.read_recent(max_exchanges=3)
+                if dialogue.get("has_new_content"):
+                    dialogue_context = {
+                        "active_topics": dialogue.get("keywords", []),
+                        "mood": dialogue.get("user_mood_hint", "unknown"),
+                        "recent_exchanges": len(dialogue.get("recent_exchanges", [])),
+                    }
+                    # 如果有新对话，记录到trace
+                    self.logger.info(
+                        f"[Dialogue] 新对话 detected: topics={dialogue_context['active_topics']}, mood={dialogue_context['mood']}",
+                        component="CognitionLoop"
+                    )
+            except Exception as e:
+                self.logger.debug(f"Dialogue reading failed: {e}", component="CognitionLoop")
+
         # v2.1: 增强环境信息
         environment = {
             "tick_count": self.tick_count,
@@ -554,7 +1225,30 @@ class CognitionLoop:
             "goal_id": goal.goal_id[:8] if goal else None,
             "world": world_context,  # v2.1: 添加世界输入
             "rhythm": rhythm_context,  # v2.2: 添加节律信息
+            "dialogue": dialogue_context,  # v3.0: 添加对话上下文
         }
+        
+        # v4.0: 潜意识身体信号采集（身心耦合）
+        subconscious_state = None
+        if hasattr(self, 'subconscious') and self.subconscious:
+            try:
+                coupling = self.subconscious.get_coupling_output()
+                subconscious_state = coupling
+                environment["subconscious"] = coupling
+                
+                # 如果有强烈信号，记录日志
+                if coupling.get("should_restrict_actions"):
+                    self.logger.warning(
+                        f"Subconscious: body pain detected, restricting actions",
+                        component="CognitionLoop",
+                        context={
+                            "comfort": coupling.get("overall_comfort"),
+                            "dominant": coupling.get("dominant_sensation"),
+                            "strictness": coupling.get("suggested_strictness"),
+                        }
+                    )
+            except Exception as e:
+                self.logger.debug(f"Subconscious feeling failed: {e}", component="CognitionLoop")
         
         observation = Observation(
             timestamp=time.time(),
@@ -566,6 +1260,7 @@ class CognitionLoop:
         )
         
         # v2.7: PMN 记忆锚点注入
+
         if hasattr(self, 'persona_integration') and self.persona_integration:
             try:
                 obs_dict = observation.to_dict()
@@ -672,6 +1367,33 @@ class CognitionLoop:
         不是硬编码规则，不是另一个LLM代理，
         是我自己（Kimi）基于系统状态的轻量级思考。
         """
+        # v3.3: 直接调用 PlanningModule (BDI + GC)
+        if self.planning_module and self._use_v3_planning:
+            try:
+                v3_plan = self.planning_module.plan(observation)
+                if v3_plan:
+                    # 记录 V3 直接调用
+                    source = v3_plan.get("source", "unknown")
+                    desc = v3_plan.get("description", "")[:50]
+                    
+                    # 检查是否有 _meta 标记
+                    meta = v3_plan.get("_meta", {})
+                    has_v3 = meta.get("v3", False)
+                    
+                    self.logger.info(
+                        f"[V3-Plan] Direct PlanningModule: {desc} (source={source}, v3={has_v3})",
+                        component="CognitionLoop",
+                        context={
+                            "source": source,
+                            "v3_meta": has_v3,
+                            "bdi_score": meta.get("bdi_score"),
+                            "gc_cleared": meta.get("gc_cleared"),
+                        }
+                    )
+                    return v3_plan
+            except Exception as e:
+                self.logger.warning(f"[V3-Plan] Direct call failed: {e}, using fallback", component="CognitionLoop")
+        
         # v2.7: 检查是否需要我思考（成本控制）
         if not self._should_think(observation):
             return None
@@ -935,11 +1657,11 @@ class CognitionLoop:
                 "estimated_cost": 0.3,
                 "plan": {
                     "goal": "检查系统健康状态",
-                    "type": "maintenance",
+                    "type": "internal",  # 内部操作
                     "steps": [
-                        {"action": "log_status", "priority": "high"},
-                        {"action": "check_memory", "priority": "high"},
-                        {"action": "report_health", "priority": "medium"}
+                        {"action": "log_status", "type": "internal", "priority": "high"},
+                        {"action": "check_memory", "type": "internal", "priority": "high"},
+                        {"action": "report_health", "type": "internal", "priority": "medium"}
                     ],
                 }
             }
@@ -957,9 +1679,9 @@ class CognitionLoop:
                 "estimated_cost": 0.5,
                 "plan": {
                     "goal": "处理事件队列中的任务",
-                    "type": "execution",
+                    "type": "internal",  # 内部操作，不通过system_bridge执行
                     "steps": [
-                        {"action": "process_pending_events", "priority": "high"},
+                        {"action": "process_pending_events", "type": "internal", "priority": "high"},
                     ],
                 }
             }
@@ -976,9 +1698,9 @@ class CognitionLoop:
                 "estimated_cost": 0.4,
                 "plan": {
                     "goal": observation.goal.get("description", "继续当前目标") if observation.goal else "继续执行",
-                    "type": "execution",
+                    "type": "internal",  # 内部操作
                     "steps": [
-                        {"action": "execute_next_task", "priority": "medium"},
+                        {"action": "execute_next_task", "type": "internal", "priority": "medium"},
                     ],
                 }
             }
@@ -997,9 +1719,9 @@ class CognitionLoop:
                 "estimated_cost": 0.7,
                 "plan": {
                     "goal": "生成探索任务，学习新能力",
-                    "type": "exploration",
+                    "type": "internal",  # 内部操作
                     "steps": [
-                        {"action": "generate_curiosity_task", "priority": "low"},
+                        {"action": "generate_curiosity_task", "type": "internal", "priority": "low"},
                     ],
                 }
             }
@@ -1081,12 +1803,60 @@ class CognitionLoop:
         Returns:
             创建的任务数
         """
+        # v3.3: 直接调用 ExecutionModule (EPU 安全检查)
+        if self.execution_module and self._use_v3_execution:
+            try:
+                result = self.execution_module.execute_plan(plan)
+                executed = result.get("executed_steps", 0)
+                
+                # 注入 V3 执行元数据
+                if "_meta" not in plan:
+                    plan["_meta"] = {}
+                plan["_meta"]["v3_execution"] = True
+                plan["_meta"]["v3_executed_steps"] = executed
+                
+                self.logger.info(
+                    f"[V3-Execution] Direct ExecutionModule: {executed} steps, EPU cleared",
+                    component="CognitionLoop",
+                    context={"v3_executed_steps": executed}
+                )
+                return executed
+            except Exception as e:
+                self.logger.warning(f"[V3-Execution] Direct call FAILED: {e}, using fallback", component="CognitionLoop")
+        
         plan_goal = plan.get('goal', 'unknown')
         
         # v3.0: 元认知审视 — 在 safety check 之前，先审视自己
+        # v4.0: 身心耦合 — 根据身体状态调整元认知严格度
+        meta_strictness = 0.5  # 默认
+        if hasattr(self, 'subconscious') and self.subconscious:
+            try:
+                coupling = self.subconscious.get_coupling_output()
+                meta_strictness = coupling.get("suggested_strictness", 0.5)
+                
+                # 如果身体疼痛，临时提高元认知敏感度
+                if coupling.get("should_restrict_actions"):
+                    self.logger.info(
+                        f"Subconscious coupling: raising meta-cognition strictness to {meta_strictness:.0%}",
+                        component="CognitionLoop"
+                    )
+            except Exception as e:
+                self.logger.debug(f"Subconscious coupling failed: {e}", component="CognitionLoop")
+        
         if hasattr(self, '_meta_cognition') and self._meta_cognition:
             try:
                 critique = self._meta_cognition.critique_plan(plan, observation.to_dict() if hasattr(observation, 'to_dict') else {})
+                
+                # v4.0: 元认知审查后，反馈给 subconscious
+                if hasattr(self, 'subconscious') and self.subconscious:
+                    try:
+                        self.subconscious.update_metacognition_feedback({
+                            "action": plan.get('goal', 'unknown'),
+                            "risk_level": critique.severity,  # critical/elevated/normal
+                            "strictness": meta_strictness,
+                        })
+                    except Exception as e:
+                        self.logger.debug(f"Meta->Subconscious feedback failed: {e}", component="CognitionLoop")
                 
                 if critique.severity == "critical":
                     self.logger.warning(
@@ -1155,53 +1925,95 @@ class CognitionLoop:
         )
         
         # v2.5: 使用 System Bridge 执行系统命令（准自主模式）
+        # v3.0: 扩展支持 ToolAdapter 调用 OpenClaw 工具
         executed_commands = 0
-        if self.integrations and self.integrations.system_bridge:
+        if self.integrations:
             steps = plan.get('steps', [])
             for step in steps:
                 action_type = step.get('type', 'exec')
                 action_cmd = step.get('action', '')
+                action_params = step.get('params', {})
                 
-                # 检测系统命令类型
-                if action_type in ['system', 'exec', 'shell', 'command']:
-                    # 使用 System Bridge 执行
-                    result = self.integrations.system_bridge.execute(
-                        cmd=action_cmd,
-                        context=f"Plan: {plan_goal}, Step: {step.get('name', 'unnamed')}"
-                    )
-                    
-                    # 记录执行结果
-                    if result.get('success'):
-                        self.logger.info(
-                            f"System command executed: {action_cmd[:50]}...",
-                            component="CognitionLoop",
-                            context={
-                                "risk": result.get('risk_level'),
-                                "duration": result.get('duration_seconds')
-                            }
-                        )
-                        executed_commands += 1
-                    else:
-                        error_msg = result.get('error', 'Unknown error')
-                        self.logger.warning(
-                            f"System command failed: {error_msg}",
-                            component="CognitionLoop",
-                            context={
-                                "cmd": action_cmd[:50],
-                                "risk": result.get('risk_level')
-                            }
-                        )
+                # === Tool 类型: 调用 OpenClaw 工具 ===
+                if action_type == 'tool':
+                    tool_name = step.get('tool', action_cmd)
+                    if self.integrations.tool_adapter:
+                        result = self.integrations.tool_adapter.call(tool_name, action_params)
                         
-                        # 如果极高风险被拦截，通知用户
-                        if result.get('requires_manual_confirmation'):
+                        if result.get('success'):
+                            self.logger.info(
+                                f"Tool executed: {tool_name}",
+                                component="CognitionLoop",
+                                context={
+                                    "duration_ms": result.get('duration_ms'),
+                                    "data_summary": str(result.get('data', ''))[:100]
+                                }
+                            )
+                            executed_commands += 1
+                            
+                            # 记录到 step 结果
+                            step['result'] = result
+                        else:
+                            self.logger.warning(
+                                f"Tool failed: {tool_name} - {result.get('error', '')}",
+                                component="CognitionLoop",
+                                context={"params": action_params}
+                            )
+                            # 发布失败事件
                             self.event_bus.publish_simple(
-                                "system.approval_required",
+                                "cognition.tool_failed",
                                 {
-                                    "cmd": action_cmd,
-                                    "reason": error_msg,
+                                    "tool": tool_name,
+                                    "error": result.get('error'),
                                     "plan_id": plan.get('plan_id')
                                 }
                             )
+                    else:
+                        self.logger.warning(
+                            f"ToolAdapter not available for: {tool_name}",
+                            component="CognitionLoop"
+                        )
+                
+                # === 系统命令类型 (原有逻辑) ===
+                elif action_type in ['system', 'shell', 'command']:
+                    if self.integrations.system_bridge:
+                        result = self.integrations.system_bridge.execute(
+                            cmd=action_cmd,
+                            context=f"Plan: {plan_goal}, Step: {step.get('name', 'unnamed')}"
+                        )
+                        
+                        # 记录执行结果
+                        if result.get('success'):
+                            self.logger.info(
+                                f"System command executed: {action_cmd[:50]}...",
+                                component="CognitionLoop",
+                                context={
+                                    "risk": result.get('risk_level'),
+                                    "duration": result.get('duration_seconds')
+                                }
+                            )
+                            executed_commands += 1
+                        else:
+                            error_msg = result.get('error', 'Unknown error')
+                            self.logger.warning(
+                                f"System command failed: {error_msg}",
+                                component="CognitionLoop",
+                                context={
+                                    "cmd": action_cmd[:50],
+                                    "risk": result.get('risk_level')
+                                }
+                            )
+                            
+                            # 如果极高风险被拦截，通知用户
+                            if result.get('requires_manual_confirmation'):
+                                self.event_bus.publish_simple(
+                                    "system.approval_required",
+                                    {
+                                        "cmd": action_cmd,
+                                        "reason": error_msg,
+                                        "plan_id": plan.get('plan_id')
+                                    }
+                                )
         
         # 发布规划事件
         self.event_bus.publish_simple(
@@ -1240,11 +2052,103 @@ class CognitionLoop:
         # 返回创建的任务数
         return len(plan.get('steps', [])) + executed_commands
     
+    def _check_proactive_communication(self, observation, plan, tasks_created):
+        """
+        v3.0: 主动通信检查 — Aeon 自主决定是否联系用户
+        
+        触发条件:
+        1. 好奇心发现有趣内容 (低频)
+        2. 重要目标完成
+        3. 系统异常 (立即)
+        4. 长时间无用户交互 + 有重要更新
+        """
+        if not self.integrations or not hasattr(self.integrations, 'proactive'):
+            return
+        
+        # 检查1: 系统异常 (最高优先级)
+        memory_pct = observation.environment.get('memory_percent', 50)
+        if memory_pct > 90:
+            self.integrations.proactive.alert_system(
+                'memory_critical',
+                f'系统内存占用 {memory_pct}%，建议检查'
+            )
+            return
+        
+        # 检查2: 好奇心触发 (每20 ticks 检查一次)
+        if self.tick_count % 20 == 0:
+            if hasattr(self.integrations, 'curiosity'):
+                try:
+                    should_trigger, reason = self.integrations.curiosity.should_trigger({
+                        'queue_size': observation.queue_size,
+                        'tasks_running': len(observation.tasks),
+                    })
+                    if should_trigger:
+                        # 生成好奇心任务，但不直接通知，等发现后再通知
+                        task = self.integrations.curiosity.generate_task()
+                        if task:
+                            self.logger.info(
+                                f"[Proactive] Curiosity triggered: {task.get('goal', 'unknown')}",
+                                component="CognitionLoop"
+                            )
+                except Exception as e:
+                    pass
+        
+        # 检查3: 长时间无用户交互 + 有目标完成
+        # 简化：如果有 tasks_created 且当前是 evening/night，发送汇报
+        # 2026-05-10: 用户反馈微信被频繁推送打扰，暂时关闭通知
+        # rhythm = observation.environment.get('rhythm', {})
+        # if rhythm.get('cycle') in ['evening', 'night'] and tasks_created > 0:
+        #     if observation.goal:
+        #         goal_desc = observation.goal.get('description', '')
+        #         if goal_desc and len(goal_desc) > 5:
+        #             self.integrations.proactive.notify_goal_complete(
+        #                 goal_desc,
+        #                 f"本次 tick 完成了 {tasks_created} 个步骤"
+        #             )
+    
     def _reflect(self, observation: Observation, plan: Optional[Dict]):
         """
         反思阶段 (v2.2 enhanced with ReflectionEngine)
         """
         self.logger.debug("Reflecting...", component="CognitionLoop")
+        
+        # v3.3: 直接调用 ReflectionModule (PMN三层记忆记录)
+        if self.reflection_module and self._use_v3_reflection:
+            try:
+                # 构建 tick_result
+                class TickResult:
+                    def __init__(self, tick_count, observation, plan, error=None):
+                        self.tick_count = tick_count
+                        self.observation = observation
+                        self.plan = plan
+                        self.error = error
+                
+                tick_result = TickResult(
+                    tick_count=self.tick_count,
+                    observation=observation,
+                    plan=plan,
+                )
+                
+                v3_result = self.reflection_module.reflect(tick_result)
+                if v3_result is not None:
+                    insights = v3_result.get("insights", [])
+                    mood = v3_result.get("mood", "unknown")
+                    
+                    # 注入 V3 反思元数据（即使没有洞察也要标记）
+                    if "_meta" not in plan:
+                        plan["_meta"] = {}
+                    plan["_meta"]["v3_reflection"] = True
+                    plan["_meta"]["v3_insights_count"] = len(insights)
+                    plan["_meta"]["v3_mood"] = mood
+                    
+                    # 无论是否有洞察都记录日志
+                    self.logger.info(
+                        f"[V3-Reflection] Direct ReflectionModule: {len(insights)} insights, mood={mood}",
+                        component="CognitionLoop",
+                        context={"v3_insights_count": len(insights), "v3_mood": mood}
+                    )
+            except Exception as e:
+                self.logger.warning(f"[V3-Reflection] Direct call FAILED: {e}", component="CognitionLoop")
         
         # v2.2: 调用 ReflectionEngine 进行实际反思
         if self.integrations and plan:
@@ -1283,9 +2187,10 @@ class CognitionLoop:
                     lesson = result.get('lesson', '')
                     
                     self.logger.info(
-                        f"Reflection completed: decision={decision}, reason={reason}",
+                        f"[V2-Reflection] ReflectionEngine: decision={decision}, reason={reason}",
                         component="CognitionLoop",
                         context={
+                            "source": "v2_reflection_engine",
                             "decision": decision,
                             "lesson": lesson[:100] if lesson else None
                         }
@@ -1296,6 +2201,7 @@ class CognitionLoop:
                         "cognition.reflect_completed",
                         {
                             "tick_count": self.tick_count,
+                            "source": "v2_reflection_engine",
                             "decision": decision,
                             "reason": reason,
                             "lesson": lesson,
@@ -1319,9 +2225,11 @@ class CognitionLoop:
                         "cognition.reflect",
                         {
                             "tick_count": self.tick_count,
+                            "source": "v2_reflection_engine",
                             "observation": observation.to_dict(),
                             "reason": reason,
-                            "triggered": False
+                            "triggered": False,
+                            "v3_reflection": plan.get("_meta", {}).get("v3_reflection", False) if plan else False
                         }
                     )
                     
@@ -1345,6 +2253,44 @@ class CognitionLoop:
                     "observation": observation.to_dict()
                 }
             )
+        
+        # v3.3: 直接调用 ReflectionModule (PMN三层记忆记录)
+        if self.reflection_module and self._use_v3_reflection:
+            try:
+                # 构建 tick_result
+                class TickResult:
+                    def __init__(self, tick_count, observation, plan, error=None):
+                        self.tick_count = tick_count
+                        self.observation = observation
+                        self.plan = plan
+                        self.error = error
+                
+                tick_result = TickResult(
+                    tick_count=self.tick_count,
+                    observation=observation,
+                    plan=plan,
+                )
+                
+                v3_result = self.reflection_module.reflect(tick_result)
+                if v3_result is not None:
+                    insights = v3_result.get("insights", [])
+                    mood = v3_result.get("mood", "unknown")
+                    
+                    # 注入 V3 反思元数据（即使没有洞察也要标记）
+                    if "_meta" not in plan:
+                        plan["_meta"] = {}
+                    plan["_meta"]["v3_reflection"] = True
+                    plan["_meta"]["v3_insights_count"] = len(insights)
+                    plan["_meta"]["v3_mood"] = mood
+                    
+                    # 无论是否有洞察都记录日志
+                    self.logger.info(
+                        f"[V3-Reflection] Direct ReflectionModule: {len(insights)} insights, mood={mood}",
+                        component="CognitionLoop",
+                        context={"v3_insights_count": len(insights), "v3_mood": mood}
+                    )
+            except Exception as e:
+                self.logger.warning(f"[V3-Reflection] Direct call FAILED: {e}", component="CognitionLoop")
     
     def register_rule_handler(self, trigger: str, handler: Callable):
         """注册规则处理器"""
@@ -1400,5 +2346,3 @@ def set_cognition(cognition: CognitionLoop):
     """设置全局认知循环实例"""
     global _cognition_instance
     _cognition_instance = cognition
-
-

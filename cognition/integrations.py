@@ -14,8 +14,9 @@ CognitionLoop Integrations - 集成封装模块 v1.2 (完全体)
 """
 
 import sys
+import os
 from pathlib import Path
-from typing import Dict, Tuple, Optional, Any
+from typing import Dict, Tuple, Optional, Any, List
 from datetime import datetime
 
 # 添加 agent 目录到路径
@@ -33,6 +34,233 @@ from curiosity_trigger import CuriosityTrigger
 from async_task_runner import AsyncTaskRunner
 from action_approval import ActionApproval
 from rate_limiter import RateLimiter
+
+
+class ToolAdapterIntegration:
+    """ToolAdapter 集成层 - OpenClaw 工具调用封装"""
+    
+    def __init__(self, timeout: int = 30):
+        from tool_adapter import ToolAdapter
+        self.adapter = ToolAdapter(timeout=timeout)
+    
+    def call(self, tool_name: str, params: Dict) -> Dict:
+        """调用工具，返回结构化结果"""
+        result = self.adapter.call(tool_name, params)
+        return result.to_dict()
+    
+    def research(self, topic: str, depth: int = 1) -> Dict:
+        """研究模式"""
+        result = self.adapter.research(topic, depth)
+        return result.to_dict()
+    
+    def monitor_stock(self, ticker: str, alert_threshold: float = 0.05) -> Dict:
+        """股票监控"""
+        result = self.adapter.monitor_stock(ticker, alert_threshold)
+        return result.to_dict()
+    
+    def list_tools(self) -> Dict:
+        """列出可用工具"""
+        return self.adapter.list_tools()
+    
+    def get_stats(self) -> Dict:
+        return self.adapter.get_stats()
+
+
+class MessageBridgeIntegration:
+    """MessageBridge 集成层 - Aeon → 用户通信"""
+    
+    def __init__(self, tool_adapter=None):
+        from message_bridge import MessageBridge
+        self.bridge = MessageBridge(tool_adapter=tool_adapter)
+    
+    def send(self, content: str, priority: str = "normal", 
+             channel: str = "", reason: str = "") -> Dict:
+        """发送消息"""
+        result = self.bridge.send(content, priority, channel, reason)
+        return result.to_dict()
+    
+    def notify_daily(self, report: str) -> Dict:
+        """每日报告"""
+        result = self.bridge.notify_daily(report)
+        return result.to_dict()
+    
+    def notify_goal_complete(self, goal_desc: str, result_summary: str = "") -> Dict:
+        """目标完成通知"""
+        result = self.bridge.notify_goal_complete(goal_desc, result_summary)
+        return result.to_dict()
+    
+    def notify_discovery(self, topic: str, summary: str) -> Dict:
+        """好奇心发现通知"""
+        result = self.bridge.notify_discovery(topic, summary)
+        return result.to_dict()
+    
+    def alert_system(self, alert_type: str, details: str) -> Dict:
+        """系统告警"""
+        result = self.bridge.alert_system(alert_type, details)
+        return result.to_dict()
+    
+    def get_stats(self) -> Dict:
+        return self.bridge.get_stats()
+    
+    def flush(self) -> Dict:
+        """强制刷新 pending 消息"""
+        result = self.bridge.flush()
+        return result.to_dict()
+
+
+class MessageBridgeIntegration:
+    """MessageBridge 集成层 - Aeon → 用户通信"""
+    
+    def __init__(self, tool_adapter=None):
+        from message_bridge import MessageBridge
+        self.bridge = MessageBridge(tool_adapter=tool_adapter)
+    
+    def send(self, content: str, priority: str = "normal", 
+             channel: str = "", reason: str = "") -> Dict:
+        """发送消息"""
+        result = self.bridge.send(content, priority, channel, reason)
+        return result.to_dict()
+    
+    def notify_daily(self, report: str) -> Dict:
+        """每日报告"""
+        result = self.bridge.notify_daily(report)
+        return result.to_dict()
+    
+    def notify_goal_complete(self, goal_desc: str, result_summary: str = "") -> Dict:
+        """目标完成通知"""
+        result = self.bridge.notify_goal_complete(goal_desc, result_summary)
+        return result.to_dict()
+    
+    def notify_discovery(self, topic: str, summary: str) -> Dict:
+        """好奇心发现通知"""
+        result = self.bridge.notify_discovery(topic, summary)
+        return result.to_dict()
+    
+    def alert_system(self, alert_type: str, details: str) -> Dict:
+        """系统告警"""
+        result = self.bridge.alert_system(alert_type, details)
+        return result.to_dict()
+    
+    def get_stats(self) -> Dict:
+        return self.bridge.get_stats()
+    
+    def flush(self) -> Dict:
+        """强制刷新 pending 消息"""
+        result = self.bridge.flush()
+        return result.to_dict()
+
+
+class DialogueLoggerIntegration:
+    """DialogueLogger 集成层 - OpenClaw session → Aeon memory bridge"""
+    
+    def __init__(self):
+        from dialogue_logger import DialogueLogger
+        self.logger = DialogueLogger()
+    
+    def log_exchange(self, user_msg: str, assistant_reply: str, 
+                     context: Optional[Dict] = None) -> Dict:
+        """记录一轮对话交换"""
+        success = self.logger.log_exchange(user_msg, assistant_reply, context=context)
+        return {"success": success, "file": str(self.logger._today_file)}
+    
+    def log_simple(self, role: str, content: str, note: Optional[str] = None) -> Dict:
+        """记录单条消息"""
+        success = self.logger.log_simple(role, content, note)
+        return {"success": success, "file": str(self.logger._today_file)}
+    
+    def get_stats(self) -> Dict:
+        return self.logger.get_stats()
+
+
+class DialogueReaderIntegration:
+    """DialogueReader 集成层 - Aeon 对话感知 + 上下文注入"""
+    
+    def __init__(self):
+        from dialogue_reader import DialogueReader
+        self.reader = DialogueReader()
+    
+    def read_recent(self, max_exchanges: int = 5) -> Dict:
+        """读取最近对话"""
+        result = self.reader.read_recent(max_exchanges=max_exchanges)
+        
+        # 如果有新内容，自动注入上下文提示
+        if result.get("has_new_content"):
+            try:
+                self.reader.inject_context(result)
+            except Exception as e:
+                print(f"[DialogueReaderIntegration] Auto-inject failed: {e}")
+        
+        return result
+    
+    def get_user_context(self) -> Dict:
+        """获取用户上下文摘要"""
+        result = self.read_recent(max_exchanges=3)
+        return {
+            "active_topics": result.get("keywords", []),
+            "mood": result.get("user_mood_hint", "unknown"),
+            "has_new": result.get("has_new_content", False),
+        }
+
+
+class ContextInjectorIntegration:
+    """ContextInjector 集成层 - Aeon → 虾虾 上下文注入"""
+    
+    def __init__(self):
+        from context_injector import ContextInjector
+        self.injector = ContextInjector()
+    
+    def write_hint(self, hint: str, topics: List[str], mood: str = "neutral",
+                   confidence: float = 0.5) -> Dict:
+        """写入上下文提示"""
+        success = self.injector.write_hint(hint, topics, mood, confidence)
+        return {"success": success, "file": str(self.injector.hint_file)}
+    
+    def read_hint(self, consume: bool = True) -> Optional[Dict]:
+        """读取上下文提示（虾虾调用）"""
+        return self.injector.read_hint(consume=consume)
+    
+    def peek_hint(self) -> Optional[Dict]:
+        """只读不消费"""
+        return self.injector.peek_hint()
+    
+    def get_stats(self) -> Dict:
+        return self.injector.get_stats()
+
+
+class ProactiveCommunicatorIntegration:
+    """ProactiveCommunicator 集成层 - Aeon 主动通信"""
+    
+    def __init__(self, message_bridge=None):
+        from proactive_communicator import ProactiveCommunicator
+        self.comm = ProactiveCommunicator(message_bridge=message_bridge)
+    
+    def notify_curiosity(self, topic: str, summary: str, source: str = "") -> Dict:
+        """好奇心发现通知"""
+        result = self.comm.notify_curiosity(topic, summary, source)
+        return result
+    
+    def notify_goal_complete(self, goal_desc: str, result_summary: str = "") -> Dict:
+        """目标完成通知"""
+        result = self.comm.notify_goal_complete(goal_desc, result_summary)
+        return result
+    
+    def alert_system(self, alert_type: str, details: str) -> Dict:
+        """系统告警"""
+        result = self.comm.alert_system(alert_type, details)
+        return result
+    
+    def notify_daily(self, report: str) -> Dict:
+        """每日报告"""
+        result = self.comm.notify_daily(report)
+        return result
+    
+    def alert_stock(self, ticker: str, price: float, change_pct: float, reason: str = "") -> Dict:
+        """股票异动提醒"""
+        result = self.comm.alert_stock(ticker, price, change_pct, reason)
+        return result
+    
+    def get_stats(self) -> Dict:
+        return self.comm.get_stats()
 
 
 class LifeRhythmIntegration:
@@ -105,6 +333,159 @@ class ReflectionIntegration:
                                      action_result.get("action", "unknown"),
                                      f"{running_state['progress']*100:.0f}%", result)
         return result
+    
+    def reflect_with_mimo(self, tick_count: int = 0) -> Dict:
+        """
+        v3.2: 使用 MiMo 100万上下文进行深度反思
+        
+        加载最近思维流 + 今日日记 + 系统状态 → MiMo 深度分析
+        
+        Returns:
+            {"deep_insights": [...], "action_items": [...], "mood": str}
+        """
+        import json
+        from datetime import datetime
+        
+        # 1. 收集反思素材
+        context_parts = []
+        
+        # a. 今日思维流（最近50条）
+        try:
+            today = datetime.now().strftime("%Y-%m-%d")
+            reflection_file = f"/root/.openclaw/workspace/agent/memory/reflections/{today}.jsonl"
+            with open(reflection_file, 'r') as f:
+                lines = f.readlines()[-50:]
+            reflections = [json.loads(line) for line in lines]
+            context_parts.append(f"## 今日思维流（最近50条）\n{json.dumps(reflections, ensure_ascii=False, indent=2)[:5000]}")
+        except Exception as e:
+            context_parts.append(f"## 思维流\n无法读取: {e}")
+        
+        # b. 今日日记
+        try:
+            diary_file = f"/root/.openclaw/workspace/memory/{today}.md"
+            with open(diary_file, 'r') as f:
+                diary = f.read()
+            context_parts.append(f"## 今日日记\n{diary[:3000]}")
+        except Exception as e:
+            context_parts.append(f"## 日记\n无法读取: {e}")
+        
+        # c. 系统状态
+        try:
+            import urllib.request
+            resp = urllib.request.urlopen('http://localhost:9090/api/status', timeout=5)
+            status = json.loads(resp.read())
+            context_parts.append(f"## 系统状态\n{json.dumps(status, ensure_ascii=False, indent=2)[:2000]}")
+        except Exception as e:
+            context_parts.append(f"## 系统状态\n无法获取: {e}")
+        
+        # d. 当前目标
+        try:
+            import sys
+            sys.path.insert(0, '/root/.openclaw/workspace/agent')
+            from goals import get_goal_manager
+            gm = get_goal_manager()
+            active = gm.get_active_goal()
+            goals_info = {
+                "active": active.description[:100] if active else None,
+                "pending_count": len(gm.get_pending_goals()),
+                "statistics": gm.get_statistics(),
+            }
+            context_parts.append(f"## 当前目标\n{json.dumps(goals_info, ensure_ascii=False, indent=2)}")
+        except Exception as e:
+            context_parts.append(f"## 目标\n无法获取: {e}")
+        
+        full_context = "\n\n---\n\n".join(context_parts)
+        
+        # 2. 构建 MiMo 提示
+        prompt = f"""你是一位AI系统的深度反思顾问。请基于以下系统运行日志，进行深度自我反思分析。
+
+要求：
+1. 识别重复出现的问题模式（如"每天队列堆积"）
+2. 分析系统行为的长期趋势
+3. 指出今天做对了什么、做错了什么
+4. 给出3条具体的、可执行的行动建议
+5. 用一句话总结当前系统情绪状态
+
+上下文数据：
+
+{full_context}
+
+请输出 JSON：
+{{
+  "deep_insights": ["深度洞察1", "深度洞察2"],
+  "action_items": ["行动1", "行动2", "行动3"],
+  "mood": "一句话情绪总结",
+  "patterns": ["重复模式1", "重复模式2"]
+}}
+"""
+        
+        # 3. 调用 MiMo
+        try:
+            import urllib.request
+            api_key = "tp-c80alurd96kqx0acohglgeyzxeryn0tukzd6wrc5uit9k9hl"
+            base_url = "https://token-plan-cn.xiaomimimo.com/v1"
+            
+            payload = {
+                "model": "mimo-v2.5",
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 2000,
+                "temperature": 0.3
+            }
+            
+            req = urllib.request.Request(
+                f"{base_url}/chat/completions",
+                data=json.dumps(payload).encode(),
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json"
+                },
+                method="POST"
+            )
+            
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read().decode())
+                reply = data["choices"][0]["message"]["content"]
+                
+                # 解析 JSON（处理 ```json ... ``` 包裹的情况）
+                try:
+                    # 先尝试直接解析
+                    result = json.loads(reply)
+                    return result
+                except json.JSONDecodeError:
+                    # 尝试从 markdown code block 中提取
+                    import re
+                    json_match = re.search(r'```json\s*(.*?)\s*```', reply, re.DOTALL)
+                    if json_match:
+                        try:
+                            result = json.loads(json_match.group(1))
+                            return result
+                        except json.JSONDecodeError:
+                            pass
+                    
+                    # 尝试从 ``` ... ``` 中提取（无 json 标记）
+                    code_match = re.search(r'```\s*(.*?)\s*```', reply, re.DOTALL)
+                    if code_match:
+                        try:
+                            result = json.loads(code_match.group(1))
+                            return result
+                        except json.JSONDecodeError:
+                            pass
+                    
+                    # 如果都不是 JSON，包装成 dict
+                    return {
+                        "deep_insights": [reply[:500]],
+                        "action_items": [],
+                        "mood": "unknown",
+                        "patterns": [],
+                        "raw": reply
+                    }
+        except Exception as e:
+            return {
+                "deep_insights": [f"MiMo reflection failed: {str(e)[:100]}"],
+                "action_items": [],
+                "mood": "error",
+                "patterns": []
+            }
     
     def apply_decision(self, decision: str, running_task: Dict) -> Tuple[Optional[Dict], bool]:
         if not self.queue_manager:
@@ -275,6 +656,28 @@ class CognitionIntegrations:
         # v2.4 完全体新增
         self.action_approval = ActionApprovalIntegration()
         self.rate_limiter = RateLimiterIntegration()
+        
+        # v3.0 Aeon主导 - OpenClaw工具集成
+        self.tool_adapter = ToolAdapterIntegration(timeout=30)
+        self.message_bridge = MessageBridgeIntegration(tool_adapter=self.tool_adapter.adapter)
+        print("[Aeon ToolAdapter] OpenClaw工具集成已激活")
+        print("[Aeon MessageBridge] 用户通信桥已激活")
+        
+        # v3.0 对话记录 - OpenClaw session → Aeon memory bridge
+        self.dialogue_logger = DialogueLoggerIntegration()
+        print("[Aeon DialogueLogger] 对话记录桥已激活")
+        
+        # v3.0 对话感知 - Aeon 读取对话上下文
+        self.dialogue_reader = DialogueReaderIntegration()
+        print("[Aeon DialogueReader] 对话感知器已激活")
+        
+        # v3.0 上下文注入 - Aeon → 虾虾 共享状态
+        self.context_injector = ContextInjectorIntegration()
+        print("[Aeon ContextInjector] 上下文注入器已激活")
+        
+        # v3.0 主动通信 - Aeon 自主发起对话
+        self.proactive = ProactiveCommunicatorIntegration(message_bridge=self.message_bridge.bridge)
+        print("[Aeon ProactiveCommunicator] 主动通信器已激活")
         
         # v2.5 准自主模式 - System Bridge
         self.system_bridge = SystemBridgeIntegration(mode="AUTONOMOUS_PLUS_NOTIFY")
@@ -596,18 +999,17 @@ class SystemBridgeIntegration:
     
     def __init__(self, mode: str = "AUTONOMOUS_PLUS_NOTIFY"):
         self.bridge_script = "/root/aeon_system_bridge.sh"
+        self.log_file = "/var/log/aeon_bridge.log"
+        self.mode = mode
+        self.approval = ActionApprovalIntegration()
+        self._execution_history = []
+        self._max_history = 100
 
     def command_exists(self, cmd: str) -> bool:
         """检查命令是否存在于 PATH 中"""
         import shutil
         return shutil.which(cmd) is not None
 
-        self.log_file = "/var/log/aeon_bridge.log"
-        self.mode = mode
-        self.approval = ActionApprovalIntegration()
-        self._execution_history = []
-        self._max_history = 100
-    
     def execute(self, cmd: str, context: str = "") -> Dict:
         """
         执行系统命令（准自主模式）
